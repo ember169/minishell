@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 15:16:17 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:18:44 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 */
 
 #include "../../includes/includes.h"
-
-/* ==== GLOBAL VAR ==== */
-extern char	**environ;
 
 static char	*_extract_key(char *env)
 {

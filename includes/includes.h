@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 10:03:00 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:18:36 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,8 @@
 /* ==== LIBC  HEADERS ==== */
 # include <stdlib.h>
 # include <stdio.h>
+
+/* ==== GLOBAL VAR ==== */
+extern char	**environ;
 
 #endif
