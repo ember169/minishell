@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   chained_list_printer.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 10:03:00 by lgervet          ###   ########.fr       */
+/*   Created: 2026/04/04 10:48:03 by lgervet           #+#    #+#             */
+/*   Updated: 2026/04/04 10:59:31 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
+#include "../../includes/includes.h"
 
-/* ==== LOCAL HEADERS ==== */
-# include "../libs/libft/includes/libft.h"
-# include "structures.h"
-# include "prototypes.h"
+void	print_env_list(t_env *root)
+{
+	t_env	*current;
+	int		i;
 
-/* ==== LIBC  HEADERS ==== */
-# include <stdlib.h>
-# include <stdio.h>
-
-#endif
+	printf("\n==== ENV LIST DEBUG ====\n");
+	i = 0;
+	current = root;
+	while (current)
+	{
+		printf("[%d] \"%s=%s\"\n", i, current->key, current->value);
+		i++;
+		current = current->next;
+	}
+}

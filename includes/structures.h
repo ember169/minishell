@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:30 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/03 16:53:10 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/03 18:42:12 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef enum e_node_type
 	NODE_SUBSHELL,	// Nœud parenthèse : exécution isolée
 }	t_node_type;
 
-// La structure de l'Arbre Syntaxique Abstrait (AST)
+// La structure de l'AST
 typedef struct s_ast_node
 {
 	t_node_type			type;
@@ -82,6 +82,5 @@ typedef struct s_minishell
 	int			last_status;	// Stocker $? (le code de retour)
 	t_ast_node	*ast_root;		// Ptr vers la racine de l'AST courant (free)
 }	t_minishell;
-
 
 #endif
