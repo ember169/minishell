@@ -6,19 +6,20 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 11:48:38 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:16:17 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* 
+	Potential performances improvements: 
+	- refactor extract_key and extract_value in a single function
+	- only one allocation instread of three ?
+*/
 
 #include "../../includes/includes.h"
 
 /* ==== GLOBAL VAR ==== */
 extern char	**environ;
-
-/* ==== TODO ==== */
-//	- Allocate only once per t_env (currently three per t_env)
-//	- Create cleanup functions
-//	- Free entire list and children when error when creating node
 
 static char	*_extract_key(char *env)
 {
@@ -78,10 +79,11 @@ t_env	*_create_node(char *env)
 	return (ret);
 }
 
-t_env	*init_env(void)
+t_env	*init_env(t_minishell *ms)
 {
 	t_env	*root;
 	t_env	*current;
+	t_env	*next;
 	int		i;
 
 	root = _create_node(environ[0]);
@@ -89,7 +91,10 @@ t_env	*init_env(void)
 	i = 1;
 	while (environ[i])
 	{
-		current->next = _create_node(environ[i]);
+		next = _create_node(environ[i]);
+		if (!next)
+			return (clean_ms(ms), next);
+		current->next = next;
 		current = current->next;
 		i++;
 	}

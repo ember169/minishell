@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:10:06 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 10:05:07 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/04 14:33:44 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_minishell	*init_ms(t_minishell *ms)
 	ms = malloc(sizeof(t_minishell));
 	if (ms)
 	{
-		ms->env_list = init_env();
+		ms->env_list = init_env(ms);
 		ms->envp = NULL;
 		ms->last_status = 0;
 		ms->ast_root = NULL;

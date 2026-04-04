@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:30 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/03 18:42:12 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/04 12:06:20 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,12 @@ typedef enum e_node_type
 typedef struct s_ast_node
 {
 	t_node_type			type;
-
 	// Pour les nœuds opérateurs (PIPE, AND, OR)
 	struct s_ast_node	*left;
 	struct s_ast_node	*right;
-
 	// Pour les nœuds commandes (NODE_CMD)
 	char				**args;		// Tableau d'arguments execve
 	t_redir				*redirs;	// Liste des redirections de la commande
-
 	// Pour les sous-shells (parenthèses)
 	struct s_ast_node	*subshell_child; // AST dans les ()
 }	t_ast_node;
