@@ -50,13 +50,18 @@ The shell must implement the following commands internally:
 
 ### Documentation
 #### Concept & Theory
-*Building...*
+- [Third argument of main() for env variables, Stackoverflow, 2014](https://stackoverflow.com/questions/21939379/main-function-with-three-arguments)
+- [How to make an elegant tokenizer in C, Zarial, 2020](https://ix-56h.github.io/how-to-make-a-tokenizer/)
+	- Convinced me to make a simple implementation of a Reverse Descent Parser before beginning the project: [math_shell (github)](https://github.com/ember169/math_shell)
 
 #### Learning Resources 
 *Building...*
 
 #### Technical Reference & Helpers
-*Building...*
+- [Official POSIX Shell documentation, Opengroup, 2018](https://pubs.opengroup.org/onlinepubs/9699919799/)
+- [Unofficial Shell documentation, Grymoire, 2023](https://www.grymoire.com/Unix/Sh.html)
 
 ### AI Usage
-*Building...*
+- To divide the entire project into seven Phases, making it easy for us to plan and keep track of the project while working simultaneously on different features.
+- To make sense of some intricates concepts (i.e: Lexer, Tokenizer, Expander, Executor...)
+- To conceive a robust nested structure architecture
