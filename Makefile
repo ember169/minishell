@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/04 14:29:01 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/05 16:11:31 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,10 @@ INC         := -I $(INCSDIR) -I $(LIBPATH)/includes
 SRC_FILES   := main.c \
                init/s_env.c \
                init/s_minishell.c \
+			   init/env_var_initializer.c \
 			   utils/chained_list_printer.c \
 			   utils/heap_cleanup.c \
+			   utils/chained_list_requests.c \
 
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))

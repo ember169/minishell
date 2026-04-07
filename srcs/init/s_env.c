@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 15:18:44 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:20:54 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ t_env	*_create_node(char *env)
 	if (!ret)
 		return (NULL);
 	ret->key = _extract_key(env);
-	printf("key = \"%s\"\n", ret->key);
 	ret->value = _extract_value(env);
-	printf("value = \"%s\"\n", ret->value);
 	return (ret);
 }
 

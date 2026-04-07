@@ -6,13 +6,13 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 14:17:36 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 15:11:44 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/05 15:48:56 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-void	clean_env(t_env *root)
+static void	_clean_env(t_env *root)
 {
 	t_env	*current;
 	t_env	*next;
@@ -32,14 +32,14 @@ void	clean_env(t_env *root)
 	return ;
 }
 
-void	clean_envp(char **envp)
+static void	_clean_envp(char **envp)
 {
 	(void)envp;
 	printf("├ envp has been freed.\n");
 	return ;
 }
 
-void	clean_ast(t_ast_node *root)
+static void	_clean_ast(t_ast_node *root)
 {
 	(void)root;
 	printf("├ ast has been freed.\n");
@@ -50,14 +50,14 @@ void	clean_ms(t_minishell *ms)
 {
 	if (ms)
 	{
-		printf("\n=========== CLEANUP ===========\n\n\
+		printf("\n=========== CLEANUP DEBUG ===========\n\n\
 ┌ Freeing super-structure\n");
 		if (ms->env_list)
-			clean_env(ms->env_list);
+			_clean_env(ms->env_list);
 		if (ms->envp)
-			clean_envp(ms->envp);
+			_clean_envp(ms->envp);
 		if (ms->ast_root)
-			clean_ast(ms->ast_root);
+			_clean_ast(ms->ast_root);
 	}
 	printf("└ Cleanup done ! Terminating.\n\n");
 	return ;

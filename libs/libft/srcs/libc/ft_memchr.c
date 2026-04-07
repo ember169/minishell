@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 09:43:22 by lgervet           #+#    #+#             */
-/*   Updated: 2025/12/20 10:20:07 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/05 13:37:25 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 /*                                                                            */
 /*  FUNCTION: ft_memchr                                                       */
 /*                                                                            */
-/*  Recherche la premiere occurrence d'un octet donne dans une zone.          */
+/*  Recherche la premiere occurrence d'un octet donné dans une zone.          */
 /*                                                                            */
 /*  @param s  Adresse du bloc de memoire source.                              */
 /*  @param c  Octet recherche.                                                */

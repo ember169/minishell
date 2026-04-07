@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 10:48:03 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 10:59:31 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:20:32 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_env_list(t_env *root)
 	t_env	*current;
 	int		i;
 
-	printf("\n==== ENV LIST DEBUG ====\n");
+	printf("\n========= ENV LIST DEBUG =========\n\n");
 	i = 0;
 	current = root;
 	while (current)

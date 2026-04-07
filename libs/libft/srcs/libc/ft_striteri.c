@@ -6,25 +6,25 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 11:33:48 by lgervet           #+#    #+#             */
-/*   Updated: 2025/12/20 10:20:07 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/05 13:41:35 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* ************************************************************************** */
 /*                                                                            */
-/*  FUNCTION: ft_striteri                                           */
+/*  FUNCTION: ft_striteri                                           		  */
 /*                                                                            */
-/*  Applies the function ’f’ to each character of the
-string passed as argument, passing its index as
-the first argument. Each character is passed by
-address to ’f’ so it can be modified if necessary.                           */
+/*  Applies the function ’f’ to each character of the						  */
+/*	string passed as argument, passing its index as							  */
+/*	the first argument. Each character is passed by							  */
+/*	address to ’f’ so it can be modified if necessary.                        */
 /*                                                                            */
-/*  @param s  The string to iterate over                */
-/*  @param f  The function to apply to each character                 */
-/*  @return       None       */
+/*  @param s  The string to iterate over                					  */
+/*  @param f  The function to apply to each character                 		  */
+/*  @return       None      											      */
 /*                                                                            */
 /*  Example:                                                                  */
-/*     int *arr = ft_calloc(10, sizeof(int));                            */
+/*     int *arr = ft_calloc(10, sizeof(int));                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
