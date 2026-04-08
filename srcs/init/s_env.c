@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 14:37:58 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 16:13:57 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_env	*create_node(char *env)
 */
 static int	_check_env_vars(t_minishell *ms, char *av0)
 {
-	printf("\n========= ENV VARS INIT DEBUG =========\n\n┌ Initializing:\n");
 	if (!check_env_pwd(ms))
 		return (-1);
 	if (!check_env_old_pwd(ms))
@@ -91,15 +90,14 @@ static int	_check_env_vars(t_minishell *ms, char *av0)
 		return (-1);
 	if (!check_env_shlvl(ms))
 		return (-1);
-	printf("└ Env vars init done !\n");
 	return (1);
 }
 
 /*
 ** init_env:
 **     Initializes t_env list:
-**	   - With extern environ global variable
-**	   - If environ empty (env -i ./minishell), sets minimal requirements nodes
+**	   - With third main variable
+**	   - If env empty (env -i ./minishell), sets minimal requirements nodes
 **
 **     @return Pointer to newly created env list root.
 */

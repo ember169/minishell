@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 14:17:36 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 11:31:53 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 16:07:49 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,28 @@ static void	_clean_env(t_env *root)
 		free(current);
 		current = next;
 	}
-	printf("├ env_list has been freed.\n");
 	return ;
 }
 
 static void	_clean_envp(char **envp)
 {
 	(void)envp;
-	printf("├ envp has been freed.\n");
 	return ;
 }
 
 static void	_clean_ast(t_ast_node *root)
 {
 	(void)root;
-	printf("├ ast has been freed.\n");
 	return ;
 }
 
 void	clean_ms(t_minishell *ms)
 {
+	int	debug;
+
+	debug = ms->debug;
 	if (ms)
 	{
-		printf("\n\n=========== CLEANUP DEBUG ===========\n\n\
-┌ Freeing super-structure\n");
 		if (ms->env_list)
 			_clean_env(ms->env_list);
 		if (ms->envp)
@@ -61,6 +59,7 @@ void	clean_ms(t_minishell *ms)
 		if (ms->ast_root)
 			_clean_ast(ms->ast_root);
 	}
-	printf("└ Cleanup done ! Terminating.\n\n");
+	if (debug)
+		printf("Cleanup done ! Terminating.\n");
 	return ;
 }

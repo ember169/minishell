@@ -6,11 +6,25 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 14:27:48 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 16:05:17 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+void	main_loop(t_minishell *ms)
+{
+	char	*uinput;
+
+	if (!ms)
+		return ;
+	while (1)
+	{
+		uinput = readline(INPUT);
+		// suite...
+	}
+	free(uinput);
+}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -18,10 +32,12 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	ms = NULL;
-	ms = init_ms(ms, av[0], envp);
+	ms = init_ms(ms, av, envp);
 	if (!ms)
 		return (1);
-	print_env_list(ms->env_list);
+	main_loop(ms);
+	if (ms->debug)
+		print_env_list(ms->env_list);
 	clean_ms(ms);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:30 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 12:06:20 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 16:01:48 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_minishell
 	char		**envp;			// Tableau envp (à partir de env_list pr execve)
 	int			last_status;	// Stocker $? (le code de retour)
 	t_ast_node	*ast_root;		// Ptr vers la racine de l'AST courant (free)
+	int			debug;			// Bool pour activer ou non les printf de debug
 }	t_minishell;
 
 #endif

@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/08 11:58:17 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/08 15:41:44 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ $(LIBFT):
 
 # Linkage du binaire final
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBPATH) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBPATH) -lft -lreadline -o $(NAME)
 
 # Compilation des objets (.c -> .o)
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.c

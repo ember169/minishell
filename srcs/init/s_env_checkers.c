@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 13:29:23 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 11:56:51 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 16:05:46 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	check_env_pwd(t_minishell *ms)
 	}
 	else
 		put_env_value(target, cwd);
-	printf("├ ✓ PWD: %s\n", target->value);
 	free(cwd);
 	return (1);
 }
@@ -48,7 +47,6 @@ int	check_env_old_pwd(t_minishell *ms)
 		target = create_node("OLDPWD=");
 		env_add_back(&ms->env_list, target);
 	}
-	printf("├ ✓ OLDPWD: %s\n", target->value);
 	return (1);
 }
 
@@ -65,7 +63,6 @@ int	check_env_path(t_minishell *ms)
 create_node("PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");
 		env_add_back(&ms->env_list, target);
 	}
-	printf("├ ✓ PATH: %s\n", target->value);
 	return (1);
 }
 
@@ -86,7 +83,6 @@ int	check_env_underscore(t_minishell *ms, char *av0)
 	}
 	else
 		put_env_value(target, av0);
-	printf("├ ✓ _: %s\n", target->value);
 	return (1);
 }
 
@@ -115,6 +111,5 @@ int	check_env_shlvl(t_minishell *ms)
 		put_env_value(target, new_val);
 		free(new_val);
 	}
-	printf("├ ✓ SHLVL: %s\n", target->value);
 	return (1);
 }

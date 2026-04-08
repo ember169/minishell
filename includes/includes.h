@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 14:26:50 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 15:49:36 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,9 @@
 /* ==== LIBC  HEADERS ==== */
 # include <stdlib.h>
 # include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+/* ==== MACROS ==== */
+# define INPUT "Minishell>$ "
 
 #endif
