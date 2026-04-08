@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 15:41:15 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/07 11:21:35 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 10:11:23 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,22 @@
 **     corresponding key.
 **
 **     @param *ms   Pointer to Minishell super structure.
-**     @param *key  Character array to find
+**     @param *key  String to find
 **     @return      Pointer to corresponding t_env / NULL if not found
 */
 t_env	*get_env_addr_from_key(t_minishell *ms, char *to_find)
 {
 	t_env	*current;
-	int		i;
-	int		len;
+	size_t	len;
 
-	len = (int)ft_strlen(to_find);
+	if (!ms || !ms->env_list || !to_find)
+		return (NULL);
+	len = ft_strlen(to_find);
 	current = ms->env_list;
-	while (current->next)
+	while (current)
 	{
-		i = 0;
-		while (to_find[i] && current->key[i] == to_find[i])
-			i++;
-		if (i == len)
+		if (ft_strncmp(current->key, to_find, len + 1) == 0 && \
+current->key[len] == '\0')
 			return (current);
 		current = current->next;
 	}
@@ -42,18 +41,27 @@ t_env	*get_env_addr_from_key(t_minishell *ms, char *to_find)
 }
 
 /*
-** insert_env_value:
-**     Inserts a new node (N) inbetween others
+** env_add_back:
+**     Appends a node at the end of the env_list
 **
-**     @param *previous  Pointer to the N-1 node
-**     @param *next      Pointer to the N+1 node
-**     @param *key       String to be added as the new node's key
-**     @param *value     String to be added as the new node's value
-**     @return 			 Pointer to the new created node / NULL.
+**     @param **root  Adress of the list's *root
+**     @param *new    Pointer to the node to append
 */
-t_env	*insert_env_value(t_env *previous, t_env *next, char *key, char *value)
+void	env_add_back(t_env **root, t_env *new)
 {
+	t_env	*tmp;
 
+	if (!root || !new)
+		return ;
+	if (!*root)
+	{
+		*root = new;
+		return ;
+	}
+	tmp = *root;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 }
 
 /*

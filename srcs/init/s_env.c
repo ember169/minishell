@@ -6,63 +6,59 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 15:20:54 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 11:57:36 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 	Potential performances improvements: 
 	- refactor extract_key and extract_value in a single function
-	- only one allocation instread of three ?
+	- only one allocation instead of three ?
 */
 
 #include "../../includes/includes.h"
 
 static char	*_extract_key(char *env)
 {
-	char	*m_key;
+	char	*key;
 	int		i;
 
-	if (!environ)
+	if (!env)
 		return (NULL);
 	i = 0;
 	while (env[i] && env[i] != '=')
 		i++;
-	m_key = ft_calloc(i + 1, sizeof(char));
-	if (!m_key)
-		return (m_key);
-	i = 0;
-	while (env[i] && env[i] != '=')
-	{
-		m_key[i] = env[i];
-		i++;
-	}
-	return (m_key);
+	key = malloc(sizeof(char) * (i + 1));
+	if (!key)
+		return (NULL);
+	ft_strlcpy(key, env, i + 1);
+	return (key);
 }
 
 static char	*_extract_value(char *env)
 {
-	char	*m_value;
+	char	*value;
 	int		i;
-	int		j;
 
-	if (!environ)
+	if (!env)
 		return (NULL);
 	i = 0;
 	while (env[i] && env[i] != '=')
 		i++;
 	if (env[i] == '=')
 		i++;
-	m_value = ft_calloc(ft_strlen(&env[i]) + 1, sizeof(char));
-	if (!m_value)
-		return (m_value);
-	j = 0;
-	while (env[i])
-		m_value[j++] = env[i++];
-	return (m_value);
+	if (env[i] != '\0')
+	{
+		value = ft_strdup(&env[i]);
+		if (!value)
+			return (NULL);
+	}
+	else
+		value = ft_strdup("");
+	return (value);
 }
 
-t_env	*_create_node(char *env)
+t_env	*create_node(char *env)
 {
 	t_env	*ret;
 
@@ -71,27 +67,57 @@ t_env	*_create_node(char *env)
 		return (NULL);
 	ret->key = _extract_key(env);
 	ret->value = _extract_value(env);
+	ret->next = NULL;
 	return (ret);
 }
 
-t_env	*init_env(t_minishell *ms)
+/*
+** init_env_vars:
+**     Iterate through mandatory env values to make sure they are set
+**
+**     @param *ms  Minishell super structure
+**     @return 1 / -1 in case of error
+*/
+static int	_check_env_vars(t_minishell *ms, char *av0)
 {
-	t_env	*root;
-	t_env	*current;
-	t_env	*next;
+	printf("\n========= ENV VARS INIT DEBUG =========\n\n┌ Initializing:\n");
+	if (!check_env_pwd(ms))
+		return (-1);
+	if (!check_env_old_pwd(ms))
+		return (-1);
+	if (!check_env_path(ms))
+		return (-1);
+	if (!check_env_underscore(ms, av0))
+		return (-1);
+	if (!check_env_shlvl(ms))
+		return (-1);
+	printf("└ Env vars init done !\n");
+	return (1);
+}
+
+/*
+** init_env:
+**     Initializes t_env list:
+**	   - With extern environ global variable
+**	   - If environ empty (env -i ./minishell), sets minimal requirements nodes
+**
+**     @return Pointer to newly created env list root.
+*/
+t_env	*init_env(t_minishell *ms, char *av0)
+{
 	int		i;
 
-	root = _create_node(environ[0]);
-	current = root;
-	i = 1;
-	while (environ[i])
+	ms->env_list = NULL;
+	if (environ && environ[0])
 	{
-		next = _create_node(environ[i]);
-		if (!next)
-			return (clean_ms(ms), next);
-		current->next = next;
-		current = current->next;
-		i++;
+		i = 0;
+		while (environ[i])
+		{
+			env_add_back(&ms->env_list, create_node(environ[i]));
+			i++;
+		}
 	}
-	return (root);
+	if (!_check_env_vars(ms, av0))
+		return (NULL);
+	return (ms->env_list);
 }

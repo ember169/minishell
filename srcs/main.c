@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/05 16:10:50 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 11:57:03 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ int	main(int ac, char **av)
 	t_minishell	*ms;
 
 	(void)ac;
-	(void)av;
 	ms = NULL;
-	ms = init_ms(ms);
+	ms = init_ms(ms, av[0]);
 	if (!ms)
 		return (1);
 	print_env_list(ms->env_list);
-	init_env_vars(ms);
 	clean_ms(ms);
 	return (0);
 }

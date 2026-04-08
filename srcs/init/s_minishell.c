@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:10:06 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 14:33:44 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 11:56:56 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 // 	t_ast_node	*ast_root;		// Ptr vers la racine de l'AST courant (free)
 // }	t_minishell;
 
-t_minishell	*init_ms(t_minishell *ms)
+t_minishell	*init_ms(t_minishell *ms, char *av0)
 {
 	ms = malloc(sizeof(t_minishell));
 	if (ms)
 	{
-		ms->env_list = init_env(ms);
+		ms->env_list = init_env(ms, av0);
 		ms->envp = NULL;
 		ms->last_status = 0;
 		ms->ast_root = NULL;
