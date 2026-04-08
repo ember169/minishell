@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 11:56:50 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 14:28:02 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PROTOTYPES_H
 
 /* ==== INITIALIZATION ==== */
-t_minishell	*init_ms(t_minishell *ms, char *av0);
-t_env		*init_env(t_minishell *ms, char *av0);
+t_minishell	*init_ms(t_minishell *ms, char *av0, char **envp);
+t_env		*init_env(t_minishell *ms, char *av0, char **envp);
 int			check_env_pwd(t_minishell *ms);
 int			check_env_old_pwd(t_minishell *ms);
 int			check_env_path(t_minishell *ms);

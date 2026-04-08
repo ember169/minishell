@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 14:37:58 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 11:57:36 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,17 @@ static int	_check_env_vars(t_minishell *ms, char *av0)
 **
 **     @return Pointer to newly created env list root.
 */
-t_env	*init_env(t_minishell *ms, char *av0, char **envp)
+t_env	*init_env(t_minishell *ms, char *av0)
 {
 	int		i;
 
 	ms->env_list = NULL;
-	if (envp && envp[0])
+	if (environ && environ[0])
 	{
 		i = 0;
-		while (envp[i])
+		while (environ[i])
 		{
-			env_add_back(&ms->env_list, create_node(envp[i]));
+			env_add_back(&ms->env_list, create_node(environ[i]));
 			i++;
 		}
 	}
