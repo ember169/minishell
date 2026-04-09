@@ -6,20 +6,11 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:23:04 by v                 #+#    #+#             */
-/*   Updated: 2026/04/09 14:02:32 by v                ###   ########.fr       */
+/*   Updated: 2026/04/09 16:41:42 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-
-/*
-TODO:
-[X]: coder handle_quotes
-[ ]: coder free tok_ls
-[X]: coder is_operator
-[X]: coder handle_operator
-[X]: regarder si le add_back de leo peut marcher sur ma liste
-*/
 
 t_token	*lexer(char *input, t_minishell *ms)
 {

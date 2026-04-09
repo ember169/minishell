@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:30 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/09 13:30:44 by v                ###   ########.fr       */
+/*   Updated: 2026/04/09 16:42:04 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 typedef enum e_state
 {
 	GENERAL,
-	SIN_QUOTE,
-	DOU_QUOTE,
+	IN_QUOTE,
 }	t_state;
 
 typedef struct s_lexer_state
