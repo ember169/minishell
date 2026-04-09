@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 14:27:48 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/08 16:16:13 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int ac, char **av, char **envp)
 {
 	t_minishell	*ms;
+	char		*input_line;
 
 	(void)ac;
 	ms = NULL;
@@ -24,4 +25,5 @@ int	main(int ac, char **av, char **envp)
 	print_env_list(ms->env_list);
 	clean_ms(ms);
 	return (0);
+	lexer(input_line, ms);
 }

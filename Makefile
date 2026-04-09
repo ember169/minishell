@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
+#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/08 11:58:17 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/09 12:32:06 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,10 @@ SRC_FILES   := main.c \
 			   utils/chained_list_printer.c \
 			   utils/heap_cleanup.c \
 			   utils/chained_list_requests.c \
-
+			   utils/lexer_utils.c \
+			   lexer/fsm.c \
+			   lexer/handling.c \
+			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))
 

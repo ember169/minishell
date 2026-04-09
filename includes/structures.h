@@ -3,15 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:30 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/04 12:06:20 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/09 13:30:44 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef enum e_state
+{
+	GENERAL,
+	SIN_QUOTE,
+	DOU_QUOTE,
+}	t_state;
+
+typedef struct s_lexer_state
+{
+	t_state	state;
+	int		i;
+}	t_lexer_state;
 
 typedef enum e_token_type
 {
