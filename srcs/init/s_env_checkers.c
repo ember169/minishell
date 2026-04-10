@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 13:29:23 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 16:05:46 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/10 14:25:00 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	check_env_pwd(t_minishell *ms)
 	{
 		join = ft_strjoin("PWD=", cwd);
 		target = create_node(join);
+		if (!target)
+			return (free(join), -1);
 		env_add_back(&ms->env_list, target);
 		free(join);
 	}
@@ -45,6 +47,8 @@ int	check_env_old_pwd(t_minishell *ms)
 	if (!target)
 	{
 		target = create_node("OLDPWD=");
+		if (!target)
+			return (-1);
 		env_add_back(&ms->env_list, target);
 	}
 	return (1);
@@ -61,6 +65,8 @@ int	check_env_path(t_minishell *ms)
 	{
 		target = \
 create_node("PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");
+		if (!target)
+			return (-1);
 		env_add_back(&ms->env_list, target);
 	}
 	return (1);
@@ -78,6 +84,8 @@ int	check_env_underscore(t_minishell *ms, char *av0)
 	{
 		join = ft_strjoin("_=", av0);
 		target = create_node(join);
+		if (!target)
+			return (free(join), -1);
 		free(join);
 		env_add_back(&ms->env_list, target);
 	}

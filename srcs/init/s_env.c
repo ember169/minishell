@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 16:13:57 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/10 15:26:23 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,21 @@ t_env	*create_node(char *env)
 **     Iterate through mandatory env values to make sure they are set
 **
 **     @param *ms  Minishell super structure
-**     @return 1 / -1 in case of error
+**     @return true / false in case of error
 */
-static int	_check_env_vars(t_minishell *ms, char *av0)
+static bool	_check_env_vars(t_minishell *ms, char *av0)
 {
 	if (!check_env_pwd(ms))
-		return (-1);
+		return (false);
 	if (!check_env_old_pwd(ms))
-		return (-1);
+		return (false);
 	if (!check_env_path(ms))
-		return (-1);
+		return (false);
 	if (!check_env_underscore(ms, av0))
-		return (-1);
+		return (false);
 	if (!check_env_shlvl(ms))
-		return (-1);
-	return (1);
+		return (false);
+	return (true);
 }
 
 /*

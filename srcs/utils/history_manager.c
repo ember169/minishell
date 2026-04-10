@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chained_list_printer.c                             :+:      :+:    :+:   */
+/*   history_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 10:48:03 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:37:14 by lgervet          ###   ########.fr       */
+/*   Created: 2026/04/10 14:29:40 by lgervet           #+#    #+#             */
+/*   Updated: 2026/04/10 15:33:39 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-void	print_env_list(t_env *root)
+static bool	_is_only_spaces(char *str)
 {
-	t_env	*current;
-	int		i;
+	int	i;
 
-	printf("\n========= ENV LIST DEBUG =========\n\n");
-	if (!root)
-	{
-		printf("No env_list found. Exiting\n");
-		return ;
-	}
 	i = 0;
-	current = root;
-	while (current)
+	while (str[i])
 	{
-		printf("[%d] \"%s=%s\"\n", i, current->key, current->value);
+		if (str[i] != ' ')
+			return (false);
 		i++;
-		current = current->next;
 	}
-	printf("\n\n");
+	return (true);
+}
+
+/*
+** add_to_history:
+**     Checks if passed str in empty or only spaces, if not add_history
+**
+**     @param *str  user input
+*/
+void	add_to_history(char *str)
+{
+	if (!str || _is_only_spaces(str))
+		return ;
+	add_history(str);
+	return ;
 }

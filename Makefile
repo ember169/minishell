@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/08 15:41:44 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/10 15:13:05 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,10 @@ SRC_FILES   := main.c \
 			   init/s_env_checkers.c \
                init/s_minishell.c \
 			   utils/chained_list_printer.c \
-			   utils/heap_cleanup.c \
 			   utils/chained_list_requests.c \
+			   utils/error_messages.c \
+			   utils/heap_cleanup.c \
+			   utils/history_manager.c \
 
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))

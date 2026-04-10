@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 15:59:17 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/10 15:29:33 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ t_env		*create_node(char *env);
 t_env		*get_env_addr_from_key(t_minishell *ms, char *to_find);
 t_env		*put_env_value(t_env *env, char *new_value);
 void		env_add_back(t_env **root, t_env *new);
+void		add_to_history(char *str);
 
 #endif

@@ -1,29 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:32:36 by lgervet          ###   ########.fr       */
+/*   Created: 2026/04/10 15:10:54 by lgervet           #+#    #+#             */
+/*   Updated: 2026/04/10 15:38:05 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-
-/* ==== LIBC  HEADERS ==== */
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-/* ==== LOCAL HEADERS ==== */
-# include "../libs/libft/includes/libft.h"
-# include "defines.h"
-# include "structures.h"
-# include "prototypes.h"
-
-#endif
+/* ==== MACROS ==== */
+# define PROMPT "Minishell$ "

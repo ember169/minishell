@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 16:05:17 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/10 15:28:51 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	main_loop(t_minishell *ms)
 		return ;
 	while (1)
 	{
-		uinput = readline(INPUT);
-		// suite...
+		uinput = readline(PROMPT);
+		add_to_history(uinput);
+		if (ft_strncmp(uinput, "exit", 5) == 0)
+			break ;
 	}
 	free(uinput);
 }
