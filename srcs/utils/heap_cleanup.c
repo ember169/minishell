@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 14:17:36 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/08 16:07:49 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/10 16:08:23 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	clean_ms(t_minishell *ms)
 		if (ms->ast_root)
 			_clean_ast(ms->ast_root);
 	}
+	free(ms);
+	clear_history();
 	if (debug)
 		printf("Cleanup done ! Terminating.\n");
 	return ;
