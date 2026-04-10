@@ -6,13 +6,13 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:23:04 by v                 #+#    #+#             */
-/*   Updated: 2026/04/09 16:41:42 by v                ###   ########.fr       */
+/*   Updated: 2026/04/10 13:27:39 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-t_token	*lexer(char *input, t_minishell *ms)
+t_token	*lexer(char *input)
 {
 	t_lexer_state	ls;
 	t_token			*tok_ls;
@@ -25,8 +25,16 @@ t_token	*lexer(char *input, t_minishell *ms)
 	if (ls.state != GENERAL)
 	{
 		write (2, "error: unclosed quotes", 22);
-		free_tok_ls(tok_ls);
+		free_tok_ls(&tok_ls);
 		return (NULL);
+	}
+	//========= AFFICHAGE ========//
+	t_token *tmp;
+	tmp = tok_ls; // On utilise tmp pour se balader
+	while (tmp)
+	{
+		ft_printf("value: %s\ntype: %d\n", tmp->value, tmp->type);
+		tmp = tmp->next;
 	}
 	return (tok_ls);
 }

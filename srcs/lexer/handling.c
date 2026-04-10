@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 12:25:26 by v                 #+#    #+#             */
-/*   Updated: 2026/04/09 14:02:31 by v                ###   ########.fr       */
+/*   Updated: 2026/04/10 13:03:10 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls)
 
 	start = ls->i;
 	quote_char = input[ls->i];
-	if (quote_char == '\'')
-		ls->state = SIN_QUOTE;
-	if (quote_char == '\"')
-		ls->state = DOU_QUOTE;
+	if (quote_char == '\'' || quote_char == '\"')
+		ls->state = IN_QUOTE;
 	ls->i++;
 	while (input[ls->i] && input[ls->i] != quote_char)
 		ls->i++;

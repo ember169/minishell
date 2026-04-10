@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/09 14:02:29 by v                ###   ########.fr       */
+/*   Updated: 2026/04/10 13:03:34 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			check_env_underscore(t_minishell *ms, char *av0);
 int			check_env_shlvl(t_minishell *ms);
 
 /* ==== LEXER ==== */
-t_token		*lexer(char *input, t_minishell *ms);
+t_token		*lexer(char *input);
 void		handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls);
 int			handle_double_op(char *input, t_lexer_state *ls, t_token **tok_ls);
 void		handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls);
