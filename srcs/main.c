@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:28:51 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/10 16:12:07 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	main_loop(t_minishell *ms)
 		uinput = readline(PROMPT);
 		add_to_history(uinput);
 		if (ft_strncmp(uinput, "exit", 5) == 0)
+		{
+			free(uinput);
 			break ;
+		}
 	}
 	free(uinput);
 }
@@ -41,5 +44,6 @@ int	main(int ac, char **av, char **envp)
 	if (ms->debug)
 		print_env_list(ms->env_list);
 	clean_ms(ms);
+	free(ms);
 	return (0);
 }
