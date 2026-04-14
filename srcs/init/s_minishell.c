@@ -6,12 +6,11 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:10:06 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:32:58 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/14 18:24:35 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-
 
 static bool	_check_debug(char **av)
 {

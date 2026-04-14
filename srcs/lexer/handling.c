@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handling.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 12:25:26 by v                 #+#    #+#             */
-/*   Updated: 2026/04/10 13:03:10 by v                ###   ########.fr       */
+/*   Updated: 2026/04/14 15:53:47 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls)
 	if (new_node)
 		token_add_back(tok_ls, new_node);
 }
-
 
 void	handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls)
 {

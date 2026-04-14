@@ -6,9 +6,14 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 15:10:54 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:38:05 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/14 18:23:57 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef DEFINES_H
+# define DEFINES_H
+
 /* ==== MACROS ==== */
 # define PROMPT "Minishell$ "
+
+#endif

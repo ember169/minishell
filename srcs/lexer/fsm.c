@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fsm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:23:04 by v                 #+#    #+#             */
-/*   Updated: 2026/04/10 13:27:39 by v                ###   ########.fr       */
+/*   Updated: 2026/04/14 18:07:39 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ t_token	*lexer(char *input)
 		write (2, "error: unclosed quotes", 22);
 		free_tok_ls(&tok_ls);
 		return (NULL);
-	}
-	//========= AFFICHAGE ========//
-	t_token *tmp;
-	tmp = tok_ls; // On utilise tmp pour se balader
-	while (tmp)
-	{
-		ft_printf("value: %s\ntype: %d\n", tmp->value, tmp->type);
-		tmp = tmp->next;
 	}
 	return (tok_ls);
 }

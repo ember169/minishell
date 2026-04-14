@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 16:10:40 by v                 #+#    #+#             */
-/*   Updated: 2026/04/09 16:54:15 by v                ###   ########.fr       */
+/*   Updated: 2026/04/14 18:06:40 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-
-//is_operator
 
 void	token_add_back(t_token **root, t_token *new)
 {

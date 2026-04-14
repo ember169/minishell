@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
+#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2026/04/10 15:13:05 by lgervet          ###   ########.fr        #
-=======
-#    Updated: 2026/04/10 13:01:04 by v                ###   ########.fr        #
->>>>>>> phase1_alma
+#    Updated: 2026/04/14 18:14:39 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +29,8 @@ SRC_FILES   := main.c \
                init/s_env.c \
 			   init/s_env_checkers.c \
                init/s_minishell.c \
-			   utils/chained_list_printer.c \
-			   utils/chained_list_requests.c \
+			   utils/list_printer.c \
+			   utils/env_list_utils.c \
 			   utils/error_messages.c \
 			   utils/heap_cleanup.c \
 			   utils/history_manager.c \

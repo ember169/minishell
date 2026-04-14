@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/14 15:44:47 by v                ###   ########.fr       */
+/*   Updated: 2026/04/14 18:10:13 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ t_token		*token_new(char *value, t_token_type type);
 int			is_space(char c);
 int			is_operator(char c);
 void		free_tok_ls(t_token **tok_ls);
+void		print_tok_list(t_token *token);
 
 #endif
