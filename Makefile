@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
+#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2026/04/10 15:13:05 by lgervet          ###   ########.fr        #
+=======
+#    Updated: 2026/04/10 13:01:04 by v                ###   ########.fr        #
+>>>>>>> phase1_alma
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +38,10 @@ SRC_FILES   := main.c \
 			   utils/error_messages.c \
 			   utils/heap_cleanup.c \
 			   utils/history_manager.c \
-
+			   utils/lexer_utils.c \
+			   lexer/fsm.c \
+			   lexer/handling.c \
+			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))
 

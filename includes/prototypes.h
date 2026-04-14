@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:29:33 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/14 15:44:47 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ int			check_env_path(t_minishell *ms);
 int			check_env_underscore(t_minishell *ms, char *av0);
 int			check_env_shlvl(t_minishell *ms);
 
+/* ==== LEXER ==== */
+t_token		*lexer(char *input);
+void		handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls);
+int			handle_double_op(char *input, t_lexer_state *ls, t_token **tok_ls);
+void		handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls);
+void		extract_word(char *input, t_lexer_state *ls, t_token **tok_ls);
+int			append_op(
+				t_token **tok_ls, t_lexer_state *ls, t_token_type type, int size
+				);
+void		process_character(
+				char *input, t_lexer_state *ls, t_token **tok_ls
+				);
+
 /* ==== UTILITIES ==== */
 void		print_env_list(t_env *root);
 void		clean_ms(t_minishell *ms);
@@ -30,5 +43,10 @@ t_env		*get_env_addr_from_key(t_minishell *ms, char *to_find);
 t_env		*put_env_value(t_env *env, char *new_value);
 void		env_add_back(t_env **root, t_env *new);
 void		add_to_history(char *str);
+void		token_add_back(t_token **root, t_token *new);
+t_token		*token_new(char *value, t_token_type type);
+int			is_space(char c);
+int			is_operator(char c);
+void		free_tok_ls(t_token **tok_ls);
 
 #endif

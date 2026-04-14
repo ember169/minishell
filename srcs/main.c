@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/04/10 16:13:19 by lgervet          ###   ########.fr       */
+=======
+/*   Updated: 2026/04/10 13:28:10 by v                ###   ########.fr       */
+>>>>>>> phase1_alma
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +35,7 @@ void	main_loop(t_minishell *ms)
 int	main(int ac, char **av, char **envp)
 {
 	t_minishell	*ms;
+	t_token		*tok_ls;
 
 	(void)ac;
 	ms = NULL;
@@ -42,5 +47,7 @@ int	main(int ac, char **av, char **envp)
 		print_env_list(ms->env_list);
 	clean_ms(ms);
 	free(ms);
+	tok_ls = lexer("ls| grep c >out");
+	free_tok_ls(&tok_ls);
 	return (0);
 }
