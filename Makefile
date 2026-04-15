@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
+#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/14 18:14:39 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/15 13:49:20 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_FILES   := main.c \
 			   utils/heap_cleanup.c \
 			   utils/history_manager.c \
 			   utils/lexer_utils.c \
+			   utils/ast_utils.c \
 			   lexer/fsm.c \
 			   lexer/handling.c \
 			   

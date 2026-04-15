@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/15 09:24:13 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/15 14:22:19 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int			is_space(char c);
 int			is_operator(char c);
 void		free_tok_ls(t_token **tok_ls);
 void		print_tok_list(t_token *token);
+t_ast_node	*ast_new_cmd_node(void);
+t_ast_node	*ast_new_op(t_node_type type, t_ast_node *left, t_ast_node *right);
 
 #endif
