@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/14 18:10:13 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/15 09:24:13 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,10 @@ int			check_env_path(t_minishell *ms);
 int			check_env_underscore(t_minishell *ms, char *av0);
 int			check_env_shlvl(t_minishell *ms);
 
-/* ==== LEXER ==== */
+/* ==== LEXER / TOKENIZER ==== */
 t_token		*lexer(char *input);
 void		handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls);
-int			handle_double_op(char *input, t_lexer_state *ls, t_token **tok_ls);
 void		handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls);
-void		extract_word(char *input, t_lexer_state *ls, t_token **tok_ls);
-int			append_op(
-				t_token **tok_ls, t_lexer_state *ls, t_token_type type, int size
-				);
-void		process_character(
-				char *input, t_lexer_state *ls, t_token **tok_ls
-				);
 
 /* ==== UTILITIES ==== */
 void		print_env_list(t_env *root);
