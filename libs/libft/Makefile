@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/07 14:34:30 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/03 18:56:33 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/16 16:12:12 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS 		:= \
 	srcs/libc/ft_isascii.c \
 	srcs/libc/ft_isdigit.c \
 	srcs/libc/ft_isprint.c \
+	srcs/libc/ft_isupper.c \
 	srcs/libc/ft_itoa.c \
 	srcs/libc/ft_memchr.c \
 	srcs/libc/ft_memcmp.c \
