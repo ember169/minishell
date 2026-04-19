@@ -6,33 +6,12 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:30:24 by v                 #+#    #+#             */
-/*   Updated: 2026/04/15 18:02:58 by v                ###   ########.fr       */
+/*   Updated: 2026/04/19 14:28:29 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-static t_token	*find_logical_op(t_token *tok)
-{
-	t_token	*current;
-	t_token	*last_found;
-	int		par_lvl;
-
-	current = tok;
-	last_found = NULL;
-	par_lvl = 0;
-	while (current)
-	{
-		if (current->type == TOK_PAREN_LEFT)
-			par_lvl++;
-		else if (current->type == TOK_PAREN_RIGHT)
-			par_lvl--;
-		else if (par_lvl == 0
-			&& (current->type == TOK_AND || current->type == TOK_OR))
-			last_found = current;
-		current = current->next;
-	}
-}
 
 static t_ast_node	*split_ast_op(t_token *tok, t_token *split_pts)
 {
@@ -55,7 +34,7 @@ static t_ast_node	*split_ast_op(t_token *tok, t_token *split_pts)
 	if (current)
 		current->next = NULL;
 	left_ast = build_ast(tok);
-	right_ast = buil_ast(right_tok);
+	right_ast = build_ast(right_tok);
 	free (split_pts);
 	return (ast_new_op(node_type, left_ast, right_ast));
 }
@@ -69,10 +48,7 @@ static int	count_args(t_token *tok)
 	current = tok;
 	while (current)
 	{
-		if (current->type == TOK_REDIR_IN
-			|| current->type == TOK_REDIR_OUT
-			|| current->type == TOK_REDIR_APPEND
-			|| current->type == TOK_HEREDOC)
+		if (is_redir(current->type))
 			current = current->next;
 		else if (current->type == TOK_WORD)
 			count++;
@@ -84,43 +60,32 @@ static int	count_args(t_token *tok)
 
 static t_ast_node	*parse_cmd(t_token *tok)
 {
-	t_ast_node	*cmd_node;
-	t_token		*current;
+	t_ast_node	*cmd;
 	int			i;
 
-	cmd_node = ast_new_cmd_node();
-	if (!cmd_node)
+	cmd = ast_new_cmd_node();
+	if (!cmd)
 		return (NULL);
-	cmd_node->args = malloc(sizeof(char*) * (count_args(tok) + 1));
-	if (!cmd_node->args)
-		return (NULL);
-	current = tok;
+	cmd->args = malloc(sizeof(char *) * (count_args(tok) + 1));
+	if (!cmd->args)
+		return (NULL); //plus tard free
 	i = 0;
-	while (current)
+	while (tok)
 	{
-		if (current->type == TOK_REDIR_IN //TODO faire une fonction pour les is_redir 
-			|| current->type == TOK_REDIR_OUT
-			|| current->type == TOK_REDIR_APPEND
-			|| current->type == TOK_HEREDOC)
+		if (is_redir(tok->type) && tok->next)
 		{
-			// TODO : Créer un t_redir et l'ajouter à cmd_node->redirs
-			// append_redir(&(cmd_node->redirs), curr->type, curr->next->value);
-			current = current->next;
+			append_redir(&(cmd->redirs), red_new(tok->type, tok->next->value));
+			tok = tok->next;
 		}
-		else if (current->type == TOK_WORD)
-		{
-			cmd_node->args[i] = ft_strdup(current->value);
-			if (!cmd_node->args[i])
-				return (NULL);
-			i++;
-		}
-		current = current->next;
+		else if (tok->type == TOK_WORD)
+			cmd->args[i++] = ft_strdup(tok->value);
+		tok = tok->next;
 	}
-	cmd_node->args[i] = NULL;
-	return (cmd_node);
+	cmd->args[i] = NULL;
+	return (cmd);
 }
 
-t_ast_node	*build_ast(t_token *tok) // a proto
+t_ast_node	*build_ast(t_token *tok)
 {
 	t_token	*split_pts;
 

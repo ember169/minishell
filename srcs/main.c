@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/14 18:24:23 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/19 14:37:51 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,28 @@
 void	main_loop(t_minishell *ms, t_token *list)
 {
 	char	*uinput;
+	t_ast_node *ast;
 
 	if (!ms)
 		return ;
 	while (1)
 	{
 		uinput = readline(PROMPT);
-		add_to_history(uinput);
+		if (!uinput)
+			break ;
+		if (uinput[0] != '\0')
+			add_to_history(uinput);
+		if (ft_strncmp(uinput, "exit", 5) == 0)
+		{
+			free (uinput);
+			break ;
+		}
 		list = lexer(uinput);
 		if (ms->debug)
 			print_tok_list(list);
-		if (ft_strncmp(uinput, "exit", 5) == 0)
-			break ;
+		ast = build_ast(list);
+		if (ms->debug)
+			print_ast(ast, 0);
 	}
 	free(uinput);
 }

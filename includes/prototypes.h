@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/15 14:22:19 by v                ###   ########.fr       */
+/*   Updated: 2026/04/19 14:26:06 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ t_token		*lexer(char *input);
 void		handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls);
 void		handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls);
 
+/* ==== PARSER / AST  ==== */
+t_ast_node	*build_ast(t_token *tok);
+bool		is_redir(t_token_type type);
+t_redir		*red_new(t_token_type type, char *file);
+void		append_redir(t_redir **redirs, t_redir *new_node);
+
 /* ==== UTILITIES ==== */
 void		print_env_list(t_env *root);
 void		clean_ms(t_minishell *ms);
@@ -43,5 +49,8 @@ void		free_tok_ls(t_token **tok_ls);
 void		print_tok_list(t_token *token);
 t_ast_node	*ast_new_cmd_node(void);
 t_ast_node	*ast_new_op(t_node_type type, t_ast_node *left, t_ast_node *right);
+void		print_ast(t_ast_node *node, int level);
+t_token		*find_logical_op(t_token *tok);
+t_token		*find_pipe_op(t_token *tok);
 
 #endif
