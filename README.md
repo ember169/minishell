@@ -37,7 +37,19 @@ The shell must implement the following commands internally:
 > `readline`, `rl_clear_history`, `rl_on_new_line`, `rl_replace_line`, `rl_redisplay`, `add_history`, `printf`, `malloc`, `free`, `write`, `access`, `open`, `read`, `close`, `fork`, `wait`, `waitpid`, `wait3`, `wait4`, `signal`, `sigaction`, `sigemptyset`, `sigaddset`, `kill`, `exit`, `getcwd`, `chdir`, `stat`, `lstat`, `fstat`, `unlink`, `execve`, `dup`, `dup2`, `pipe`, `opendir`, `readdir`, `closedir`, `strerror`, `perror`, `isatty`, `ttyname`, `ttyslot`, `ioctl`, `getenv`, `tcsetattr`, `tcgetattr`, `tgetent`, `tgetflag`, `tgetnum`, `tgetstr`, `tgoto`, `tputs`
 
 ### Implementation
-*Building...*
+
+#### Naming Rules Summary
+
+| Pattern | Use Case | Example |
+| :--- | :--- | :--- |
+| `module.c` | Main entry point(s) | `lexer.c` |
+| `module_checkers.c` | Validation/checking functions | `init_checkers.c` |
+| `module_creators.c` | Creation/init functions | `init_creators.c` |
+| `module_operators.c` | Operator handling | `lexer_operators.c` |
+| `module_tokens.c` | Token manipulation | `lexer_tokens.c` |
+| `module_helpers.c` | General utilities for the module | `expander_helpers.c` |
+| `module_vars.c` | Variable-specific logic | `expander_vars.c` |
+Each file should have a clear, single responsibility matching its suffix
 
 ## Instructions
 ### Compiling

@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/18 10:52:12 by lgervet          ###   ########.fr       */
+/*   Created: 2026/04/18 10:51:53 by lgervet           #+#    #+#             */
+/*   Updated: 2026/04/18 10:51:56 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-# include "../libs/libft/includes/libft.h"
-# include "core/structures.h"
-# include "core/defines.h"
-# include "modules/init.h"
-# include "modules/lexer.h"
-# include "modules/expander.h"
-# include "modules/utils.h"
-# include "modules/debug.h"
+void		clean_ms(t_minishell *ms);
+void		add_to_history(char *str);
+void		print_env_list(t_env *root);
 
 #endif

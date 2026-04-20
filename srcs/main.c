@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/14 18:24:23 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/20 10:46:27 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	main_loop(t_minishell *ms, t_token *list)
 		uinput = readline(PROMPT);
 		add_to_history(uinput);
 		list = lexer(uinput);
+		expand_token_list(ms, list);
 		if (ms->debug)
 			print_tok_list(list);
 		if (ft_strncmp(uinput, "exit", 5) == 0)

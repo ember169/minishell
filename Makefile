@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/14 18:14:39 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/15 14:59:02 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,11 @@ SRC_FILES   := main.c \
 			   utils/error_messages.c \
 			   utils/heap_cleanup.c \
 			   utils/history_manager.c \
-			   utils/lexer_utils.c \
+			   utils/token_utils.c \
 			   lexer/fsm.c \
 			   lexer/handling.c \
+			   expander/expander.c \
+			   expander/expander_utils.c \
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))
