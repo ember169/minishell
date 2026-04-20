@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_printer.c                                     :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 10:48:03 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/14 18:21:53 by lgervet          ###   ########.fr       */
+/*   Created: 2026/04/20 17:51:47 by lgervet           #+#    #+#             */
+/*   Updated: 2026/04/20 17:52:26 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,21 @@ i, token->value, token->type);
 		i++;
 	}
 	printf("\n\n");
+}
+
+/*
+** wrong_usage_message:
+**     Function that could be used when user inputs a wrong flag
+**
+**     @param has_error  Boolean to return
+**     @return has_error
+*/
+int	wrong_usage_message(int has_error)
+{
+	ft_putendl_fd("Usage: ./minishell [Options]\n\
+OPTIONS:\n\
+	--debug: Increase verbosity level with debug messages\n\
+EXAMPLE:\n\
+	./minishell --debug\n", 2);
+	return (has_error);
 }

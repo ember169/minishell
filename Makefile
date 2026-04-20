@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/15 14:59:02 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/20 18:03:51 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,17 @@ INC         := -I $(INCSDIR) -I $(LIBPATH)/includes
 
 # Sources :
 SRC_FILES   := main.c \
-               init/s_env.c \
-			   init/s_env_checkers.c \
-               init/s_minishell.c \
-			   utils/list_printer.c \
-			   utils/env_list_utils.c \
-			   utils/error_messages.c \
-			   utils/heap_cleanup.c \
-			   utils/history_manager.c \
-			   utils/token_utils.c \
-			   lexer/fsm.c \
-			   lexer/handling.c \
-			   expander/expander.c \
-			   expander/expander_utils.c \
+               history.c \
+               env/env.c \
+               env/env_checkers.c \
+               env/env_utils.c \
+               exit/debug.c \
+               exit/exit.c \
+               expander/expander.c \
+               expander/expander_utils.c \
+               lexer/lexer.c \
+               lexer/lexer_utils.c \
+               lexer/handling.c \
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))

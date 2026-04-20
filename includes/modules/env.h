@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 10:51:13 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/18 10:51:14 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/20 17:49:16 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#ifndef ENV_H
+# define ENV_H
 
 t_minishell	*init_ms(t_minishell *ms, char **av, char **envp);
 t_env		*init_env(t_minishell *ms, char *av0, char **envp);
