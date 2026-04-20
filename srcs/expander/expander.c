@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:57:29 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/20 13:11:53 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/20 13:57:36 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,20 @@ static void	_get_env_var(t_minishell *ms, char *dollar, char **var)
 		*var = ft_strdup("");
 		return ;
 	}
-	env = get_env_addr_from_key(ms, key);
-	free(key);
-	if (!env)
-		*var = ft_strdup("");
+	if (key_len == 1 && *key == '?')
+	{
+		free(key);
+		*var = ft_itoa(ms->last_status);
+	}
 	else
-		*var = ft_strdup(env->value);
+	{
+		env = get_env_addr_from_key(ms, key);
+		free(key);
+		if (!env)
+			*var = ft_strdup("");
+		else
+			*var = ft_strdup(env->value);
+	}
 }
 
 /*

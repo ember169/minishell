@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/18 10:52:12 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/20 13:55:47 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@
 # include "modules/lexer.h"
 # include "modules/expander.h"
 # include "modules/utils.h"
-# include "modules/debug.h"
 
 #endif
