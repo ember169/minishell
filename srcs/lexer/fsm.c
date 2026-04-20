@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:23:04 by v                 #+#    #+#             */
-/*   Updated: 2026/04/15 09:24:03 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/20 13:17:23 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ static void	_process_character(
 		handle_quotes(input, ls, tok_ls);
 	else if (ls->state == GENERAL && is_space(input[ls->i]))
 		ls->i++;
+	else if (ls->state == GENERAL
+		&& ((input[ls->i] == '&' && input[ls->i + 1] == '&')
+			|| (input[ls->i] == '|' && input[ls->i + 1] == '|')
+			|| (input[ls->i] == '<' && input[ls->i + 1] == '<')
+			|| (input[ls->i] == '>' && input[ls->i + 1] == '>')))
+		handle_operator(input, ls, tok_ls);
 	else if (ls->state == GENERAL && !is_operator(input[ls->i]))
 		_extract_word(input, ls, tok_ls);
 	else if (ls->state == GENERAL && is_operator(input[ls->i]))
