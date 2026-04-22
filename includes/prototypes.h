@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/19 14:26:06 by v                ###   ########.fr       */
+/*   Updated: 2026/04/21 13:54:46 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ t_ast_node	*ast_new_op(t_node_type type, t_ast_node *left, t_ast_node *right);
 void		print_ast(t_ast_node *node, int level);
 t_token		*find_logical_op(t_token *tok);
 t_token		*find_pipe_op(t_token *tok);
+void		free_ast(t_ast_node *node);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:30:24 by v                 #+#    #+#             */
-/*   Updated: 2026/04/19 14:28:29 by v                ###   ########.fr       */
+/*   Updated: 2026/04/21 15:22:58 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_ast_node	*parse_cmd(t_token *tok)
 		return (NULL);
 	cmd->args = malloc(sizeof(char *) * (count_args(tok) + 1));
 	if (!cmd->args)
-		return (NULL); //plus tard free
+		return (free_ast(cmd), NULL);
 	i = 0;
 	while (tok)
 	{

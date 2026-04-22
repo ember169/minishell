@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/19 14:11:23 by v                ###   ########.fr        #
+#    Updated: 2026/04/21 14:13:29 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,14 @@ SRC_FILES   := main.c \
 			   utils/heap_cleanup.c \
 			   utils/history_manager.c \
 			   utils/lexer_utils.c \
-			   utils/ast_utils.c \
-			   utils/ast_printer.c \
+			   parser/ast_utils.c \
+			   parser/ast_printer.c \
 			   lexer/fsm.c \
 			   lexer/handling.c \
 			   parser/build_ast.c \
-			   parser/handle_redir.c 
+			   parser/handle_redir.c \
+			   parser/free_ast.c \
+			   parser/parse_subshell.c
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))
 

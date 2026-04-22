@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/19 14:37:51 by v                ###   ########.fr       */
+/*   Updated: 2026/04/21 13:59:19 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	main_loop(t_minishell *ms, t_token *list)
 {
-	char	*uinput;
-	t_ast_node *ast;
+	char		*uinput;
+	t_ast_node	*ast;
 
 	if (!ms)
 		return ;
@@ -38,6 +38,7 @@ void	main_loop(t_minishell *ms, t_token *list)
 		if (ms->debug)
 			print_ast(ast, 0);
 	}
+	free_ast(ast);
 	free(uinput);
 }
 
