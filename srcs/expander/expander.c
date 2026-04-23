@@ -6,137 +6,97 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:57:29 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/20 13:59:45 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/23 10:41:56 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-/*
-** _reconstruct_str:
-**     Merges every str into one, frees the others
-**
-**     @param *prefix	Prefix string.
-**     @param *suffix	Suffix string.
-**     @param *var		Var string.
-**     @param *ret		Merged string.
-*/
-static void	_reconstruct_str(char *prefix, char *suffix, char *var, char **ret)
+static char	*_expand_path(t_minishell *ms, char *str)
 {
-	char	*tmp;
-
-	if (!prefix || !suffix || !var)
-		return ;
-	tmp = ft_strjoin(prefix, var);
-	if (!tmp)
-		return ;
-	*ret = ft_strjoin(tmp, suffix);
-	free(tmp);
-	free(prefix);
-	free(suffix);
-	free(var);
+	if (!ms)
+		return ("");
+	return (str);
 }
 
 /*
-** _get_env_var:
-**     Finds according variable value in ms->env_list:
-**	   fills *`var with it or with empty string if not found.
+** _expand_with_quote:
+**		Expands variables with quote management and removal:
+**     		- Track quote state (in_quote = '\0' OR '\'' OR '"')
+**	   		- Skip expansion when in_quote == '\''
+**	  		- Allow expansion when unquoted or in_quote == '"'
+**	  		- Strip quotes as it processes
+**	  		- Return the final string
 **
-**     @param *ms		Pointer to minishell super structure
-**     @param *dollar	Pointer to string at dollar char
-**     @param **var		String in which put the env_list->value
+**     @param param  Description.
+**     @return New string.
 */
-static void	_get_env_var(t_minishell *ms, char *dollar, char **var)
+static char	*_expand_with_quotes(t_minishell *ms, char *str)
 {
-	char		*key;
-	int			key_len;
-	t_env		*env;
-
-	key_len = get_key_len(dollar);
-	key = ft_substr(dollar, 1, key_len);
-	if (!key)
-	{
-		*var = ft_strdup("");
-		return ;
-	}
-	if (key_len == 1 && *key == '?')
-		*var = ft_itoa(ms->last_status);
-	else
-	{
-		env = get_env_addr_from_key(ms, key);
-		if (!env)
-			*var = ft_strdup("");
-		else
-			*var = ft_strdup(env->value);
-	}
-	free(key);
-}
-
-/*
-** _isolate_var:
-**     Takes everything before and after $VAR in a string to fill buffers
-**
-**     @param *str		String to treat.
-**     @param *dollar	Pointer to dollar char in *str.
-**     @param *prefix	String to fill w/ prefix.
-**     @param *suffix	String to fill w/ suffix.
-*/
-static void	_isolate_var(char *str, char *dollar, char **prefix, char **suffix)
-{
-	int		prefix_len;
+	char	in_quote;
+	char	*ret;
+	char	*key;
+	char	*var;
+	int		i;
+	int		j;
 	int		key_len;
 
-	prefix_len = dollar - str;
-	*prefix = ft_substr(str, 0, prefix_len);
-	key_len = get_key_len(dollar);
-	*suffix = ft_strdup(dollar + 1 + key_len);
+	in_quote = '\0';
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (is_quote(str[i]))
+		{
+			if (in_quote == str[i])
+			{
+				in_quote = '\0';
+				i++;
+				continue ;
+			}
+			else if (in_quote == '\0')
+			{
+				in_quote = str[i];
+				i++;
+				continue ;
+			}
+			else
+				ret[j++] = str[i++];
+		}
+		else if (str[i] == '$' && in_quote != '\'')
+		{
+			key_len = get_key_len(&str[i]);
+			if (key_len > 0)
+			{
+				extract_key(&str[i], &key, key_len);
+				get_env_var(ms, &str[i], &var);
+				j += append_var(&ret[j], var);
+				free(key);
+				free(var);
+			}
+			continue ;
+		}
+		else
+			ret[j++] = str[i++];
+	}
+	ret[j] = '\0';
+	return (ret);
 }
 
 /*
-** _expand_loop:
-**     Recursively :
-**		- Checks if var in string, if not return a new allocated str, else:
-**		- Asks for isolation of three str parts (before $ | VAR | after $ )
-**		- Asks for environment variable
-**		- Asks for string construction
-**		- Checks again if other variable in str
+** expand_token_list:
+**		Iterate through token list, each time a TOK_WORD is encountered:
+**			- Variable expansion ($VAR) + quote handling
+**			- Pathname expansion (*.txt)
 **
-**     @param *ms   Pointer to minishell parent structure
-**     @param *str  Pointer to string to check
-**     @return Newly allocated char in any case
+**     @param *ms    Pointer to superstructure.
+**     @param *head  Head of token chained list.
 */
-static char	*_expand_loop(t_minishell *ms, char *str)
-{
-	char	*prefix;
-	char	*var;
-	char	*suffix;
-	char	*res;
-	char	*dollar;
-
-	if (!ms || !str)
-		return (NULL);
-	res = NULL;
-	dollar = check_for_var(str);
-	if (!dollar)
-		return (ft_strdup(str));
-	if (get_key_len(dollar) == 0)
-		return (ft_strdup(str));
-	_isolate_var(str, dollar, &prefix, &suffix);
-	_get_env_var(ms, dollar, &var);
-	_reconstruct_str(prefix, suffix, var, &res);
-	if (res && check_for_var(res))
-	{
-		dollar = _expand_loop(ms, res);
-		free(res);
-		return (dollar);
-	}
-	return (res);
-}
-
 void	expand_token_list(t_minishell *ms, t_token *head)
 {
 	t_token	*current;
 	char	*expanded;
+	char	*expanded_path;
 
 	if (!head || !ms)
 		return ;
@@ -145,11 +105,12 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 	{
 		if (current->type == TOK_WORD)
 		{
-			expanded = _expand_loop(ms, current->value);
+			expanded = _expand_with_quotes(ms, current->value);
 			free(current->value);
-			current->value = expanded;
+			expanded_path = _expand_path(ms, expanded);
+			free(expanded);
+			current->value = expanded_path;
 		}
 		current = current->next;
 	}
-	return ;
 }
