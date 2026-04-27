@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/21 11:14:50 by lgervet          ###   ########.fr        #
+#    Updated: 2026/04/27 13:29:23 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ SRC_FILES   := main.c \
                exit/debug.c \
                exit/exit.c \
                expander/expander.c \
-               expander/expander_utils.c \
+               expander/expander_var_utils.c \
+               expander/expander_var_helpers.c \
                expander/expander_quote_utils.c \
-               expander/expander_quote.c \
                lexer/lexer.c \
                lexer/lexer_utils.c \
                lexer/handling.c \
