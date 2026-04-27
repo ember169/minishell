@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 10:33:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/27 14:03:22 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/27 17:01:55 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ static void	_in_quote_switcher(char *in_quote, char **src, char **dst)
 	}
 }
 
+
+static void	_append_var(char **dst, char *var)
+{
+	while (*var)
+	{
+		**dst = *var;
+		var++;
+		(*dst)++;
+	}
+}
+
 /*
 ** _expand_one_var:
 **     Expands a variable starting at src. Extracts variable name, looks up
@@ -53,7 +64,6 @@ static void	_in_quote_switcher(char *in_quote, char **src, char **dst)
 static void	_expand_one_var(t_minishell *ms, char **src, char **dst)
 {
 	int		key_len;
-	char	*key;
 	char	*var;
 
 	key_len = get_key_len(*src);
@@ -64,11 +74,9 @@ static void	_expand_one_var(t_minishell *ms, char **src, char **dst)
 		(*src)++;
 		return ;
 	}
-	extract_key(*src, &key, key_len);
 	get_env_var(ms, *src, &var);
-	append_var(dst, var);
+	_append_var(dst, var);
 	*src += (1 + key_len);
-	free(key);
 	free(var);
 }
 

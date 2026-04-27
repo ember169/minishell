@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 17:51:47 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/20 17:52:26 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/27 17:12:02 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,21 @@ void	print_env_list(t_env *root)
 
 void	print_tok_list(t_token *token)
 {
-	int	i;
+	t_token	*current;
 
+	current = token;
 	printf("\n========= TOK LIST DEBUG =========\n\n");
-	i = 0;
-	while (token)
+	while (current)
 	{
-		ft_printf("[%d] Value: \"%s\" | Type:  [%d]\n", \
-i, token->value, token->type);
-		token = token->next;
-		i++;
+		ft_printf("[%d] Value: %s\n", current->type, current->value);
+		current = current->next;
+	}
+	printf("\n\n");
+	current = token;
+	while (current)
+	{
+		ft_printf("%s ", current->value);
+		current = current->next;
 	}
 	printf("\n\n");
 }

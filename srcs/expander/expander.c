@@ -6,18 +6,18 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:57:29 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/27 13:29:42 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/27 17:25:19 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-// static char	*_expand_with_path(t_minishell *ms, char *str)
-// {
-// 	if (!ms)
-// 		return ("");
-// 	return (str);
-// }
+static char	*_expand_with_path(t_minishell *ms, char *str)
+{
+	if (!ms)
+		return ("");
+	return (str);
+}
 
 /*
 ** _expand_with_quotes:
@@ -52,7 +52,7 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 {
 	t_token	*current;
 	char	*expanded;
-	// char	*expanded_path;
+	char	*expanded_path;
 
 	if (!head || !ms)
 		return ;
@@ -63,10 +63,10 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 		{
 			expanded = _expand_with_quotes(ms, current->value);
 			free(current->value);
-			// expanded_path = _expand_with_path(ms, expanded);
 			current->value = expanded;
-			free(expanded);
-			// current->value = expanded_path;
+			expanded_path = _expand_with_path(ms, expanded);
+			// free(expanded);
+			current->value = expanded_path;
 		}
 		current = current->next;
 	}
