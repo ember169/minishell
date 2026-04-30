@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:30:24 by v                 #+#    #+#             */
-/*   Updated: 2026/04/21 15:22:58 by v                ###   ########.fr       */
+/*   Updated: 2026/04/30 17:22:36 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static t_ast_node	*split_ast_op(t_token *tok, t_token *split_pts)
 		current->next = NULL;
 	left_ast = build_ast(tok);
 	right_ast = build_ast(right_tok);
+	if (split_pts->value)
+		free (split_pts->value);
 	free (split_pts);
 	return (ast_new_op(node_type, left_ast, right_ast));
 }
@@ -58,17 +60,10 @@ static int	count_args(t_token *tok)
 	return (count);
 }
 
-static t_ast_node	*parse_cmd(t_token *tok)
+static void	fill_cmd_args(t_ast_node *cmd, t_token *tok)
 {
-	t_ast_node	*cmd;
-	int			i;
+	int	i;
 
-	cmd = ast_new_cmd_node();
-	if (!cmd)
-		return (NULL);
-	cmd->args = malloc(sizeof(char *) * (count_args(tok) + 1));
-	if (!cmd->args)
-		return (free_ast(cmd), NULL);
 	i = 0;
 	while (tok)
 	{
@@ -82,6 +77,22 @@ static t_ast_node	*parse_cmd(t_token *tok)
 		tok = tok->next;
 	}
 	cmd->args[i] = NULL;
+}
+
+static t_ast_node	*parse_cmd(t_token *tok)
+{
+	t_ast_node	*cmd;
+	t_token		*head;
+
+	head = tok;
+	cmd = ast_new_cmd_node();
+	if (!cmd)
+		return (NULL);
+	cmd->args = malloc(sizeof(char *) * (count_args(tok) + 1));
+	if (!cmd->args)
+		return (free_ast(cmd), NULL);
+	fill_cmd_args(cmd, tok);
+	free_tok_ls(&head);
 	return (cmd);
 }
 
@@ -97,5 +108,7 @@ t_ast_node	*build_ast(t_token *tok)
 	split_pts = find_pipe_op(tok);
 	if (split_pts)
 		return (split_ast_op(tok, split_pts));
+	if (is_fully_enclosed(tok))
+		return (build_subshell(tok));
 	return (parse_cmd(tok));
 }

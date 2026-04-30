@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/21 13:59:19 by v                ###   ########.fr       */
+/*   Updated: 2026/04/30 16:00:35 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,20 @@ void	main_loop(t_minishell *ms, t_token *list)
 			break ;
 		}
 		list = lexer(uinput);
+		if (!list)
+		{
+			free (uinput);
+			continue ;
+		}
 		if (ms->debug)
 			print_tok_list(list);
 		ast = build_ast(list);
 		if (ms->debug)
 			print_ast(ast, 0);
+		if (ast)
+			free_ast(ast);
+		free (uinput);
 	}
-	free_ast(ast);
-	free(uinput);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -56,7 +62,6 @@ int	main(int ac, char **av, char **envp)
 		print_env_list(ms->env_list);
 	tok_list = NULL;
 	main_loop(ms, tok_list);
-	free_tok_ls(&tok_list);
 	clean_ms(ms);
 	free(ms);
 	return (0);

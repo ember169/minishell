@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_printer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 13:52:41 by v                 #+#    #+#             */
-/*   Updated: 2026/04/19 14:41:03 by v                ###   ########.fr       */
+/*   Updated: 2026/04/30 14:41:28 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	print_ast(t_ast_node *node, int level)
 		ft_printf("[AND &&]\n");
 	else if (node->type == NODE_OR)
 		ft_printf("[OR ||]\n");
+	else if (node->type == NODE_SUBSHELL)
+		ft_printf("[SUBSHELL ()]\n");
 	else if (node->type == NODE_CMD)
 		print_cmd_node(node);
 	if (node->left)

@@ -65,3 +65,7 @@ The shell must implement the following commands internally:
 - To divide the entire project into seven Phases, making it easy for us to plan and keep track of the project while working simultaneously on different features.
 - To make sense of some intricates concepts (i.e: Lexer, Tokenizer, Expander, Executor...)
 - To conceive a robust nested structure architecture
+
+
+input exemple pour moi:
+(ls -l | grep ".c") && (echo "OK" || echo "KO")

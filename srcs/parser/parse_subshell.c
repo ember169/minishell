@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parse_subshell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 14:12:15 by v                 #+#    #+#             */
-/*   Updated: 2026/04/21 15:23:00 by v                ###   ########.fr       */
+/*   Updated: 2026/04/30 15:38:42 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
+
+static t_ast_node	*ast_new_subshell_node(t_ast_node *child)
+{
+	t_ast_node	*node;
+
+	node = ft_calloc(1, sizeof(t_ast_node));
+	if (!node)
+		return (NULL);
+	node->type = NODE_SUBSHELL;
+	node->left = child;
+	return (node);
+}
 
 bool	is_fully_enclosed(t_token *tok)
 {
@@ -50,7 +62,11 @@ t_ast_node	*build_subshell(t_token *tok)
 	end_paren = curr->next;
 	curr->next = NULL;
 	node = ast_new_subshell_node(build_ast(inner_start));
+	if (tok->value)
+		free (tok->value);
 	free(tok);
+	if (end_paren->value)
+		free (end_paren->value);
 	free(end_paren);
 	return (node);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/21 13:54:46 by v                ###   ########.fr       */
+/*   Updated: 2026/04/30 14:30:48 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ void		print_ast(t_ast_node *node, int level);
 t_token		*find_logical_op(t_token *tok);
 t_token		*find_pipe_op(t_token *tok);
 void		free_ast(t_ast_node *node);
+bool		is_fully_enclosed(t_token *tok);
+t_ast_node	*build_subshell(t_token *tok);
 
 #endif
