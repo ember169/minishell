@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 10:52:23 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/27 10:44:39 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/04/28 10:35:07 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int		get_key_len(char *dollar_ptr);
 void	get_env_var(t_minishell *ms, char *dollar, char **var);
 char	is_quote(char c);
 char	*expand_loop(t_minishell *ms, char *str, char *ret);
+char	*expand_path_loop(t_minishell *ms, char *str, char *ret);
 
 #endif
