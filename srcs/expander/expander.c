@@ -15,13 +15,9 @@
 static char	*_expand_with_path(t_minishell *ms, t_token *current)
 {
 	int		allocated;
-	char	*ret;
+	t_token	*ret;
 
 	if (!ms)
-		return (NULL);
-	allocated = ft_strlen(current->value) * 2 + 256;
-	ret = malloc(allocated);
-	if (!ret)
 		return (NULL);
 	expand_path_loop(ms, current, ret);
 	return (ret);
@@ -61,8 +57,8 @@ static char	*_expand_with_quotes(t_minishell *ms, char *str)
 void	expand_token_list(t_minishell *ms, t_token *head)
 {
 	t_token	*current;
+	t_token	*last_inserted_token;
 	char	*expanded;
-	char	*expanded_path;
 
 	if (!head || !ms)
 		return ;
@@ -74,9 +70,9 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 			expanded = _expand_with_quotes(ms, current->value);
 			free(current->value);
 			current->value = expanded;
-			expanded_path = _expand_with_path(ms, current);
+			last_inserted_token = _expand_with_path(ms, current);
 			free(expanded);
-			current->value = expanded_path;
+			current->value = last_inserted_token;
 		}
 		current = current->next;
 	}

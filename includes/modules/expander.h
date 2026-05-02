@@ -19,6 +19,6 @@ int		get_key_len(char *dollar_ptr);
 void	get_env_var(t_minishell *ms, char *dollar, char **var);
 char	is_quote(char c);
 char	*expand_loop(t_minishell *ms, char *str, char *ret);
-char	*expand_path_loop(t_minishell *ms, char *str, char *ret);
+char	*expand_path_loop(t_minishell *ms, char *str);
 
 #endif
