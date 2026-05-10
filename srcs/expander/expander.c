@@ -6,25 +6,17 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:57:29 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/30 11:01:49 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/10 11:39:41 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-static char	*_expand_with_path(t_minishell *ms, t_token *current)
+static t_token	*_expand_with_path(t_token *current)
 {
-	int		allocated;
-	char	*ret;
-
-	if (!ms)
-		return (NULL);
-	allocated = ft_strlen(current->value) * 2 + 256;
-	ret = malloc(allocated);
-	if (!ret)
-		return (NULL);
-	expand_path_loop(ms, current, ret);
-	return (ret);
+	if (!ft_strchr(current->value, '*'))
+		return (current);
+	return (expand_path(current));
 }
 
 /*
@@ -62,7 +54,6 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 {
 	t_token	*current;
 	char	*expanded;
-	char	*expanded_path;
 
 	if (!head || !ms)
 		return ;
@@ -74,9 +65,7 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 			expanded = _expand_with_quotes(ms, current->value);
 			free(current->value);
 			current->value = expanded;
-			expanded_path = _expand_with_path(ms, current);
-			free(expanded);
-			current->value = expanded_path;
+			current = _expand_with_path(current);
 		}
 		current = current->next;
 	}

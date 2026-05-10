@@ -33,6 +33,7 @@ SRC_FILES   := main.c \
                exit/debug.c \
                exit/exit.c \
 			   expander/expander_path_expand.c \
+			   expander/expander_path_utils.c \
 			   expander/expander_quote_expand.c \
                expander/expander_var_utils.c \
                expander/expander_quote_utils.c \
