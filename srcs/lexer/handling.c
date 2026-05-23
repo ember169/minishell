@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 12:25:26 by v                 #+#    #+#             */
-/*   Updated: 2026/05/23 17:05:08 by v                ###   ########.fr       */
+/*   Updated: 2026/05/23 18:38:26 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ void	handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls)
 		token_add_back(tok_ls, new_node);
 }
 
-void	handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls)
+bool	handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls)
 {
 	if (_handle_double_op(input, ls, tok_ls))
-		return ;
+		return (true);
 	if (input[ls->i] == '>')
 		_append_op(tok_ls, ls, TOK_REDIR_OUT, 1);
 	else if (input[ls->i] == '<')
@@ -81,5 +81,9 @@ void	handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls)
 	else if (input[ls->i] == ')')
 		_append_op(tok_ls, ls, TOK_PAREN_RIGHT, 1);
 	else if (input[ls->i] == '&')
-		ls->i++;
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token `&'\n", 2);
+		return (false);
+	}
+	return (true);
 }

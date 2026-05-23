@@ -6,22 +6,18 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:57:29 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/23 16:32:34 by v                ###   ########.fr       */
+/*   Updated: 2026/05/23 18:13:06 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-// static char	*_expand_with_path(t_minishell *ms, t_token *current)
-// {
-// 	int		allocated;
-// 	t_token	*ret;
-
-// 	if (!ms)
-// 		return (NULL);
-// 	expand_path_loop(ms, current, ret);
-// 	return (ret);
-// }
+static t_token	*_expand_with_path(t_token *current)
+{
+	if (!ft_strchr(current->value, '*'))
+		return (current);
+	return (expand_path(current));
+}
 
 /*
 ** _expand_with_quotes:
@@ -38,7 +34,6 @@ static char	*_expand_with_quotes(t_minishell *ms, char *str)
 
 	if (!ms)
 		return (NULL);
-	// FIXME: on va essayer de un calcul de taille plus precis plus tard 
 	allocated = ft_strlen(str) * 2 + 256;
 	ret = malloc(allocated);
 	if (!ret)
@@ -59,7 +54,6 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 {
 	t_token	*current;
 	char	*expanded;
-//	t_token	*last_inserted_token;
 
 	if (!head || !ms)
 		return ;
@@ -69,13 +63,9 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 		if (current->type == TOK_WORD)
 		{
 			expanded = _expand_with_quotes(ms, current->value);
-			if (expanded)
-			{
-				free (current->value);
-				current->value = expanded;
-			}
-			// 2. TODO : Remettre l'expansion des paths (*) plus tard
-			// quand le fichier expander_path_expand.c sera terminé.	
+			free(current->value);
+			current->value = expanded;
+			current = _expand_with_path(current);
 		}
 		current = current->next;
 	}

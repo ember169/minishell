@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/05/23 16:28:05 by v                ###   ########.fr        #
+#    Updated: 2026/05/23 18:13:39 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRC_FILES   := main.c \
                exit/debug.c \
                exit/exit.c \
                expander/expander.c \
+               expander/expander_path_expand.c \
+               expander/expander_path_utils.c \
                expander/expander_quote_expand.c \
                expander/expander_quote_utils.c \
                expander/expander_var_utils.c \

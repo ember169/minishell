@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 13:46:07 by v                 #+#    #+#             */
-/*   Updated: 2026/05/23 15:35:35 by v                ###   ########.fr       */
+/*   Updated: 2026/05/23 18:19:54 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,6 @@ static void	free_redir_list(t_redir *redir)
 			free(tmp->file);
 		free(tmp);
 	}
-}
-
-static void	free_str_array(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free (arr);
 }
 
 void	free_ast(t_ast_node *node)

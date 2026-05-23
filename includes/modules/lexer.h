@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 10:51:23 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/18 10:51:25 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/23 18:34:05 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LEXER_H
 
 t_token		*lexer(char *input);
-void		handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls);
+bool		handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls);
 void		handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls);
 int			is_space(char c);
 int			is_operator(char c);
