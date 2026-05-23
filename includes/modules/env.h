@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 10:51:13 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/20 17:49:16 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/23 15:23:59 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-t_minishell	*init_ms(t_minishell *ms, char **av, char **envp);
 t_env		*init_env(t_minishell *ms, char *av0, char **envp);
 int			check_env_pwd(t_minishell *ms);
 int			check_env_old_pwd(t_minishell *ms);

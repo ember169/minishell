@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
+#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/28 10:34:35 by lgervet          ###   ########.fr        #
+#    Updated: 2026/05/23 16:28:05 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,14 +32,19 @@ SRC_FILES   := main.c \
                env/env_utils.c \
                exit/debug.c \
                exit/exit.c \
-			   expander/expander_path_expand.c \
-			   expander/expander_quote_expand.c \
-               expander/expander_var_utils.c \
-               expander/expander_quote_utils.c \
                expander/expander.c \
+               expander/expander_quote_expand.c \
+               expander/expander_quote_utils.c \
+               expander/expander_var_utils.c \
+               lexer/handling.c \
                lexer/lexer.c \
                lexer/lexer_utils.c \
-               lexer/handling.c \
+               parser/ast_printer.c \
+               parser/ast_utils.c \
+               parser/build_ast.c \
+               parser/free_ast.c \
+               parser/handle_redir.c \
+               parser/parse_subshell.c
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))
