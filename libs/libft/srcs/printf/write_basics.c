@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 12:37:05 by lgervet           #+#    #+#             */
-/*   Updated: 2025/12/20 10:20:07 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/26 15:29:32 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	pf_putchar(char c)
 {
-	return (write(1, &c, 1));
+	return (write(STDOUT_FILENO, &c, 1));
 }
 
 int	pf_putstr(char *str)
@@ -24,7 +24,7 @@ int	pf_putstr(char *str)
 	if (!str)
 		return (0);
 	len = pf_strlen(str);
-	write(1, str, len);
+	write(STDOUT_FILENO, str, len);
 	return (len);
 }
 

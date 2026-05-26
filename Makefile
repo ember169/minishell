@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/05/26 09:37:16 by lgervet          ###   ########.fr        #
+#    Updated: 2026/05/26 14:54:00 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ INC         := -I $(INCSDIR) -I $(LIBPATH)/includes
 # Sources :
 SRC_FILES   := main.c \
                history.c \
+			   builtins/echo.c \
                env/env.c \
                env/env_checkers.c \
                env/env_utils.c \
