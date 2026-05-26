@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
+#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/04/14 18:14:39 by lgervet          ###   ########.fr        #
+#    Updated: 2026/05/23 18:13:39 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,17 +26,27 @@ INC         := -I $(INCSDIR) -I $(LIBPATH)/includes
 
 # Sources :
 SRC_FILES   := main.c \
-               init/s_env.c \
-			   init/s_env_checkers.c \
-               init/s_minishell.c \
-			   utils/list_printer.c \
-			   utils/env_list_utils.c \
-			   utils/error_messages.c \
-			   utils/heap_cleanup.c \
-			   utils/history_manager.c \
-			   utils/lexer_utils.c \
-			   lexer/fsm.c \
-			   lexer/handling.c \
+               history.c \
+               env/env.c \
+               env/env_checkers.c \
+               env/env_utils.c \
+               exit/debug.c \
+               exit/exit.c \
+               expander/expander.c \
+               expander/expander_path_expand.c \
+               expander/expander_path_utils.c \
+               expander/expander_quote_expand.c \
+               expander/expander_quote_utils.c \
+               expander/expander_var_utils.c \
+               lexer/handling.c \
+               lexer/lexer.c \
+               lexer/lexer_utils.c \
+               parser/ast_printer.c \
+               parser/ast_utils.c \
+               parser/build_ast.c \
+               parser/free_ast.c \
+               parser/handle_redir.c \
+               parser/parse_subshell.c
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))

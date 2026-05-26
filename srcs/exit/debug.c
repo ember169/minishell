@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_printer.c                                     :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 10:48:03 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/14 18:21:53 by lgervet          ###   ########.fr       */
+/*   Created: 2026/04/20 17:51:47 by lgervet           #+#    #+#             */
+/*   Updated: 2026/05/23 15:36:55 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,38 @@ void	print_env_list(t_env *root)
 
 void	print_tok_list(t_token *token)
 {
-	int	i;
+	t_token	*current;
 
+	current = token;
 	printf("\n========= TOK LIST DEBUG =========\n\n");
-	i = 0;
-	while (token)
+	while (current)
 	{
-		ft_printf("[%d] Value: \"%s\" | Type:  [%d]\n", \
-i, token->value, token->type);
-		token = token->next;
-		i++;
+		ft_printf("[%d] Value: %s\n", current->type, current->value);
+		current = current->next;
 	}
 	printf("\n\n");
+	current = token;
+	while (current)
+	{
+		ft_printf("%s ", current->value);
+		current = current->next;
+	}
+	printf("\n\n");
+}
+
+/*
+** wrong_usage_message:
+**     Function that could be used when user inputs a wrong flag
+**
+**     @param has_error  Boolean to return
+**     @return has_error
+*/
+int	wrong_usage_message(int has_error)
+{
+	ft_putendl_fd("Usage: ./minishell [Options]\n\
+OPTIONS:\n\
+	--debug: Increase verbosity level with debug messages\n\
+EXAMPLE:\n\
+	./minishell --debug\n", 2);
+	return (has_error);
 }

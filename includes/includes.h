@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:32:36 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/23 14:57:46 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
-/* ==== LIBC  HEADERS ==== */
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
+# include <sys/types.h>
 
-/* ==== LOCAL HEADERS ==== */
 # include "../libs/libft/includes/libft.h"
-# include "defines.h"
-# include "structures.h"
-# include "prototypes.h"
+# include "core/structures.h"
+# include "core/defines.h"
+# include "modules/env.h"
+# include "modules/lexer.h"
+# include "modules/expander.h"
+# include "modules/utils.h"
+# include "modules/parser.h"
 
 #endif
