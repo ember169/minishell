@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:13:34 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/26 15:27:03 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/27 13:06:55 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,48 @@
 
 static bool	_is_flag(char *arg)
 {
-	if (arg[0] == '-' && arg[1] == 'n' && arg[2] == '\0')
-		return (true);
-	return (false);
-}
-
-static bool	_has_flag(char **args)
-{
 	int	i;
 
-	i = 1;
-	while (args[i])
+	i = 2;
+	if (arg[0] == '-' && arg[1] == 'n')
 	{
-		if (_is_flag(args[i]))
-			return (true);
-		i++;
+		while (arg[i])
+		{
+			if (arg[i] != 'n')
+				return (false);
+			i++;
+		}
+		return (true);
 	}
 	return (false);
 }
 
-/*
-** execute_echo:
-**     Implementation of standard echo behavior
-**
-**     @param **args  Array of strings sent by executor (args[0] == "echo")
-**     @return Valeur retour.
-*/
+
 void	execute_echo(char **args)
 {
-	bool	flag;
-	bool	first;
+	bool	has_flag;
+	bool	in_flag;
+	bool	first_word;
 	int		i;
 
-	flag = _has_flag(args);
-	first = true;
+	first_word = true;
+	in_flag = true;
+	has_flag = false;
 	i = 1;
 	while (args[i])
 	{
+		if (!first_word)
+			write(STDOUT_FILENO, " ", 1);
 		if (!_is_flag(args[i]))
 		{
-			if (!first)
-				write(STDOUT_FILENO, " ", 1);
 			write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
-			first = false;
+			first_word = false;
+			in_flag = false;
 		}
+		if (first_word && in_flag)
+			has_flag = _is_flag(args[i]);
 		i++;
 	}
-	if (!flag)
+	if (!has_flag)
 		write(STDOUT_FILENO, "\n", 1);
-	return ;
 }
