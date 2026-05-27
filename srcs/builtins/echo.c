@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:13:34 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/27 13:06:55 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/27 13:07:45 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static bool	_is_flag(char *arg)
 	}
 	return (false);
 }
-
 
 void	execute_echo(char **args)
 {
