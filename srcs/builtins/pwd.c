@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/10 15:10:54 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/26 15:46:28 by lgervet          ###   ########.fr       */
+/*   Created: 2026/05/27 13:23:29 by lgervet           #+#    #+#             */
+/*   Updated: 2026/05/27 15:07:59 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include "../../includes/includes.h"
 
-/* ==== MACROS ==== */
-# ifndef PROMPT
-#  define PROMPT "Minishell$ "
-# endif
+void	execute_pwd(void)
+{
+	char	*buf;
 
-# ifndef STDOUT_FILENO
-#  define STDOUT_FILENO 1
-# endif
-
-# ifndef STDERR_FILENO
-#  define STDERR_FILENO 2
-# endif
-
-#endif
+	buf = getcwd(NULL, 0);
+	if (buf)
+	{
+		write(STDOUT_FILENO, buf, strlen(buf));
+		write(STDOUT_FILENO, "\n", 1);
+		free(buf);
+		return (0);
+	}
+	else
+	{
+		perror("minishell: pwd");
+		return (1);
+	}
+}
