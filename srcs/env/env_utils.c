@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 17:49:50 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/20 18:06:11 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/27 18:58:23 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ current->key[len] == '\0')
 		current = current->next;
 	}
 	return (NULL);
+}
+
+char	*get_env_value_from_key(t_minishell *ms, char *key)
+{
+	t_env	*addr;
+
+	if (!ms || !ms->env_list || !key)
+		return (NULL);
+	addr = get_env_addr_from_key(ms, key);
+	if (!addr)
+		return (NULL);
+	return (addr->value);
 }
 
 /*
