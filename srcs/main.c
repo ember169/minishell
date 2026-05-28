@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/27 13:21:52 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/28 17:01:21 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool	_check_debug(char **av)
 	{
 		if (ft_strncmp(av[i], "--debug", 8) == 0)
 		{
-			printf("Debug mode ON.\n\n");
+			ft_printf("Debug mode ON.\n\n");
 			res = true;
 			break ;
 		}

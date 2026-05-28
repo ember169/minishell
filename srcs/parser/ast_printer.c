@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_printer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 13:52:41 by v                 #+#    #+#             */
-/*   Updated: 2026/04/19 14:41:03 by v                ###   ########.fr       */
+/*   Updated: 2026/05/28 17:02:17 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	print_redir(t_redir *redir)
 		if (redir->type == TOK_REDIR_IN)
 			ft_printf("< ");
 		else if (redir->type == TOK_REDIR_OUT)
-			printf("> ");
+			ft_printf("> ");
 		else if (redir->type == TOK_REDIR_APPEND)
-			printf(">> ");
+			ft_printf(">> ");
 		else if (redir->type == TOK_HEREDOC)
-			printf("<< ");
+			ft_printf("<< ");
 		ft_printf("'%s'", redir->file);
 		redir = redir->next;
 	}
@@ -49,7 +49,7 @@ static void	print_cmd_node(t_ast_node *node)
 	redir = node->redirs;
 	if (redir)
 		print_redir(redir);
-	printf("\n");
+	ft_printf("\n");
 }
 
 void	print_ast(t_ast_node *node, int level)

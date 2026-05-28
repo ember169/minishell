@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_env.c                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:26:23 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/28 15:43:45 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "../../includes/includes.h"
 
-static char	*_extract_key(char *env)
+char	*extract_key(char *env)
 {
 	char	*key;
 	int		i;
@@ -35,7 +35,7 @@ static char	*_extract_key(char *env)
 	return (key);
 }
 
-static char	*_extract_value(char *env)
+char	*extract_value(char *env)
 {
 	char	*value;
 	int		i;
@@ -65,8 +65,8 @@ t_env	*create_node(char *env)
 	ret = malloc(sizeof(t_env));
 	if (!ret)
 		return (NULL);
-	ret->key = _extract_key(env);
-	ret->value = _extract_value(env);
+	ret->key = extract_key(env);
+	ret->value = extract_value(env);
 	ret->next = NULL;
 	return (ret);
 }

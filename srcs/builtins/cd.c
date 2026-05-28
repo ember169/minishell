@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 17:20:45 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/28 11:09:34 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/28 14:03:53 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static int	_throw_error(void)
 // 		cd - 			→ chdir to OLDPWD, then print it
 // Else:
 // 		cd /some/path	→ chdir to the given path	
-
 int	execute_cd(t_minishell *ms, char **args)
 {
 	char	*buf;
