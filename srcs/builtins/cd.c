@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 17:20:45 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/27 19:03:11 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/28 11:09:34 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,41 @@ static int	_change_dir(t_minishell *ms, char *dir)
 	return (1);
 }
 
+static int	_throw_error(void)
+{
+	perror("minishell: cd");
+	return (1);
+}
+
+// First condition:
+// 		cd			   → chdir to HOME
+// 		cd /nonexistent → print error, return 1
+// Second condition:
+// 		cd - 			→ chdir to OLDPWD, then print it
+// Else:
+// 		cd /some/path	→ chdir to the given path	
+
 int	execute_cd(t_minishell *ms, char **args)
 {
-	char	*home;
+	char	*buf;
 
-	// cd			   → chdir to HOME
-	// cd /nonexistent → print error, return 1
 	if (!args[1])
 	{
-		home = get_env_value_from_key(ms, "HOME");
-		if (!home || _change_dir(ms, home) > 0)
-		{
-			perror("minishell: cd");
-			return (1);
-		}
+		buf = get_env_value_from_key(ms, "HOME");
+		if (!buf || _change_dir(ms, buf) > 0)
+			return (_throw_error());
 	}
-	// cd - 			→ chdir to OLDPWD, then print it
-	// cd /some/path	→ chdir to the given path
+	else if (ft_strncmp(args[1], "-", 2) == 0)
+	{
+		buf = get_env_value_from_key(ms, "OLDPWD");
+		if (_change_dir(ms, buf) > 0)
+			return (_throw_error());
+		write(STDOUT_FILENO, buf, ft_strlen(buf));
+	}
 	else
 	{
-		
+		if (_change_dir(ms, args[1]) > 0)
+			return (_throw_error());
 	}
 	return (0);
 }
