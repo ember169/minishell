@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_printer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 13:52:41 by v                 #+#    #+#             */
-/*   Updated: 2026/04/19 14:41:03 by v                ###   ########.fr       */
+/*   Updated: 2026/05/28 14:16:56 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	print_redir(t_redir *redir)
 		ft_printf("'%s'", redir->file);
 		redir = redir->next;
 	}
-
 }
 
 static void	print_cmd_node(t_ast_node *node)

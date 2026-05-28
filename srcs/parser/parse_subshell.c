@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_subshell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 14:12:15 by v                 #+#    #+#             */
-/*   Updated: 2026/05/23 16:35:53 by v                ###   ########.fr       */
+/*   Updated: 2026/05/28 14:17:56 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-
 
 static t_ast_node	*ast_new_subshell_node(t_ast_node *child)
 {
@@ -67,4 +66,3 @@ t_ast_node	*build_subshell(t_token *tok)
 	free(end_paren);
 	return (node);
 }
-

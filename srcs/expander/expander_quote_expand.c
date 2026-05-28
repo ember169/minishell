@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_quote_expand.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 10:33:07 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/29 10:36:04 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/28 14:17:13 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	_in_quote_switcher(char *in_quote, char **src, char **dst)
 		(*src)++;
 	}
 }
-
 
 static void	_append_var(char **dst, char *var)
 {
