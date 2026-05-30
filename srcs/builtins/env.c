@@ -1,32 +1,29 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*		                                                                    */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 13:23:29 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/30 10:53:33 by mskn             ###   ########.fr       */
+/*   Created: 2026/05/30 10:27:37 by mskn              #+#    #+#             */
+/*   Updated: 2026/05/30 10:32:25 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-int	execute_pwd(void)
+int	execute_env(t_minishell *ms)
 {
-	char	*buf;
+	t_env	*current;
 
-	buf = getcwd(NULL, 0);
-	if (buf)
-	{
-		write(STDOUT_FILENO, buf, ft_strlen(buf));
-		write(STDOUT_FILENO, "\n", 1);
-		free(buf);
-		return (0);
-	}
-	else
-	{
-		perror("minishell: pwd");
+	if (!ms || !ms->env_list)
 		return (1);
+	current = ms->env_list;
+	while (current)
+	{
+		if (current->value)
+			ft_printf("%s=%s\n", current->key, current->value);
+		current = current->next;
 	}
+	return (0);
 }

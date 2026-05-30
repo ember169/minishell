@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:13:34 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/27 13:07:45 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/30 10:52:57 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,31 @@ static bool	_is_flag(char *arg)
 	return (false);
 }
 
-void	execute_echo(char **args)
+// Sidenote: we could check write return values 
+// to return (>0) in case of error, but overkill (?)
+int	execute_echo(char **args)
 {
 	bool	has_flag;
-	bool	in_flag;
-	bool	first_word;
+	bool	in_flags;
 	int		i;
 
-	first_word = true;
-	in_flag = true;
+	in_flags = true;
 	has_flag = false;
 	i = 1;
 	while (args[i])
 	{
-		if (!first_word)
+		if (!in_flags)
 			write(STDOUT_FILENO, " ", 1);
 		if (!_is_flag(args[i]))
 		{
 			write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
-			first_word = false;
-			in_flag = false;
+			in_flags = false;
 		}
-		if (first_word && in_flag)
+		if (in_flags)
 			has_flag = _is_flag(args[i]);
 		i++;
 	}
 	if (!has_flag)
 		write(STDOUT_FILENO, "\n", 1);
+	return (0);
 }
