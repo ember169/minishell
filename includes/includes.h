@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/23 14:57:46 by v                ###   ########.fr       */
+/*   Updated: 2026/05/30 10:15:30 by alma             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@
 # include "modules/expander.h"
 # include "modules/utils.h"
 # include "modules/parser.h"
+# include "modules/executor.h"
+# include "modules/exit.h"
 
 #endif
