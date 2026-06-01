@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 17:49:50 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/27 18:58:23 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/06/01 09:36:10 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ current->key[len] == '\0')
 	return (NULL);
 }
 
+/*
+** get_env_value_from_key:
+**     Gets t_env address and returns a pointer to its value
+**
+**     @param *ms   Pointer to Minishell super structure.
+**     @param *key  Node to get value from
+**     @return      Pointer to t_env->value / NULL if not found
+*/
 char	*get_env_value_from_key(t_minishell *ms, char *key)
 {
 	t_env	*addr;
@@ -100,3 +108,4 @@ t_env	*put_env_value(t_env *env, char *new_value)
 	env->value = tmp;
 	return (env);
 }
+

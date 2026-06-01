@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
+#    By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/05/27 17:20:22 by lgervet          ###   ########.fr        #
+#    Updated: 2026/06/01 09:37:16 by mskn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_FILES   := main.c \
 			   builtins/pwd.c \
                env/env.c \
                env/env_checkers.c \
+               env/env_node_utils.c \
                env/env_utils.c \
                exit/debug.c \
                exit/exit.c \
