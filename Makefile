@@ -6,7 +6,7 @@
 #    By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/01 09:37:16 by mskn             ###   ########.fr        #
+#    Updated: 2026/06/01 12:17:11 by mskn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,11 @@ SRC_FILES   := main.c \
                history.c \
 			   builtins/cd.c \
 			   builtins/echo.c \
+               builtins/env.c \
+               builtins/exit.c \
+               builtins/export.c \
 			   builtins/pwd.c \
+               builtins/unset.c \
                env/env.c \
                env/env_checkers.c \
                env/env_node_utils.c \
