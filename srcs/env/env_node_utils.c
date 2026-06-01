@@ -6,7 +6,7 @@
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 09:35:47 by mskn              #+#    #+#             */
-/*   Updated: 2026/06/01 10:03:45 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/01 12:03:54 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,30 @@ static t_env	*_find_previous(t_minishell *ms, t_env *node)
 	return (tmp);
 }
 
-t_env	*remove_env_node(t_minishell *ms, t_env *node)
+int	remove_env_node(t_minishell *ms, t_env *node)
 {
-	t_env	*ret;
+	t_env	*next;
 	t_env	*prev;
 
-	if (!ms || !node)
-		return (NULL);
-	if (ms->env_list == node)
+	if (!ms)
+		return (1);
+	if (node)
 	{
-		ret = node->next;
-		ms->env_list = ret;
-		_free_node(node);
+		if (ms->env_list == node)
+		{
+			next = node->next;
+			ms->env_list = next;
+			_free_node(node);
+		}
+		else
+		{
+			prev = _find_previous(ms, node);
+			if (!prev)
+				return (1);
+			next = node->next;
+			prev->next = next;
+			_free_node(node);
+		}
 	}
-	else
-	{
-		prev = _find_previous(ms, node);
-		ret = node->next;
-		prev->next = ret;
-		_free_node(node);
-	}
-	return (ret);
+	return (0);
 }
