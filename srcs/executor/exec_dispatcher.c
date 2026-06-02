@@ -6,7 +6,7 @@
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:35:38 by mskn              #+#    #+#             */
-/*   Updated: 2026/06/02 15:39:59 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/02 20:30:19 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,14 @@ int	dispatch_cmd(t_minishell *ms, t_ast_node *node)
 		if (_is_env_unsafe(node->args[0]))
 		{
 			printf("  -> [CMD] %s isn't env safe\n", node->args[0]);
-			// ??
+			// Determiner s'ils ont un pipe a droite
+			// Si oui : fork()
+			// Si non: execution dans le processus parent
 		}
 		else
 		{
 			printf("  -> [CMD] %s is env safe\n", node->args[0]);
-			// ??
+			// execution dans le processus parent ?
 		}
 
 	}

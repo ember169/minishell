@@ -6,7 +6,7 @@
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/02 15:04:37 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/02 20:23:55 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	_process_input(t_minishell *ms, char *uinput)
 		print_ast(ms->ast_root, 0);
 	if (ms->ast_root)
 	{
-		exec_ast(ms, ms->ast_root);
+		ms->last_status = exec_ast(ms, ms->ast_root);
 		free_ast(ms->ast_root);
 		ms->ast_root = NULL;
 	}
