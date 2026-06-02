@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/02 02:17:35 by v                ###   ########.fr        #
+#    Updated: 2026/06/02 14:09:39 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_FILES   := main.c \
                parser/free_ast.c \
                parser/handle_redir.c \
                parser/parse_subshell.c \
+               parser/heredoc.c \
                executor/exec_ast.c \
                executor/leo_test.c \
                executor/redirections.c
