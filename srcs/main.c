@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/23 16:01:04 by v                ###   ########.fr       */
+/*   Updated: 2026/06/02 15:04:37 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int	_process_input(t_minishell *ms, char *uinput)
 		print_ast(ms->ast_root, 0);
 	if (ms->ast_root)
 	{
+		exec_ast(ms, ms->ast_root);
 		free_ast(ms->ast_root);
 		ms->ast_root = NULL;
 	}
@@ -77,15 +78,16 @@ static void	_main_loop(t_minishell *ms)
 	{
 		uinput = readline(PROMPT);
 		if (!uinput)
-			break ;
+			return ;
+		if (ft_strncmp(uinput, "exit", ft_strlen("exit")) == 0)
+			return (free(uinput));
 		if (uinput[0] != '\0')
-			add_to_history(uinput);
-		if (!_process_input(ms, uinput))
 		{
-			free(uinput);
-			break ;
+			add_to_history(uinput);
+			_process_input(ms, uinput);
 		}
 		free(uinput);
+		printf("\n\n");
 	}
 }
 

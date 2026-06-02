@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_subshell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 14:12:15 by v                 #+#    #+#             */
-/*   Updated: 2026/05/28 14:17:56 by alma             ###   ########.fr       */
+/*   Updated: 2026/06/02 12:34:35 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-static t_ast_node	*ast_new_subshell_node(t_ast_node *child)
+static t_ast_node	*_ast_new_subshell_node(t_ast_node *child)
 {
 	t_ast_node	*node;
 
@@ -24,27 +24,27 @@ static t_ast_node	*ast_new_subshell_node(t_ast_node *child)
 	return (node);
 }
 
-bool	is_fully_enclosed(t_token *tok)
-{
-	int		par_lvl;
-	t_token	*curr;
+// bool	is_fully_enclosed(t_token *tok)
+// {
+// 	int		par_lvl;
+// 	t_token	*curr;
 
-	if (!tok || tok->type != TOK_PAREN_LEFT)
-		return (false);
-	par_lvl = 0;
-	curr = tok;
-	while (curr)
-	{
-		if (curr->type == TOK_PAREN_LEFT)
-			par_lvl++;
-		else if (curr->type == TOK_PAREN_RIGHT)
-			par_lvl--;
-		if (par_lvl == 0 && curr->next != NULL)
-			return (false);
-		curr = curr->next;
-	}
-	return (par_lvl == 0);
-}
+// 	if (!tok || tok->type != TOK_PAREN_LEFT)
+// 		return (false);
+// 	par_lvl = 0;
+// 	curr = tok;
+// 	while (curr)
+// 	{
+// 		if (curr->type == TOK_PAREN_LEFT)
+// 			par_lvl++;
+// 		else if (curr->type == TOK_PAREN_RIGHT)
+// 			par_lvl--;
+// 		if (par_lvl == 0 && curr->next != NULL)
+// 			return (false);
+// 		curr = curr->next;
+// 	}
+// 	return (par_lvl == 0);
+// }
 
 t_ast_node	*build_subshell(t_token *tok)
 {
@@ -61,7 +61,7 @@ t_ast_node	*build_subshell(t_token *tok)
 		curr = curr->next;
 	end_paren = curr->next;
 	curr->next = NULL;
-	node = ast_new_subshell_node(build_ast(inner_start));
+	node = _ast_new_subshell_node(build_ast(inner_start));
 	free(tok);
 	free(end_paren);
 	return (node);

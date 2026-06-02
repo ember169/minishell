@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/30 09:29:00 by alma              #+#    #+#             */
-/*   Updated: 2026/06/02 20:17:50 by mskn             ###   ########.fr       */
+/*   Created: 2026/06/02 12:52:47 by mskn              #+#    #+#             */
+/*   Updated: 2026/06/02 12:55:35 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#ifndef DEBUG_H
+# define DEBUG_H
 
-int	exec_ast(t_minishell *ms, t_ast_node *node);
-int	setup_redirections(t_ast_node *node);
-int	dispatch_cmd(t_minishell *ms, t_ast_node *node);
+void	print_ast(t_ast_node *node, int level);
+void	print_tok_list(t_token *token);
+void	print_env_list(t_env *root);
+void	print_cmd_node(t_ast_node *node);
+int		wrong_usage_message(int has_error);
 
 #endif
