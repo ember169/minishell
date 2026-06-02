@@ -6,13 +6,13 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 02:15:46 by v                 #+#    #+#             */
-/*   Updated: 2026/06/02 03:11:48 by v                ###   ########.fr       */
+/*   Updated: 2026/06/02 03:13:07 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-static int	apply_single_redir(t_redir *redir)
+static int	_apply_single_redir(t_redir *redir)
 {
 	int	fd;
 	int	target_fd;
@@ -51,7 +51,7 @@ int	setup_redirections(t_ast_node *node)
 	{
 		if (current->type != TOK_HEREDOC)
 		{
-			if (apply_single_redir(current) != 0)
+			if (_apply_single_redir(current) != 0)
 				return (1);
 		}
 		current = current->next;
