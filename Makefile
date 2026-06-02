@@ -6,7 +6,7 @@
 #    By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/02 20:16:56 by mskn             ###   ########.fr        #
+#    Updated: 2026/06/02 20:21:41 by mskn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_FILES   := main.c \
                env/env_utils.c \
                executor/exec_ast.c \
                executor/exec_dispatcher.c \
+               parser/parse_subshell.c \
                exit/exit.c \
                expander/expander.c \
                expander/expander_path_expand.c \
@@ -49,9 +50,6 @@ SRC_FILES   := main.c \
                parser/build_ast.c \
                parser/free_ast.c \
                parser/handle_redir.c \
-               parser/parse_subshell.c \
-               executor/exec_ast.c \
-               executor/redirections.c
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))
