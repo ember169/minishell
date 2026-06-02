@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
+#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/05/26 09:37:16 by lgervet          ###   ########.fr        #
+#    Updated: 2026/06/02 02:17:35 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,10 @@ SRC_FILES   := main.c \
                parser/build_ast.c \
                parser/free_ast.c \
                parser/handle_redir.c \
-               parser/parse_subshell.c
+               parser/parse_subshell.c \
+               executor/exec_ast.c \
+               executor/leo_test.c \
+               executor/redirections.c
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))
