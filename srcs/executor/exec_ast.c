@@ -6,7 +6,7 @@
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 09:33:20 by alma              #+#    #+#             */
-/*   Updated: 2026/06/01 16:45:41 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/02 15:06:15 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int exec_pipe(t_minishell *ms, t_ast_node *node)
 	return (status_right);
 }
 
-static int	exec_or(t_minishell *ms, t_ats_node *node)
+static int	exec_or(t_minishell *ms, t_ast_node *node)
 {
 	int	status;
 
@@ -72,9 +72,10 @@ static int	exec_cmd(t_minishell *ms, t_ast_node *node)
 {
 	(void)ms;
 	printf("-> [CMD] Simulation exécution de : %s\n", node->args[0]);
-	if (ft_strncmp(node->args[0], "false", 5) == 0)
-		return (1);
-	return (0);
+	return (dispatch_cmd(ms, node));
+	// if (ft_strncmp(node->args[0], "false", 5) == 0)
+	// 	return (1);
+	// return (0);
 }
 
 int	exec_ast(t_minishell *ms, t_ast_node *node)

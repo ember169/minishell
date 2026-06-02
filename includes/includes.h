@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/30 10:15:30 by alma             ###   ########.fr       */
+/*   Updated: 2026/06/02 12:53:41 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../libs/libft/includes/libft.h"
 # include "core/structures.h"
 # include "core/defines.h"
+# include "modules/debug.h"
 # include "modules/env.h"
 # include "modules/lexer.h"
 # include "modules/expander.h"

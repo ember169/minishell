@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
+#    By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/05/26 09:37:16 by lgervet          ###   ########.fr        #
+#    Updated: 2026/06/02 12:52:08 by mskn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,14 @@ INC         := -I $(INCSDIR) -I $(LIBPATH)/includes
 # Sources :
 SRC_FILES   := main.c \
                history.c \
+               debug/debug_ast_print_utils.c \
+               debug/debug_errors.c \
+               debug/debug_print.c \
                env/env.c \
                env/env_checkers.c \
                env/env_utils.c \
-               exit/debug.c \
+               executor/exec_ast.c \
+               executor/exec_dispatcher.c \
                exit/exit.c \
                expander/expander.c \
                expander/expander_path_expand.c \
@@ -41,7 +45,6 @@ SRC_FILES   := main.c \
                lexer/handling.c \
                lexer/lexer.c \
                lexer/lexer_utils.c \
-               parser/ast_printer.c \
                parser/ast_utils.c \
                parser/build_ast.c \
                parser/free_ast.c \

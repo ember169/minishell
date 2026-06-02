@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   build_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alma <alma@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:30:24 by v                 #+#    #+#             */
-/*   Updated: 2026/05/28 14:17:38 by alma             ###   ########.fr       */
+/*   Updated: 2026/06/02 12:34:21 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-static t_ast_node	*split_ast_op(t_token *tok, t_token *split_pts)
+static t_ast_node	*_split_ast_op(t_token *tok, t_token *split_pts)
 {
 	t_token		*current;
 	t_token		*right_tok;
@@ -40,7 +40,7 @@ static t_ast_node	*split_ast_op(t_token *tok, t_token *split_pts)
 	return (ast_new_op(node_type, left_ast, right_ast));
 }
 
-static int	count_args(t_token *tok)
+static int	_count_args(t_token *tok)
 {
 	int		count;
 	t_token	*current;
@@ -59,7 +59,7 @@ static int	count_args(t_token *tok)
 	return (count);
 }
 
-static void	fill_cmd_args(t_ast_node *cmd, t_token *tok)
+static void	_fill_cmd_args(t_ast_node *cmd, t_token *tok)
 {
 	int	i;
 
@@ -78,7 +78,7 @@ static void	fill_cmd_args(t_ast_node *cmd, t_token *tok)
 	cmd->args[i] = NULL;
 }
 
-static t_ast_node	*parse_cmd(t_token *tok)
+static t_ast_node	*_parse_cmd(t_token *tok)
 {
 	t_ast_node	*cmd;
 	t_token		*head;
@@ -87,10 +87,10 @@ static t_ast_node	*parse_cmd(t_token *tok)
 	cmd = ast_new_cmd_node();
 	if (!cmd)
 		return (NULL);
-	cmd->args = malloc(sizeof(char *) * (count_args(tok) + 1));
+	cmd->args = malloc(sizeof(char *) * (_count_args(tok) + 1));
 	if (!cmd->args)
 		return (free_ast(cmd), NULL);
-	fill_cmd_args(cmd, tok);
+	_fill_cmd_args(cmd, tok);
 	free_tok_ls(&head);
 	return (cmd);
 }
@@ -103,11 +103,11 @@ t_ast_node	*build_ast(t_token *tok)
 		return (NULL);
 	split_pts = find_logical_op(tok);
 	if (split_pts)
-		return (split_ast_op(tok, split_pts));
+		return (_split_ast_op(tok, split_pts));
 	split_pts = find_pipe_op(tok);
 	if (split_pts)
-		return (split_ast_op(tok, split_pts));
+		return (_split_ast_op(tok, split_pts));
 	if (tok->type == TOK_PAREN_LEFT)
 		return (build_subshell(tok));
-	return (parse_cmd(tok));
+	return (_parse_cmd(tok));
 }
