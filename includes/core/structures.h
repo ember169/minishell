@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:30 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/14 15:44:03 by v                ###   ########.fr       */
+/*   Updated: 2026/06/04 19:04:38 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef enum e_token_type
 	TOK_REDIR_APPEND,	// >>
 	TOK_HEREDOC,		// <<
 	TOK_PAREN_LEFT,		// (
-	TOK_PAREN_RIGHT,	// )
+	TOK_PAREN_RIGHT,
+	TOK_HEREDOC_QUOTED,	// )
 }	t_token_type;
 
 typedef struct s_token

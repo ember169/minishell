@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/04 18:24:17 by v                ###   ########.fr        #
+#    Updated: 2026/06/04 18:50:29 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,6 @@ SRC_FILES   := main.c \
                env/env.c \
                env/env_checkers.c \
                env/env_utils.c \
-               executor/exec_ast.c \
-               executor/exec_dispatcher.c \
                exit/exit.c \
                expander/expander.c \
                expander/expander_path_expand.c \
@@ -52,7 +50,7 @@ SRC_FILES   := main.c \
                parser/parse_subshell.c \
                parser/heredoc.c \
                executor/exec_ast.c \
-               executor/leo_test.c \
+               executor/exec_dispatcher.c \
                executor/redirections.c
 			   
 # Objets :

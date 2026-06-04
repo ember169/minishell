@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 12:36:19 by v                 #+#    #+#             */
-/*   Updated: 2026/04/21 14:00:20 by v                ###   ########.fr       */
+/*   Updated: 2026/06/04 20:22:23 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ bool	is_redir(t_token_type type) // a proto
 	if (type == TOK_REDIR_IN
 		|| type == TOK_REDIR_OUT
 		|| type == TOK_REDIR_APPEND
-		|| type == TOK_HEREDOC)
+		|| type == TOK_HEREDOC
+		|| type == TOK_HEREDOC_QUOTED)
 		return (true);
 	return (false);
 }

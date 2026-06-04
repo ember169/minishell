@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/02 15:04:37 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/04 20:34:43 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,26 @@ static t_minishell	*_init_ms(t_minishell *ms, char **av, char **envp)
 	return (ms);
 }
 
+static void	_format_tokens(t_minishell *ms, t_token *list)
+{
+	t_token	*tmp;
+
+	tmp = list;
+	while (tmp && tmp->next)
+	{
+		if (tmp->type == TOK_HEREDOC && tmp->next->type == TOK_WORD)
+		{
+			if (ft_strchr(tmp->next->value, '\'')
+				|| ft_strchr(tmp->next->value, '\"'))
+				tmp->type = TOK_HEREDOC_QUOTED;
+		}
+		tmp = tmp->next;
+	}
+	expand_token_list(ms, list);
+	if (ms->debug)
+		print_tok_list(list);
+}
+
 static int	_process_input(t_minishell *ms, char *uinput)
 {
 	t_token	*list;
@@ -55,10 +75,9 @@ static int	_process_input(t_minishell *ms, char *uinput)
 	list = lexer(uinput);
 	if (!list)
 		return (1);
-	expand_token_list(ms, list);
-	if (ms->debug)
-		print_tok_list(list);
+	_format_tokens(ms, list);
 	ms->ast_root = build_ast(list);
+	process_all_heredocs(ms, ms->ast_root);
 	if (ms->debug)
 		print_ast(ms->ast_root, 0);
 	if (ms->ast_root)

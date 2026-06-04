@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 13:09:06 by v                 #+#    #+#             */
-/*   Updated: 2026/06/02 14:30:14 by v                ###   ########.fr       */
+/*   Updated: 2026/06/04 20:15:33 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,50 @@ static char	*_generate_tmp_filename(void)
 	return (filename);
 }
 
-static void	_fill_heredoc(int fd, char *delimiter)
+static char	*_exapand_heredoc_line(t_minishell *ms, char *line)
+{
+	char	*ret;
+	char	*src;
+	char	*dst;
+	char	*val;
+
+	ret = malloc(ft_strlen(line) * 2 + 1084);
+	if (!ret)
+		return (line);
+	src = line;
+	dst = ret;
+	while (*src)
+	{
+		if (*src == '$' && get_key_len(src) > 0)
+		{
+			get_env_var(ms, src, &val);
+			ft_memcpy(dst, val, ft_strlen(val));
+			dst += ft_strlen(val);
+			src += (1 + get_key_len(src));
+			free (val);
+		}
+		else
+			*dst++ = *src++;
+	}
+	*dst = '\0';
+	return (free(line), ret);
+}
+
+static void	_fill_heredoc(t_minishell *ms, int fd, char *delim, bool expand)
 {
 	char	*line;
 
 	while (1)
 	{
 		line = readline("heredoc> ");
-		if (!line | ft_strncmp(line, delimiter, ft_strlen(delimiter) + 1) == 0)
+		if (!line || ft_strncmp(line, delim, ft_strlen(delim) + 1) == 0)
 		{
 			if (line)
 				free(line);
 			break ;
 		}
+		if (expand)
+			line = _exapand_heredoc_line(ms, line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free (line);
@@ -47,7 +78,10 @@ static void	_process_single_heredoc(t_minishell *ms, t_redir *redir)
 {
 	int		fd;
 	char	*tmp_file;
+	bool	should_expand;
 
+	(void)ms;
+	should_expand = (redir->type == TOK_HEREDOC);
 	tmp_file = _generate_tmp_filename();
 	fd = open(tmp_file, O_CREAT | O_WRONLY | O_TRUNC | 0644);
 	if (fd < 0)
@@ -55,7 +89,7 @@ static void	_process_single_heredoc(t_minishell *ms, t_redir *redir)
 		free(tmp_file);
 		return ;
 	}
-	_fill_heredoc(fd, redir->file);
+	_fill_heredoc(ms, fd, redir->file, should_expand);
 	close(fd);
 	free(redir->file);
 	redir->file = tmp_file;
@@ -64,18 +98,20 @@ static void	_process_single_heredoc(t_minishell *ms, t_redir *redir)
 
 void	process_all_heredocs(t_minishell *ms, t_ast_node *node)
 {
-	t_redir	*current_redir;
+	t_redir	*current;
 
+	(void)ms;
 	if (!node)
 		return ;
 	if (node->type == NODE_CMD)
 	{
-		current_redir = node->redirs;
-		while (current_redir)
+		current = node->redirs;
+		while (current)
 		{
-			if (current_redir->type == TOK_HEREDOC)
-				_process_single_heredoc(ms, current_redir);
-			current_redir = current_redir->next;
+			if (current->type == TOK_HEREDOC
+				|| current->type == TOK_HEREDOC_QUOTED)
+				_process_single_heredoc(ms, current);
+			current = current->next;
 		}
 	}
 	else
