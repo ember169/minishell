@@ -6,7 +6,7 @@
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 09:33:20 by alma              #+#    #+#             */
-/*   Updated: 2026/06/02 20:23:55 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/04 13:58:58 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,12 @@ static int exec_and(t_minishell *ms, t_ast_node *node)
 	return (status);
 }
 
-static int	exec_cmd(t_minishell *ms, t_ast_node *node)
-{
-	(void)ms;
-	printf("-> [CMD] Simulation exécution de : %s\n", node->args[0]);
-	return (dispatch_cmd(ms, node));
-	// if (ft_strncmp(node->args[0], "false", 5) == 0)
-	// 	return (1);
-	// return (0);
-}
-
 int	exec_ast(t_minishell *ms, t_ast_node *node)
 {
 	if (!node)
 		return (0);
 	if (node->type == NODE_CMD)
-		return (exec_cmd(ms, node));
+		return (dispatch_cmd(ms, node));
 	else if (node->type == NODE_PIPE)
 		return (exec_pipe(ms, node));
 	else if (node->type == NODE_AND)

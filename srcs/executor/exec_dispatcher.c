@@ -6,7 +6,7 @@
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:35:38 by mskn              #+#    #+#             */
-/*   Updated: 2026/06/03 16:32:03 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/04 14:46:37 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,57 @@
 
 static bool	_is_env_safe(char *command)
 {
-	if (!command)
-		return (false);
-	if (\
-(ft_strlen("exit") == ft_strlen(command) && \
-ft_strncmp("exit", command, ft_strlen("exit")) == 0) || \
-(ft_strlen("cd") == ft_strlen(command) && \
-ft_strncmp("cd", command, ft_strlen("cd")) == 0) || \
-(ft_strlen("export") == ft_strlen(command) && \
-ft_strncmp("export", command, ft_strlen("export")) == 0) || \
-(ft_strlen("unset") == ft_strlen(command) && \
-ft_strncmp("unset", command, ft_strlen("unset")) == 0))
-		return (false);
+	int			i;
+	size_t		c_len;
+	size_t		b_len;
+	const char	*builtins[5];
+
+	builtins[0] = "exit";
+	builtins[1] = "cd";
+	builtins[2] = "export";
+	builtins[3] = "unset";
+	builtins[4] = NULL;
+	i = 0;
+	c_len = ft_strlen(command);
+	while (builtins[i])
+	{
+		b_len = ft_strlen(builtins[i]);
+		if (b_len == c_len && ft_strncmp(command, builtins[i], c_len) == 0)
+			return (false);
+		i++;
+	}
 	return (true);
 }
 
-int	execute_cmd_in_fork(t_minishell *ms, t_ast_node *node)
-{
-	int		ret;
-	pid_t	pid;
+// Note: fork() returns a value which is different in parent process 
+// and child process which can be used to differentiate the work of 
+// parent and child processes accordingly
+// int	execute_cmd_in_fork(t_minishell *ms, t_ast_node *node)
+// {
+// 	int		status;
+// 	pid_t	pid;
 
-	pid = fork();
+// 	status = -1;
+// 	pid = fork();
+// 	if (pid == 0)
+// 		status = execute_cmd(ms, node);
+// 	else if (pid > 0)
+// 		waitpid(pid, 0, NULL);
+// 	return (status);
+// }
 
-	waitpid(pid);
-	return (ret);
-}
+// int	execute_cmd(t_minishell *ms, t_ast_node *node)
+// {
+// 	int		status;
+// 	char	*path;
+// 	char	**envp;
 
-int	execute_cmd(t_minishell *ms, t_ast_node *node)
-{
-	pid_t	pid;
-	int		ret;
-
-	// Execute command with execve()
-	pid = execve();
-
-	waitpid(pid);
-	return (ret);
-}
+// 	// Build {path}
+// 	// Ensure node->args ends with \0
+// 	// Build envp
+// 	status = execve(path, node->args, envp);
+// 	return (status);
+// }
 
 /*
 ** dispatch_cmd:
@@ -69,16 +83,20 @@ int	dispatch_cmd(t_minishell *ms, t_ast_node *node)
 
 	if (!ms || !node)
 		return (1);
-	if (!_is_env_safe(node->args[0]) && node->right->type != NODE_PIPE)
+	printf("-> [CMD] Simulation exécution de : %s\n", node->args[0]);
+	status = 1;
+	if (_is_env_safe(node->args[0]))
+	{
+		printf("  -> [CMD] %s is env safe\n", node->args[0]);
+		status = execute_cmd_in_fork(ms, node);
+	}
+	else if (node->right != NULL && node->right->type != NODE_PIPE)
 	{
 		printf("  -> [CMD] %s is env unsafe\n", node->args[0]);
 		status = execute_cmd(ms, node);
 	}
 	else
-	{
-		printf("  -> [CMD] %s is env safe\n", node->args[0]);
-		status = execute_cmd_in_fork(ms, node);
-	}
+		???;
 	ms->last_status = status;
 	return (status);
 }
