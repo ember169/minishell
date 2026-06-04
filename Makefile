@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/04 18:50:29 by v                ###   ########.fr        #
+#    Updated: 2026/06/04 23:00:22 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SRC_FILES   := main.c \
                parser/heredoc.c \
                executor/exec_ast.c \
                executor/exec_dispatcher.c \
-               executor/redirections.c
+               executor/redirections.c \
+               executor/exec_path.c
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))

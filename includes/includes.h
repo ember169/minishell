@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/02 12:53:41 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/04 21:53:14 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <dirent.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 
 # include "../libs/libft/includes/libft.h"
 # include "core/structures.h"
