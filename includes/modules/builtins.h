@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/30 09:29:00 by alma              #+#    #+#             */
-/*   Updated: 2026/06/05 03:47:36 by v                ###   ########.fr       */
+/*   Created: 2026/05/26 14:54:50 by lgervet           #+#    #+#             */
+/*   Updated: 2026/06/05 00:07:35 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-int		exec_ast(t_minishell *ms, t_ast_node *node);
-int		dispatch_cmd(t_minishell *ms, t_ast_node *node);
-int		setup_redirections(t_ast_node *node);
-char	*get_cmd_path(t_minishell *ms, char *cmd);
-int		exec_builtin(t_minishell *ms, t_ast_node *node);
-int		exec_pipe(t_minishell *ms, t_ast_node *node);
+int	execute_echo(char **args);
+int	execute_cd(t_minishell *ms, char **args);
+int	execute_env(t_minishell *ms);
+int	execute_exit(t_minishell *ms, char **args);
+int	execute_export(t_minishell *ms, char **args);
+int	execute_pwd(void);
+int	execute_unset(t_minishell *ms, char **args);
 
 #endif

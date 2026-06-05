@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:35:38 by mskn              #+#    #+#             */
-/*   Updated: 2026/06/04 23:21:50 by v                ###   ########.fr       */
+/*   Updated: 2026/06/05 02:46:19 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,47 +62,40 @@ ft_strncmp("unset", command, ft_strlen("unset")) == 0))
 **     @param *node		Pointer to command node
 **     @return 0 on success / >0 on error
 */
-int	dispatch_cmd05(t_minishell *ms, t_ast_node *node)
-{
-
-	if (!ms || !node)
-		return (1);
-	if (_is_builtin(node->args[0]))
-	{
-		printf("  -> [CMD] %s is built-in\n", node->args[0]);
-		if (_is_env_unsafe(node->args[0]))
-		{
-			printf("  -> [CMD] %s isn't env safe\n", node->args[0]);
-			// ??
-		}
-		else
-		{
-			printf("  -> [CMD] %s is env safe\n", node->args[0]);
-			// ??
-		}
-
-	}
-	else
-	{
-		printf("  -> [CMD] %s is external\n", node->args[0]);
-		// Fork it
-		// waitpid()
-		// Update ms->last_status
-	}
-	return (0);
-}
 static void	execute_child(t_minishell *ms, t_ast_node *node)
 {
 	char	*cmd_path;
 
 	if (setup_redirections(node) != 0)
 		exit(1);
-	if (!node->args || node->args[0])
+	if (!node->args || !node->args[0])
 		exit(0);
 	if (_is_builtin(node->args[0]))
+		exit (exec_builtin(ms, node));
+	cmd_path = get_cmd_path(ms, node->args[0]);
+	if (!cmd_path)
 	{
-		
+		printf("minishell: command not found: %s\n", node->args[0]);
+		exit (127);
 	}
+	execve(cmd_path, node->args, ms->envp);
+	perror("execve");
+	exit(126);
+}
+
+static int	_exec_parent_builtin(t_minishell *ms, t_ast_node *node)
+{
+	int	status;
+	int	saved_stdout;
+
+	saved_stdout = dup(STDOUT_FILENO);
+	if (setup_redirections(node) == 0)
+		status = exec_builtin(ms, node);
+	else
+		status = 1;
+	dup2(saved_stdout, STDOUT_FILENO);
+	close(saved_stdout);
+	return (status);
 }
 
 int	dispatch_cmd(t_minishell *ms, t_ast_node *node)
@@ -112,40 +105,17 @@ int	dispatch_cmd(t_minishell *ms, t_ast_node *node)
 
 	if (!ms || !node)
 		return (1);
-
 	if (_is_env_unsafe(node->args[0]))
-	{
-		printf("-> [CMD] %s is env unsafe (NO FORK)\n", node->args[0]);
-		// Note : Comme on ne fork pas, il faudra plus tard sauvegarder 
-		// les STDIN/STDOUT avec dup() avant de lancer setup_redirections,
-		// puis les restaurer. Mais la logique de base est là.
-	}
-	printf("  -> [CMD] %s is env safe or external (FORKING)\n", node->args[0]);
+		return (_exec_parent_builtin(ms, node));
 	pid = fork();
 	if (pid == -1)
 		return (1);
-	if (pid == 0) // c'est le gosse
-	{
-		if (setup_redirections(node) != 0)
-			exit(1);
-		if (_is_builtin(node->args[0]))
-		{
-			// exec de builtin
-			exit(0);
-		}
-		else
-		{
-			// char *path = find_cmd_path(...);
-			// execve(path, node->args, ms->envp);
-			printf("Simulation execve de %s\n", node->args[0]);
-			exit(0); // apparament a gerer avec la gestion d'erreur de execve
-		}
-	}
-	else // les parents
-	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-	}
-
+	if (pid == 0)
+		execute_child(ms, node);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		ms->last_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		ms->last_status = 128 + WTERMSIG(status);
+	return (ms->last_status);
 }

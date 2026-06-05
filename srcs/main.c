@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/04 20:34:43 by v                ###   ########.fr       */
+/*   Updated: 2026/06/05 01:59:53 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool	_check_debug(char **av)
 	{
 		if (ft_strncmp(av[i], "--debug", 8) == 0)
 		{
-			printf("Debug mode ON.\n\n");
+			ft_printf("Debug mode ON.\n\n");
 			res = true;
 			break ;
 		}
@@ -82,7 +82,10 @@ static int	_process_input(t_minishell *ms, char *uinput)
 		print_ast(ms->ast_root, 0);
 	if (ms->ast_root)
 	{
+		ms->envp = generate_envp_array(ms->env_list);
 		exec_ast(ms, ms->ast_root);
+		free_str_array(ms->envp);
+		ms->envp = NULL;
 		free_ast(ms->ast_root);
 		ms->ast_root = NULL;
 	}

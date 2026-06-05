@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug_ast.c                                        :+:      :+:    :+:   */
+/*   debug_ast_print_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 13:52:41 by v                 #+#    #+#             */
-/*   Updated: 2026/06/02 12:50:11 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/04 23:32:29 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	_print_redir(t_redir *redir)
 		if (redir->type == TOK_REDIR_IN)
 			printf("< ");
 		else if (redir->type == TOK_REDIR_OUT)
-			printf("> ");
+			ft_printf("> ");
 		else if (redir->type == TOK_REDIR_APPEND)
-			printf(">> ");
+			ft_printf(">> ");
 		else if (redir->type == TOK_HEREDOC)
 			printf("<< ");
 		printf("'%s'", redir->file);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_env.c                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 15:26:23 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/06/01 09:36:19 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "../../includes/includes.h"
 
-static char	*_extract_key(char *env)
+char	*extract_key(char *env)
 {
 	char	*key;
 	int		i;
@@ -35,7 +35,7 @@ static char	*_extract_key(char *env)
 	return (key);
 }
 
-static char	*_extract_value(char *env)
+char	*extract_value(char *env)
 {
 	char	*value;
 	int		i;
@@ -56,19 +56,6 @@ static char	*_extract_value(char *env)
 	else
 		value = ft_strdup("");
 	return (value);
-}
-
-t_env	*create_node(char *env)
-{
-	t_env	*ret;
-
-	ret = malloc(sizeof(t_env));
-	if (!ret)
-		return (NULL);
-	ret->key = _extract_key(env);
-	ret->value = _extract_value(env);
-	ret->next = NULL;
-	return (ret);
 }
 
 /*

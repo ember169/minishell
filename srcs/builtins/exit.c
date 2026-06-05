@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/10 15:10:54 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/26 15:46:28 by lgervet          ###   ########.fr       */
+/*   Created: 2026/06/01 12:10:54 by mskn              #+#    #+#             */
+/*   Updated: 2026/06/01 12:15:09 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include "../../includes/includes.h"
 
-/* ==== MACROS ==== */
-# ifndef PROMPT
-#  define PROMPT "Minishell$ "
-# endif
+int	execute_exit(t_minishell *ms, char **args)
+{
+	int	last_status;
 
-# ifndef STDOUT_FILENO
-#  define STDOUT_FILENO 1
-# endif
-
-# ifndef STDERR_FILENO
-#  define STDERR_FILENO 2
-# endif
-
-#endif
+	(void)args;
+	last_status = ms->last_status;
+	write(STDERR_FILENO, "exit", ft_strlen("exit"));
+	clean_ms(ms);
+	exit (last_status);
+}

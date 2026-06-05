@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/04 23:00:22 by v                ###   ########.fr        #
+#    Updated: 2026/06/05 03:27:09 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,18 @@ SRC_FILES   := main.c \
                debug/debug_ast_print_utils.c \
                debug/debug_errors.c \
                debug/debug_print.c \
+			   builtins/cd.c \
+			   builtins/echo.c \
+               builtins/env.c \
+               builtins/exit.c \
+               builtins/export.c \
+			   builtins/pwd.c \
+               builtins/unset.c \
                env/env.c \
                env/env_checkers.c \
+               env/env_node_utils.c \
                env/env_utils.c \
+               env/envp_array.c \
                exit/exit.c \
                expander/expander.c \
                expander/expander_path_expand.c \
@@ -52,7 +61,9 @@ SRC_FILES   := main.c \
                executor/exec_ast.c \
                executor/exec_dispatcher.c \
                executor/redirections.c \
-               executor/exec_path.c
+               executor/exec_path.c \
+               executor/exec_builtin.c \
+               executor/exec_pipe.c
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))
