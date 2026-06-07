@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 13:46:07 by v                 #+#    #+#             */
-/*   Updated: 2026/06/04 20:35:18 by v                ###   ########.fr       */
+/*   Updated: 2026/06/07 19:17:50 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ static void	_free_redir_list(t_redir *redir)
 
 void	free_ast(t_ast_node *node)
 {
-	if (!node)
+if (!node)
 		return ;
 	free_ast(node->left);
 	free_ast(node->right);
 	free_ast(node->subshell_child);
-	if (node->type == NODE_CMD)
-	{
-		free_str_array(node->args);
+
+	if (node->type == NODE_CMD || node->type == NODE_SUBSHELL)
 		_free_redir_list(node->redirs);
-	}
-	free (node);
+	if (node->type == NODE_CMD)
+		free_str_array(node->args);
+	free(node);
 }

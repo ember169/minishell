@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   build_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:30:24 by v                 #+#    #+#             */
-/*   Updated: 2026/06/02 12:34:21 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/07 16:38:10 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
+
+// faire un "syntax error near unexpected token"
 
 static t_ast_node	*_split_ast_op(t_token *tok, t_token *split_pts)
 {

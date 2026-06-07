@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 13:49:31 by v                 #+#    #+#             */
-/*   Updated: 2026/04/19 14:25:53 by v                ###   ########.fr       */
+/*   Updated: 2026/06/07 18:37:58 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,18 @@ t_token	*find_pipe_op(t_token *tok)
 		current = current->next;
 	}
 	return (last_found);
+}
+
+void	print_syntax_error(t_token *tok)
+{
+ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+	if (tok && tok->value)
+		ft_putstr_fd(tok->value, 2);
+	else if (tok && tok->type == TOK_PAREN_LEFT)
+		ft_putstr_fd("(", 2);
+	else if (tok && tok->type == TOK_PAREN_RIGHT)
+		ft_putstr_fd(")", 2);
+	else
+		ft_putstr_fd("newline", 2);
+	ft_putstr_fd("'\n", 2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_subshell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 14:12:15 by v                 #+#    #+#             */
-/*   Updated: 2026/06/02 12:34:35 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/07 18:37:58 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,49 @@ static t_ast_node	*_ast_new_subshell_node(t_ast_node *child)
 	return (node);
 }
 
-// bool	is_fully_enclosed(t_token *tok)
-// {
-// 	int		par_lvl;
-// 	t_token	*curr;
+static t_token	*find_matching_paren(t_token *tok)
+{
+	int		lvl = 0;
+	t_token	*curr = tok;
 
-// 	if (!tok || tok->type != TOK_PAREN_LEFT)
-// 		return (false);
-// 	par_lvl = 0;
-// 	curr = tok;
-// 	while (curr)
-// 	{
-// 		if (curr->type == TOK_PAREN_LEFT)
-// 			par_lvl++;
-// 		else if (curr->type == TOK_PAREN_RIGHT)
-// 			par_lvl--;
-// 		if (par_lvl == 0 && curr->next != NULL)
-// 			return (false);
-// 		curr = curr->next;
-// 	}
-// 	return (par_lvl == 0);
-// }
+	while (curr)
+	{
+		if (curr->type == TOK_PAREN_LEFT)
+			lvl++;
+		else if (curr->type == TOK_PAREN_RIGHT)
+			lvl--;
+		if (lvl == 0)
+			return (curr);
+		curr = curr->next;
+	}
+	return (NULL);
+}
 
 t_ast_node	*build_subshell(t_token *tok)
 {
-	t_token		*inner_start;
+	t_token		*end;
 	t_token		*curr;
-	t_token		*end_paren;
 	t_ast_node	*node;
 
-	inner_start = tok->next;
-	if (inner_start->type == TOK_PAREN_RIGHT)
-		return (NULL);
-	curr = inner_start;
-	while (curr->next->type != TOK_PAREN_RIGHT || curr->next->next != NULL)
+	end = find_matching_paren(tok);
+	if (!end)
+		return (print_syntax_error(NULL), free_tok_ls(&tok), NULL);
+	curr = tok;
+	while (curr->next != end)
 		curr = curr->next;
-	end_paren = curr->next;
 	curr->next = NULL;
-	node = _ast_new_subshell_node(build_ast(inner_start));
-	free(tok);
-	free(end_paren);
-	return (node);
+	node = _ast_new_subshell_node(build_ast(tok->next));
+	curr = end->next;
+	while (curr)
+	{
+		if (is_redir(curr->type) && curr->next)
+		{
+			append_redir(&(node->redirs), red_new(curr->type, curr->next->value));
+			curr = curr->next->next;
+		}
+		else
+			return (print_syntax_error(curr), free_ast(node), free(tok), free_tok_ls(&end), NULL);
+	}
+	return (free(tok), free_tok_ls(&end), node);
 }
+
