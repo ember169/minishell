@@ -6,7 +6,7 @@
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/12 11:33:07 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/12 11:59:51 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ static t_minishell	*_init_ms(t_minishell *ms, char **av, char **envp)
 	return (ms);
 }
 
+/*
+** _format_tokens:
+**      Determines if current token is HEREDOC and next one is quoted
+**		to reformat it
+**
+**      @param *ms  	pointer to t_minishell
+**      @param *list  	pointer to token list
+**      @return value
+*/
+// cette fonction devrait s'appeler _manage_heredoc_quotes et l'appel 
+// a expand_token_list devrait se faire dans la fonction appelante ??
 static void	_format_tokens(t_minishell *ms, t_token *list)
 {
 	t_token	*tmp;

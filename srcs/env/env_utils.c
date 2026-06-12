@@ -6,7 +6,7 @@
 /*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 17:49:50 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/01 09:36:10 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/12 13:57:58 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_env	*get_env_addr_from_key(t_minishell *ms, char *to_find)
 	current = ms->env_list;
 	while (current)
 	{
-		if (ft_strncmp(current->key, to_find, len + 1) == 0 && \
-current->key[len] == '\0')
+		if (ft_strncmp(current->key, to_find, len + 1) == 0
+			&& current->key[len] == '\0')
 			return (current);
 		current = current->next;
 	}

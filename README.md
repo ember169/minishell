@@ -38,6 +38,20 @@ The shell must implement the following commands internally:
 
 ### Implementation
 
+### Pipeline
+
+> Tracing `env | grep $USER` from raw user input to execution.
+
+| Stage | Input | Output | Key Structure |
+|-------|-------|--------|---------------|
+| **1. Input** | keystrokes | `char *` raw string | — |
+| **2. Lexer** | `"env \| grep $USER"` | token linked list (`$USER` raw) | `t_token` |
+| **3. Expander** | token list with `"$USER"` | token list with `"mskn"` | `t_token` (mutated) |
+| **4. Parser** | flat token list | binary AST | `t_ast_node` |
+| **5. Executor** | AST tree | processes + pipe + execve | OS fd table |
+
+__More details in `pipeline.md` and `pipeline.mmd`__
+
 #### Naming Rules Summary
 
 | Pattern | Use Case | Example |
@@ -66,9 +80,6 @@ Each file should have a clear, single responsibility matching its suffix
 - [How to make an elegant tokenizer in C, Zarial, 2020](https://ix-56h.github.io/how-to-make-a-tokenizer/)
 	- Convinced me to make a simple implementation of a Reverse Descent Parser before beginning the project: [math_shell (github)](https://github.com/ember169/math_shell)
 
-#### Learning Resources 
-*Building...*
-
 #### Technical Reference & Helpers
 - [Official POSIX Shell documentation, Opengroup, 2018](https://pubs.opengroup.org/onlinepubs/9699919799/)
 - [Unofficial Shell documentation, Grymoire, 2023](https://www.grymoire.com/Unix/Sh.html)
@@ -77,3 +88,4 @@ Each file should have a clear, single responsibility matching its suffix
 - To divide the entire project into seven Phases, making it easy for us to plan and keep track of the project while working simultaneously on different features.
 - To make sense of some intricates concepts (i.e: Lexer, Tokenizer, Expander, Executor...)
 - To conceive a robust nested structure architecture
+- To make flowcharts documenting the entire pipeline, making it easier to explain and debug
