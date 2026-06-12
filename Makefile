@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
+#    By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/05 03:27:09 by v                ###   ########.fr        #
+#    Updated: 2026/06/12 11:31:12 by mskn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC_FILES   := main.c \
                expander/expander_quote_expand.c \
                expander/expander_quote_utils.c \
                expander/expander_var_utils.c \
-               lexer/handling.c \
+               lexer/lexer_handling.c \
                lexer/lexer.c \
                lexer/lexer_utils.c \
                parser/ast_utils.c \

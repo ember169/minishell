@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/05 01:59:53 by v                ###   ########.fr       */
+/*   Updated: 2026/06/12 11:33:07 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,12 @@ static void	_main_loop(t_minishell *ms)
 		uinput = readline(PROMPT);
 		if (!uinput)
 			return ;
-		if (ft_strncmp(uinput, "exit", ft_strlen("exit")) == 0)
-			return (free(uinput));
 		if (uinput[0] != '\0')
 		{
 			add_to_history(uinput);
 			_process_input(ms, uinput);
 		}
 		free(uinput);
-		printf("\n\n");
 	}
 }
 

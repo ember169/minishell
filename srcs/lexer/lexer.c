@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:23:04 by v                 #+#    #+#             */
-/*   Updated: 2026/06/02 03:11:45 by v                ###   ########.fr       */
+/*   Updated: 2026/06/12 11:30:27 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
+/*
+** _extract_word:
+**      Increments character pointer until it's space or operator, creates 
+**		new token with this content and appends it to tok_list
+**
+**      @param input  	input string
+**      @param ls  		lexer state machine
+**      @param tok_ls  	current token
+*/
 static void	_extract_word(char *input, t_lexer_state *ls, t_token **tok_ls)
 {
 	int		start;
@@ -30,6 +39,16 @@ static void	_extract_word(char *input, t_lexer_state *ls, t_token **tok_ls)
 		token_add_back(tok_ls, new_node);
 }
 
+/*
+** _process_character:
+**      Determines what the first character is (quote, operator, word)
+** 		and dispatch it accordingly
+**
+**      @param input  	input string
+**      @param ls  		lexer state machine
+**      @param tok_ls  	current token
+**      @return 		1 if everything works out / 0 if not
+*/
 static int	_process_character(char *input, t_lexer_state *ls, t_token **tok_ls)
 {
 	if (input[ls->i] == '\'' || input[ls->i] == '\"')
