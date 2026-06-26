@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/12 11:59:51 by mskn             ###   ########.fr       */
+/*   Updated: 2026/06/26 15:28:56 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,11 @@ static void	_main_loop(t_minishell *ms)
 		if (uinput[0] != '\0')
 		{
 			add_to_history(uinput);
-			_process_input(ms, uinput);
+			if (_process_input(ms, uinput) == 0)
+			{
+				free(uinput);
+				break ;
+			}
 		}
 		free(uinput);
 	}

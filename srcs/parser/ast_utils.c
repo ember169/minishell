@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 13:49:31 by v                 #+#    #+#             */
-/*   Updated: 2026/06/07 18:37:58 by v                ###   ########.fr       */
+/*   Updated: 2026/06/26 15:59:04 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ t_ast_node	*ast_new_op(t_node_type type, t_ast_node *left, t_ast_node *right)
 	node->redirs = NULL;
 	return (node);
 }
+/*
+il serait logique de se demander pourquoi on a deux fonction quasi identiques.
+c'est assez simple en faite: c'est l'ordre de prio de l'AST. 
+meme si avec du recul une fonction avec un argument en plus marche aussi
+c'est cheangable mais osef un peu juste ca a une justification quoi.
+*/
 
 t_token	*find_logical_op(t_token *tok)
 {

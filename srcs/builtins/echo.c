@@ -6,13 +6,11 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:13:34 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/05 02:13:32 by v                ###   ########.fr       */
+/*   Updated: 2026/06/26 15:29:22 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-
-// quid des flags ?
 
 static bool	_is_flag(char *arg)
 {

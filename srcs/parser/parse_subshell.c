@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 14:12:15 by v                 #+#    #+#             */
-/*   Updated: 2026/06/07 18:37:58 by v                ###   ########.fr       */
+/*   Updated: 2026/06/26 16:10:00 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ static t_ast_node	*_ast_new_subshell_node(t_ast_node *child)
 
 static t_token	*find_matching_paren(t_token *tok)
 {
-	int		lvl = 0;
-	t_token	*curr = tok;
+	int		lvl;
+	t_token	*curr;
 
+	lvl = 0;
+	curr = tok;
 	while (curr)
 	{
 		if (curr->type == TOK_PAREN_LEFT)
