@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:57:29 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/26 09:38:39 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/06/27 03:03:10 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,42 @@ static t_token	*_expand_with_path(t_token *current)
 	return (expand_path(current));
 }
 
+static void	_update_quote(char *in_quotes, char c)
+{
+	if (*in_quotes == c)
+		*in_quotes = '\0';
+	else if (*in_quotes == '\0')
+		*in_quotes = c;
+}
+
+static int	_calc_len(t_minishell *ms, char *str)
+{
+	int		len;
+	char	in_quotes;
+	char	*var;
+
+	len = 0;
+	in_quotes = '\0';
+	while (*str)
+	{
+		if (is_quote(*str) && (in_quotes == *str || in_quotes == '\0'))
+			_update_quote(&in_quotes, *str++);
+		else if (*str == '$' && in_quotes != '\'' && get_key_len(str) > 0)
+		{
+			get_env_var(ms, str, &var);
+			len += ft_strlen(var);
+			str += (1 + get_key_len(str));
+			free (var);
+		}
+		else
+		{
+			len++;
+			str++;
+		}
+	}
+	return (len + 1);
+}
+
 /*
 ** _expand_with_quotes:
 **     Allocates expanded string and feeds it to main expander loop
@@ -29,13 +65,11 @@ static t_token	*_expand_with_path(t_token *current)
 */
 static char	*_expand_with_quotes(t_minishell *ms, char *str)
 {
-	int		allocated;
 	char	*ret;
 
 	if (!ms)
 		return (NULL);
-	allocated = ft_strlen(str) * 2 + 256;
-	ret = malloc(allocated);
+	ret = malloc(_calc_len(ms, str));
 	if (!ret)
 		return (NULL);
 	return (expand_loop(ms, str, ret));

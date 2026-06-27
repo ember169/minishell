@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 14:57:27 by v                 #+#    #+#             */
-/*   Updated: 2026/06/07 18:37:57 by v                ###   ########.fr       */
+/*   Updated: 2026/06/27 01:11:56 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void		free_ast(t_ast_node *node);
 t_ast_node	*build_subshell(t_token *tok);
 void		process_all_heredocs(t_minishell *ms, t_ast_node *node);
 void		print_syntax_error(t_token *tok);
+t_ast_node	*parse_cmd(t_token *tok);
 
 #endif

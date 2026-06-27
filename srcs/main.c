@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/26 15:28:56 by v                ###   ########.fr       */
+/*   Updated: 2026/06/27 01:42:15 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ static int	_process_input(t_minishell *ms, char *uinput)
 {
 	t_token	*list;
 
-	if (ft_strncmp(uinput, "exit", 5) == 0)
-		return (0);
 	list = lexer(uinput);
 	if (!list)
 		return (1);

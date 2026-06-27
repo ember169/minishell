@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 13:49:31 by v                 #+#    #+#             */
-/*   Updated: 2026/06/26 15:59:04 by v                ###   ########.fr       */
+/*   Updated: 2026/06/27 01:35:05 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,20 @@ t_token	*find_pipe_op(t_token *tok)
 
 void	print_syntax_error(t_token *tok)
 {
-ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
-	if (tok && tok->value)
+	ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+	if (!tok)
+		ft_putstr_fd("newline", 2);
+	else if (tok->value)
 		ft_putstr_fd(tok->value, 2);
-	else if (tok && tok->type == TOK_PAREN_LEFT)
+	else if (tok->type == TOK_PIPE)
+		ft_putstr_fd("|", 2);
+	else if (tok->type == TOK_AND)
+		ft_putstr_fd("&&", 2);
+	else if (tok->type == TOK_OR)
+		ft_putstr_fd("||", 2);
+	else if (tok->type == TOK_PAREN_LEFT)
 		ft_putstr_fd("(", 2);
-	else if (tok && tok->type == TOK_PAREN_RIGHT)
+	else if (tok->type == TOK_PAREN_RIGHT)
 		ft_putstr_fd(")", 2);
 	else
 		ft_putstr_fd("newline", 2);
