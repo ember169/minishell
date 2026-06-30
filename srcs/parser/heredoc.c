@@ -6,8 +6,20 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 13:09:06 by v                 #+#    #+#             */
-/*   Updated: 2026/06/04 20:15:33 by v                ###   ########.fr       */
+/*   Updated: 2026/06/30 17:42:49 by v                ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/* */
+/* :::      ::::::::   */
+/* heredoc.c                                          :+:      :+:    :+:   */
+/* +:+ +:+         +:+     */
+/* By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/* +#+#+#+#+#+   +#+           */
+/* Created: 2026/06/02 13:09:06 by v                 #+#    #+#             */
+/* Updated: 2026/06/27 03:00:00 by v                ###   ########.fr       */
+/* */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
@@ -24,35 +36,6 @@ static char	*_generate_tmp_filename(void)
 	return (filename);
 }
 
-static char	*_exapand_heredoc_line(t_minishell *ms, char *line)
-{
-	char	*ret;
-	char	*src;
-	char	*dst;
-	char	*val;
-
-	ret = malloc(ft_strlen(line) * 2 + 1084);
-	if (!ret)
-		return (line);
-	src = line;
-	dst = ret;
-	while (*src)
-	{
-		if (*src == '$' && get_key_len(src) > 0)
-		{
-			get_env_var(ms, src, &val);
-			ft_memcpy(dst, val, ft_strlen(val));
-			dst += ft_strlen(val);
-			src += (1 + get_key_len(src));
-			free (val);
-		}
-		else
-			*dst++ = *src++;
-	}
-	*dst = '\0';
-	return (free(line), ret);
-}
-
 static void	_fill_heredoc(t_minishell *ms, int fd, char *delim, bool expand)
 {
 	char	*line;
@@ -67,7 +50,7 @@ static void	_fill_heredoc(t_minishell *ms, int fd, char *delim, bool expand)
 			break ;
 		}
 		if (expand)
-			line = _exapand_heredoc_line(ms, line);
+			line = expand_heredoc_line(ms, line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free (line);
