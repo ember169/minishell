@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
+#    By: alma <alma@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/27 01:03:29 by v                ###   ########.fr        #
+#    Updated: 2026/06/27 20:06:34 by alma             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC_FILES   := main.c \
                parser/parse_subshell.c \
                parser/heredoc.c \
                parser/parse_cmd.c \
+               parser/heredoc_expand.c \
                executor/exec_ast.c \
                executor/exec_dispatcher.c \
                executor/redirections.c \
