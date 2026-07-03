@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 03:26:39 by v                 #+#    #+#             */
-/*   Updated: 2026/06/05 03:55:23 by v                ###   ########.fr       */
+/*   Updated: 2026/07/02 16:34:56 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	_exec_left_child(t_minishell *ms, t_ast_node *node, int *pfd)
 	close(pfd[0]);
 	dup2(pfd[1], STDOUT_FILENO);
 	close(pfd[1]);
-	exit(exec_ast(ms, node->left));
+	clean_child_and_exit(ms, exec_ast(ms, node->left));
 }
 
 static void	_exec_right_child(t_minishell *ms, t_ast_node *node, int *pfd)
@@ -25,7 +25,7 @@ static void	_exec_right_child(t_minishell *ms, t_ast_node *node, int *pfd)
 	close(pfd[1]);
 	dup2(pfd[0], STDIN_FILENO);
 	close(pfd[0]);
-	exit(exec_ast(ms, node->right));
+	clean_child_and_exit(ms, exec_ast(ms, node->right));
 }
 
 int	exec_pipe(t_minishell *ms, t_ast_node *node)

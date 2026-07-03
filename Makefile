@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alma <alma@student.42.fr>                  +#+  +:+       +#+         #
+#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/06/27 20:06:34 by alma             ###   ########.fr        #
+#    Updated: 2026/07/02 16:01:22 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ SRC_FILES   := main.c \
                executor/redirections.c \
                executor/exec_path.c \
                executor/exec_builtin.c \
-               executor/exec_pipe.c
+               executor/exec_pipe.c \
+               executor/exec_utils.c
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))

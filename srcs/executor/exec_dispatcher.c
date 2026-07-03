@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:35:38 by mskn              #+#    #+#             */
-/*   Updated: 2026/06/05 02:46:19 by v                ###   ########.fr       */
+/*   Updated: 2026/07/03 02:32:01 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ static void	execute_child(t_minishell *ms, t_ast_node *node)
 	char	*cmd_path;
 
 	if (setup_redirections(node) != 0)
-		exit(1);
+		clean_child_and_exit(ms, 1);
 	if (!node->args || !node->args[0])
-		exit(0);
+		clean_child_and_exit(ms, 0);
 	if (_is_builtin(node->args[0]))
-		exit (exec_builtin(ms, node));
+		clean_child_and_exit(ms, exec_builtin(ms, node));
 	cmd_path = get_cmd_path(ms, node->args[0]);
 	if (!cmd_path)
 	{
 		printf("minishell: command not found: %s\n", node->args[0]);
-		exit (127);
+		clean_child_and_exit(ms, 127);
 	}
 	execve(cmd_path, node->args, ms->envp);
 	perror("execve");
-	exit(126);
+	clean_child_and_exit(ms, 126);
 }
 
 static int	_exec_parent_builtin(t_minishell *ms, t_ast_node *node)

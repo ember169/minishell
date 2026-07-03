@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/30 09:29:00 by alma              #+#    #+#             */
-/*   Updated: 2026/07/02 16:41:06 by v                ###   ########.fr       */
+/*   Created: 2026/07/02 16:00:30 by v                 #+#    #+#             */
+/*   Updated: 2026/07/02 16:41:48 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#include "../../includes/includes.h"
 
-int		exec_ast(t_minishell *ms, t_ast_node *node);
-int		dispatch_cmd(t_minishell *ms, t_ast_node *node);
-int		setup_redirections(t_ast_node *node);
-char	*get_cmd_path(t_minishell *ms, char *cmd);
-int		exec_builtin(t_minishell *ms, t_ast_node *node);
-int		exec_pipe(t_minishell *ms, t_ast_node *node);
-void	clean_child_and_exit(t_minishell *ms, int exit_code);
+void	clean_child_and_exit(t_minishell *ms, int exit_code)
+{
+	close (STDIN_FILENO);
+	close (STDOUT_FILENO);
+	close (STDERR_FILENO);
 
-#endif
+	clean_ms(ms);
+	free(ms);
+	exit(exit_code);
+}
