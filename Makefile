@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/07/02 16:01:22 by v                ###   ########.fr        #
+#    Updated: 2026/07/05 00:06:55 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,8 @@ SRC_FILES   := main.c \
                executor/exec_path.c \
                executor/exec_builtin.c \
                executor/exec_pipe.c \
-               executor/exec_utils.c
+               executor/exec_utils.c \
+               signals/signals.c
 			   
 # Objets :
 OBJS        := $(addprefix $(OBJSDIR)/, $(SRC_FILES:.c=.o))

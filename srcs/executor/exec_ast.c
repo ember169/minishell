@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 09:33:20 by alma              #+#    #+#             */
-/*   Updated: 2026/07/02 16:34:54 by v                ###   ########.fr       */
+/*   Updated: 2026/07/05 00:58:18 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ static int	exec_subshell(t_minishell *ms, t_ast_node *node)
 		return (1);
 	if (pid == 0)
 	{
+		init_exec_child_signals();
 		if (setup_redirections(node) != 0)
 			clean_child_and_exit(ms, 1);
 		clean_child_and_exit(ms, exec_ast(ms, node->left));
 	}
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (128 + WTERMSIG(status));
+	return (handle_child_status(status));
 }
 
 static int	exec_or(t_minishell *ms, t_ast_node *node)

@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:35:38 by mskn              #+#    #+#             */
-/*   Updated: 2026/07/03 02:32:01 by v                ###   ########.fr       */
+/*   Updated: 2026/07/05 00:59:06 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void	execute_child(t_minishell *ms, t_ast_node *node)
 {
 	char	*cmd_path;
 
+	init_exec_child_signals();
 	if (setup_redirections(node) != 0)
 		clean_child_and_exit(ms, 1);
 	if (!node->args || !node->args[0])
@@ -113,9 +114,6 @@ int	dispatch_cmd(t_minishell *ms, t_ast_node *node)
 	if (pid == 0)
 		execute_child(ms, node);
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		ms->last_status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-		ms->last_status = 128 + WTERMSIG(status);
+	ms->last_status = handle_child_status(status);
 	return (ms->last_status);
 }

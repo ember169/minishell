@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/04 23:59:50 by v                ###   ########.fr       */
+/*   Updated: 2026/07/05 00:17:44 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 # include "../libs/libft/includes/libft.h"
 # include "core/structures.h"
@@ -35,5 +36,6 @@
 # include "modules/executor.h"
 # include "modules/exit.h"
 # include "modules/builtins.h"
+# include "modules/signals.h"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 03:26:39 by v                 #+#    #+#             */
-/*   Updated: 2026/07/02 16:34:56 by v                ###   ########.fr       */
+/*   Updated: 2026/07/05 00:57:43 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	_exec_left_child(t_minishell *ms, t_ast_node *node, int *pfd)
 {
+	init_exec_child_signals();
 	close(pfd[0]);
 	dup2(pfd[1], STDOUT_FILENO);
 	close(pfd[1]);
@@ -22,6 +23,7 @@ static void	_exec_left_child(t_minishell *ms, t_ast_node *node, int *pfd)
 
 static void	_exec_right_child(t_minishell *ms, t_ast_node *node, int *pfd)
 {
+	init_exec_child_signals();
 	close(pfd[1]);
 	dup2(pfd[0], STDIN_FILENO);
 	close(pfd[0]);
@@ -47,8 +49,6 @@ int	exec_pipe(t_minishell *ms, t_ast_node *node)
 	close(pfd[1]);
 	waitpid(pid_left, NULL, 0);
 	waitpid(pid_right, &status, 0);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (128 + WTERMSIG(status));
+	return (handle_child_status(status));
 }
 

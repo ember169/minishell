@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/27 01:42:15 by v                ###   ########.fr       */
+/*   Updated: 2026/07/05 00:32:01 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ static int	_process_input(t_minishell *ms, char *uinput)
 	if (ms->ast_root)
 	{
 		ms->envp = generate_envp_array(ms->env_list);
+		init_exec_parent_signals();
 		exec_ast(ms, ms->ast_root);
+		init_exec_child_signals();
 		free_str_array(ms->envp);
 		ms->envp = NULL;
 		free_ast(ms->ast_root);
@@ -105,6 +107,7 @@ static void	_main_loop(t_minishell *ms)
 {
 	char	*uinput;
 
+	init_interactive_signals();
 	while (1)
 	{
 		uinput = readline(PROMPT);
