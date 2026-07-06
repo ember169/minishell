@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 13:49:31 by v                 #+#    #+#             */
-/*   Updated: 2026/06/27 01:35:05 by v                ###   ########.fr       */
+/*   Updated: 2026/07/06 04:45:03 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,14 @@ void	print_syntax_error(t_token *tok)
 		ft_putstr_fd("(", 2);
 	else if (tok->type == TOK_PAREN_RIGHT)
 		ft_putstr_fd(")", 2);
+	else if (tok->type == TOK_REDIR_IN)
+		ft_putstr_fd("<", 2);
+	else if (tok->type == TOK_REDIR_OUT)
+		ft_putstr_fd(">", 2);
+	else if (tok->type == TOK_REDIR_APPEND)
+		ft_putstr_fd(">>", 2);
+	else if (tok->type == TOK_HEREDOC || tok->type == TOK_HEREDOC_QUOTED)
+		ft_putstr_fd("<<", 2);
 	else
 		ft_putstr_fd("newline", 2);
 	ft_putstr_fd("'\n", 2);

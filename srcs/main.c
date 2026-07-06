@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/06 04:06:27 by v                ###   ########.fr       */
+/*   Updated: 2026/07/06 05:33:21 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,29 +77,54 @@ static void	_format_tokens(t_minishell *ms, t_token *list)
 		print_tok_list(list);
 }
 
+
 static bool	_check_syntax(t_token *tok)
 {
 	t_token	*curr;
+	int		par_lvl;
 
 	curr = tok;
-	if (curr && (curr->type == TOK_PIPE
-			|| curr->type == TOK_AND
-			|| curr->type == TOK_OR))
+	par_lvl = 0;
+	if (curr && (curr->type == TOK_PIPE || curr->type == TOK_AND || curr->type == TOK_OR))
 		return (print_syntax_error(curr), false);
 	while (curr)
 	{
-		if (curr->type == TOK_PIPE
-			|| curr->type == TOK_AND
-			|| curr->type == TOK_OR)
+		if (curr->type == TOK_PAREN_LEFT)
+		{
+			par_lvl++;
+			if (!curr->next)
+				return (print_syntax_error(NULL), false);
+			if (curr->next->type == TOK_PIPE || curr->next->type == TOK_AND || curr->next->type == TOK_OR || curr->next->type == TOK_PAREN_RIGHT)
+				return (print_syntax_error(curr->next), false);
+		}
+		else if (curr->type == TOK_PAREN_RIGHT)
+		{
+			par_lvl--;
+			if (par_lvl < 0)
+				return (print_syntax_error(curr), false);
+			if (curr->next && (curr->next->type == TOK_WORD || curr->next->type == TOK_PAREN_LEFT || is_redir(curr->next->type)))
+				return (print_syntax_error(curr->next), false);
+		}
+		else if (curr->type == TOK_PIPE || curr->type == TOK_AND || curr->type == TOK_OR)
 		{
 			if (!curr->next)
 				return (print_syntax_error(NULL), false);
-			if (curr->next->type == TOK_PIPE
-				|| curr->next->type == TOK_AND
-				|| curr->next->type == TOK_OR)
+			if (curr->next->type == TOK_PIPE || curr->next->type == TOK_AND || curr->next->type == TOK_OR || curr->next->type == TOK_PAREN_RIGHT)
+				return (print_syntax_error(curr->next), false);
+		}
+		else if (is_redir(curr->type))
+		{
+			if (!curr->next)
+				return (print_syntax_error(NULL), false);
+			if (curr->next->type != TOK_WORD && curr->next->type != TOK_HEREDOC_QUOTED)
 				return (print_syntax_error(curr->next), false);
 		}
 		curr = curr->next;
+	}
+	if (par_lvl != 0)
+	{
+		ft_putstr_fd("minishell: syntax error: unclosed parenthesis\n", 2);
+		return (false);
 	}
 	return (true);
 }
@@ -132,7 +157,7 @@ static int	_process_input(t_minishell *ms, char *uinput)
 	{
 		ms->envp = generate_envp_array(ms->env_list);
 		init_exec_parent_signals();
-		exec_ast(ms, ms->ast_root);
+		ms->last_status = exec_ast(ms, ms->ast_root);
 		init_interactive_signals();
 		free_str_array(ms->envp);
 		ms->envp = NULL;
@@ -168,6 +193,7 @@ static void	_main_loop(t_minishell *ms)
 int	main(int ac, char **av, char **envp)
 {
 	t_minishell	*ms;
+	int			final_status;
 
 	(void)ac;
 	ms = NULL;
@@ -177,7 +203,8 @@ int	main(int ac, char **av, char **envp)
 	if (ms->debug)
 		print_env_list(ms->env_list);
 	_main_loop(ms);
+	final_status = ms->last_status;
 	clean_ms(ms);
 	free(ms);
-	return (0);
+	return (final_status);
 }
