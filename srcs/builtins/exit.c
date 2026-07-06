@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 12:10:54 by mskn              #+#    #+#             */
-/*   Updated: 2026/07/06 05:16:22 by v                ###   ########.fr       */
+/*   Updated: 2026/07/06 06:07:56 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static void	_exit_numeric_error(t_minishell *ms, char *arg)
 	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
 	ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-	clean_ms(ms);
-	exit(2);
+	clean_child_and_exit(ms, 2);
 }
 
 int	execute_exit(t_minishell *ms, char **args)
@@ -82,6 +81,6 @@ int	execute_exit(t_minishell *ms, char **args)
 		}
 		status = (int)(code % 256);
 	}
-	clean_ms(ms);
-	exit(status);
+	clean_child_and_exit(ms, status);
+	return (1);
 }

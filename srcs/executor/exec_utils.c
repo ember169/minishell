@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/02 16:00:30 by v                 #+#    #+#             */
-/*   Updated: 2026/07/05 00:55:40 by v                ###   ########.fr       */
+/*   Updated: 2026/07/06 06:07:49 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,23 @@
 
 void	clean_child_and_exit(t_minishell *ms, int exit_code)
 {
-	close (STDIN_FILENO);
-	close (STDOUT_FILENO);
-	close (STDERR_FILENO);
+	int	fd;
 
-	clean_ms(ms);
-	free(ms);
+	if (ms)
+	{
+		if (ms->envp)
+			free_str_array(ms->envp);
+		if (ms->ast_root)
+			free_ast(ms->ast_root);
+		clean_ms(ms);
+		free(ms);
+	}
+	fd = 0;
+	while (fd < 1024)
+	{
+		close(fd);
+		fd++;
+	}
 	exit(exit_code);
 }
 
