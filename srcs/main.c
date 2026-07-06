@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/05 00:32:01 by v                ###   ########.fr       */
+/*   Updated: 2026/07/06 04:06:27 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,33 @@ static void	_format_tokens(t_minishell *ms, t_token *list)
 		print_tok_list(list);
 }
 
+static bool	_check_syntax(t_token *tok)
+{
+	t_token	*curr;
+
+	curr = tok;
+	if (curr && (curr->type == TOK_PIPE
+			|| curr->type == TOK_AND
+			|| curr->type == TOK_OR))
+		return (print_syntax_error(curr), false);
+	while (curr)
+	{
+		if (curr->type == TOK_PIPE
+			|| curr->type == TOK_AND
+			|| curr->type == TOK_OR)
+		{
+			if (!curr->next)
+				return (print_syntax_error(NULL), false);
+			if (curr->next->type == TOK_PIPE
+				|| curr->next->type == TOK_AND
+				|| curr->next->type == TOK_OR)
+				return (print_syntax_error(curr->next), false);
+		}
+		curr = curr->next;
+	}
+	return (true);
+}
+
 static int	_process_input(t_minishell *ms, char *uinput)
 {
 	t_token	*list;
@@ -84,9 +111,21 @@ static int	_process_input(t_minishell *ms, char *uinput)
 	list = lexer(uinput);
 	if (!list)
 		return (1);
+	if (!_check_syntax(list))
+	{
+		ms->last_status = 2;
+		free_tok_ls(&list);
+		return (1);
+	}
 	_format_tokens(ms, list);
 	ms->ast_root = build_ast(list);
-	process_all_heredocs(ms, ms->ast_root);
+	if (process_all_heredocs(ms, ms->ast_root) == 130)
+	{
+		ms->last_status = 130;
+		free_ast(ms->ast_root);
+		ms->ast_root = NULL;
+		return (1);
+	}
 	if (ms->debug)
 		print_ast(ms->ast_root, 0);
 	if (ms->ast_root)
@@ -94,7 +133,7 @@ static int	_process_input(t_minishell *ms, char *uinput)
 		ms->envp = generate_envp_array(ms->env_list);
 		init_exec_parent_signals();
 		exec_ast(ms, ms->ast_root);
-		init_exec_child_signals();
+		init_interactive_signals();
 		free_str_array(ms->envp);
 		ms->envp = NULL;
 		free_ast(ms->ast_root);

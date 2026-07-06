@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/07/05 00:06:55 by v                ###   ########.fr        #
+#    Updated: 2026/07/06 00:57:09 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,9 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	@$(MAKE) -C $(LIBPATH) fclean
+
+valgrind: all
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./$(NAME)
 
 re: fclean all
 

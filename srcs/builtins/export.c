@@ -6,15 +6,17 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:00:46 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/05 01:06:15 by v                ###   ########.fr       */
+/*   Updated: 2026/07/06 03:48:16 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-static int	_throw_error(void)
+static int	_throw_error(char *arg)
 {
-	perror("minishell: export");
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 	return (1);
 }
 
@@ -83,8 +85,8 @@ int	execute_export(t_minishell *ms, char **args)
 		{
 			if (_export_one_var(ms, args[i]) != 0)
 			{
-				_throw_error();
-				ret++;
+				_throw_error(args[i]);
+				ret = 1;
 			}
 			i++;
 		}

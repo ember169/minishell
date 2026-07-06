@@ -1,0 +1,16 @@
+Makefile
+README.md
+graphify-out
+includes
+libs
+minishell
+objs
+out
+out1
+out2
+out3
+pipeline.md
+pipeline.mmd
+readline.supp
+srcs
+tests

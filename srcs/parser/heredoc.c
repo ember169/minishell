@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 13:09:06 by v                 #+#    #+#             */
-/*   Updated: 2026/06/30 17:42:49 by v                ###   ########.fr       */
+/*   Updated: 2026/07/06 00:44:39 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	_fill_heredoc(t_minishell *ms, int fd, char *delim, bool expand)
 
 	while (1)
 	{
-		line = readline("heredoc> ");
+		line = readline("> ");
 		if (!line || ft_strncmp(line, delim, ft_strlen(delim) + 1) == 0)
 		{
 			if (line)
@@ -57,49 +57,75 @@ static void	_fill_heredoc(t_minishell *ms, int fd, char *delim, bool expand)
 	}
 }
 
-static void	_process_single_heredoc(t_minishell *ms, t_redir *redir)
+static void	_heredoc_child(t_minishell *ms, t_redir *redir, char *file)
 {
-	int		fd;
-	char	*tmp_file;
-	bool	should_expand;
+	int	fd;
 
-	(void)ms;
-	should_expand = (redir->type == TOK_HEREDOC);
-	tmp_file = _generate_tmp_filename();
-	fd = open(tmp_file, O_CREAT | O_WRONLY | O_TRUNC | 0644);
-	if (fd < 0)
+	init_exec_child_signals();
+	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd >= 0)
 	{
-		free(tmp_file);
-		return ;
+		_fill_heredoc(ms, fd, redir->file, redir->type == TOK_HEREDOC);
+		close (fd);
 	}
-	_fill_heredoc(ms, fd, redir->file, should_expand);
-	close(fd);
+	free(file);
+	clean_ms(ms);
+	free(ms);
+	exit(0);
+}
+
+static int	_process_single_heredoc(t_minishell *ms, t_redir *redir)
+{
+	pid_t			pid;
+	int				status;
+	char			*tmp_file;
+	struct termios	term;
+
+	tmp_file = _generate_tmp_filename();
+	tcgetattr(STDIN_FILENO, &term);
+	init_exec_parent_signals();
+	pid = fork();
+	if (pid == 0)
+		_heredoc_child(ms, redir, tmp_file);
+	waitpid(pid, &status, 0);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	init_interactive_signals();
 	free(redir->file);
 	redir->file = tmp_file;
 	redir->type = TOK_REDIR_IN;
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		return (130);
+	}
+	return (0);
 }
 
-void	process_all_heredocs(t_minishell *ms, t_ast_node *node)
+int	process_all_heredocs(t_minishell *ms, t_ast_node *node)
 {
-	t_redir	*current;
+	t_redir	*curr;
 
-	(void)ms;
 	if (!node)
-		return ;
+		return (0);
 	if (node->type == NODE_CMD)
 	{
-		current = node->redirs;
-		while (current)
+		curr = node->redirs;
+		while (curr)
 		{
-			if (current->type == TOK_HEREDOC
-				|| current->type == TOK_HEREDOC_QUOTED)
-				_process_single_heredoc(ms, current);
-			current = current->next;
+			if (curr->type == TOK_HEREDOC || curr->type == TOK_HEREDOC_QUOTED)
+			{
+				if (_process_single_heredoc(ms, curr) == 130)
+					return (130);
+			}
+			curr = curr->next;
 		}
 	}
 	else
 	{
-		process_all_heredocs(ms, node->left);
-		process_all_heredocs(ms, node->right);
+		if (process_all_heredocs(ms, node->left) == 130)
+			return (130);
+		if (process_all_heredocs(ms, node->right) == 130)
+			return (130);
 	}
+	return (0);
 }
