@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/07/06 00:57:09 by v                ###   ########.fr        #
+#    Updated: 2026/07/07 02:34:24 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ LIBFT       := $(LIBPATH)/$(LIBNAME)
 INC         := -I $(INCSDIR) -I $(LIBPATH)/includes
 
 # Sources :
-SRC_FILES   := main.c \
-               history.c \
+SRC_FILES   := main/main.c \
+               main/history.c \
+               main/init.c \
+               main/syntax.h \
                debug/debug_ast_print_utils.c \
                debug/debug_errors.c \
                debug/debug_print.c \

@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 10:51:13 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/05 01:43:46 by v                ###   ########.fr       */
+/*   Updated: 2026/07/07 02:26:40 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ t_env		*get_env_addr_from_key(t_minishell *ms, char *to_find);
 char		*get_env_value_from_key(t_minishell *ms, char *key);
 t_env		*put_env_value(t_env *env, char *new_value);
 void		env_add_back(t_env **root, t_env *new);
-char	    **generate_envp_array(t_env *env_list);
+char		**generate_envp_array(t_env *env_list);
 
 #endif

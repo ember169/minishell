@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 09:33:20 by alma              #+#    #+#             */
-/*   Updated: 2026/07/05 00:58:18 by v                ###   ########.fr       */
+/*   Updated: 2026/07/07 01:40:25 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	exec_and(t_minishell *ms, t_ast_node *node)
 		status = exec_ast(ms, node->right);
 	return (status);
 }
-
 
 int	exec_ast(t_minishell *ms, t_ast_node *node)
 {

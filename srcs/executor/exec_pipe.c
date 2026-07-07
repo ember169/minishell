@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 03:26:39 by v                 #+#    #+#             */
-/*   Updated: 2026/07/06 03:22:33 by v                ###   ########.fr       */
+/*   Updated: 2026/07/07 01:40:08 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ int	exec_pipe(t_minishell *ms, t_ast_node *node)
 	ms->last_status = handle_child_status(status);
 	return (ms->last_status);
 }
-

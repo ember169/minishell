@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:36:52 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/06 00:01:12 by v                ###   ########.fr       */
+/*   Updated: 2026/07/07 02:44:11 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "../libs/libft/includes/libft.h"
 # include "core/structures.h"
 # include "core/defines.h"
+# include "modules/main.h"
 # include "modules/debug.h"
 # include "modules/env.h"
 # include "modules/lexer.h"

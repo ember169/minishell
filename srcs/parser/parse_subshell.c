@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 14:12:15 by v                 #+#    #+#             */
-/*   Updated: 2026/06/26 16:10:00 by v                ###   ########.fr       */
+/*   Updated: 2026/07/07 01:54:26 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,28 @@ static t_token	*find_matching_paren(t_token *tok)
 t_ast_node	*build_subshell(t_token *tok)
 {
 	t_token		*end;
-	t_token		*curr;
+	t_token		*cu;
 	t_ast_node	*node;
 
 	end = find_matching_paren(tok);
 	if (!end)
 		return (print_syntax_error(NULL), free_tok_ls(&tok), NULL);
-	curr = tok;
-	while (curr->next != end)
-		curr = curr->next;
-	curr->next = NULL;
+	cu = tok;
+	while (cu->next != end)
+		cu = cu->next;
+	cu->next = NULL;
 	node = _ast_new_subshell_node(build_ast(tok->next));
-	curr = end->next;
-	while (curr)
+	cu = end->next;
+	while (cu)
 	{
-		if (is_redir(curr->type) && curr->next)
+		if (is_redir(cu->type) && cu->next)
 		{
-			append_redir(&(node->redirs), red_new(curr->type, curr->next->value));
-			curr = curr->next->next;
+			append_redir(&(node->redirs), red_new(cu->type, cu->next->value));
+			cu = cu->next->next;
 		}
 		else
-			return (print_syntax_error(curr), free_ast(node), free(tok), free_tok_ls(&end), NULL);
+			return (print_syntax_error(cu), free_ast(node),
+				free(tok), free_tok_ls(&end), NULL);
 	}
 	return (free(tok), free_tok_ls(&end), node);
 }
-
