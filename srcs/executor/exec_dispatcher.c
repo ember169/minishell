@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:35:38 by mskn              #+#    #+#             */
-/*   Updated: 2026/07/06 02:43:45 by v                ###   ########.fr       */
+/*   Updated: 2026/07/07 04:04:12 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,20 @@ static bool	_is_builtin(char *command)
 {
 	if (!command)
 		return (false);
-	if (\
-(ft_strlen("echo") == ft_strlen(command) && \
-ft_strncmp("echo", command, ft_strlen("echo")) == 0) || \
-(ft_strlen("exit") == ft_strlen(command) && \
-ft_strncmp("exit", command, ft_strlen("exit")) == 0) || \
-(ft_strlen("env") == ft_strlen(command) && \
-ft_strncmp("env", command, ft_strlen("env")) == 0) || \
-(ft_strlen("cd") == ft_strlen(command) && \
-ft_strncmp("cd", command, ft_strlen("cd")) == 0) || \
-(ft_strlen("pwd") == ft_strlen(command) && \
-ft_strncmp("pwd", command, ft_strlen("pwd")) == 0) || \
-(ft_strlen("export") == ft_strlen(command) && \
-ft_strncmp("export", command, ft_strlen("export")) == 0) || \
-(ft_strlen("unset") == ft_strlen(command) && \
-ft_strncmp("unset", command, ft_strlen("unset")) == 0))
+	if ((ft_strlen("echo") == ft_strlen(command)
+			&& ft_strncmp("echo", command, ft_strlen("echo")) == 0)
+		|| (ft_strlen("exit") == ft_strlen(command)
+			&& ft_strncmp("exit", command, ft_strlen("exit")) == 0)
+		|| (ft_strlen("env") == ft_strlen(command)
+			&& ft_strncmp("env", command, ft_strlen("env")) == 0)
+		|| (ft_strlen("cd") == ft_strlen(command)
+			&& ft_strncmp("cd", command, ft_strlen("cd")) == 0)
+		|| (ft_strlen("pwd") == ft_strlen(command)
+			&& ft_strncmp("pwd", command, ft_strlen("pwd")) == 0)
+		|| (ft_strlen("export") == ft_strlen(command)
+			&& ft_strncmp("export", command, ft_strlen("export")) == 0)
+		|| (ft_strlen("unset") == ft_strlen(command)
+			&& ft_strncmp("unset", command, ft_strlen("unset")) == 0))
 		return (true);
 	return (false);
 }
@@ -39,15 +38,14 @@ static bool	_is_env_unsafe(char *command)
 {
 	if (!command)
 		return (false);
-	if (\
-(ft_strlen("exit") == ft_strlen(command) && \
-ft_strncmp("exit", command, ft_strlen("exit")) == 0) || \
-(ft_strlen("cd") == ft_strlen(command) && \
-ft_strncmp("cd", command, ft_strlen("cd")) == 0) || \
-(ft_strlen("export") == ft_strlen(command) && \
-ft_strncmp("export", command, ft_strlen("export")) == 0) || \
-(ft_strlen("unset") == ft_strlen(command) && \
-ft_strncmp("unset", command, ft_strlen("unset")) == 0))
+	if ((ft_strlen("exit") == ft_strlen(command)
+			&& ft_strncmp("exit", command, ft_strlen("exit")) == 0)
+		|| (ft_strlen("cd") == ft_strlen(command)
+			&& ft_strncmp("cd", command, ft_strlen("cd")) == 0)
+		|| (ft_strlen("export") == ft_strlen(command)
+			&& ft_strncmp("export", command, ft_strlen("export")) == 0)
+		|| (ft_strlen("unset") == ft_strlen(command)
+			&& ft_strncmp("unset", command, ft_strlen("unset")) == 0))
 		return (true);
 	return (false);
 }
@@ -106,7 +104,7 @@ int	dispatch_cmd(t_minishell *ms, t_ast_node *node)
 
 	if (!ms || !node)
 		return (1);
-	if (_is_env_unsafe(node->args[0]))
+	if (node->args && node->args[0] && _is_env_unsafe(node->args[0]))
 		return (_exec_parent_builtin(ms, node));
 	pid = fork();
 	if (pid == -1)
