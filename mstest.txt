@@ -549,9 +549,9 @@
 [1;35m  25:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:55[m  
 [1;35m  26:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:59[m  
 [1;35m  27:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:68[m  
-[1;35m  28:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:84[m  
+[1;35m  28:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ❌  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:84[m  
 [1;35m  29:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(0)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:96[m  
-[1;35m  30:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:110[m  
+[1;35m  30:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ❌  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:110[m  
 [1;35m  31:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:126[m  
 [1;35m  32:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:132[m  
 [1;35m  33:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/1_pipelines.sh:138[m  
@@ -906,9 +906,9 @@
 [1;33m  # **************************************************************************** #[m
 [1;33m  #                                SYNTAX ERRORS                                 #[m
 [1;33m  # **************************************************************************** #[m
-[1;35m  1:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:5[m  
-[1;35m  2:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:7[m  
-[1;35m  3:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:9[m  
+[1;35m  1:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:5[m  
+[1;35m  2:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:7[m  
+[1;35m  3:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:9[m  
 [1;35m  4:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:11[m  
 [1;35m  5:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:13[m  
 [1;35m  6:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:15[m  
@@ -916,18 +916,18 @@
 [1;35m  8:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ❌  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(127)  bash(126) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:19[m  
 [1;35m  9:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:21[m  
 [1;35m  10:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:23[m  
-[1;35m  11:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:25[m  
+[1;35m  11:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:25[m  
 [1;35m  12:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:27[m  
-[1;35m  13:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:29[m  
+[1;35m  13:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:29[m  
 [1;35m  14:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:31[m  
 [1;35m  15:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(126)  bash(127) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:33[m  
 [1;35m  16:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(126)  bash(127) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:35[m  
 [1;35m  17:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:37[m  
 [1;35m  18:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ❌  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:39[m  
 [1;35m  19:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ❌  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:41[m  
-[1;35m  20:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(0)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:43[m  
-[1;35m  21:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(0)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:46[m  
-[1;35m  22:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(0)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:49[m  
+[1;35m  20:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:43[m  
+[1;35m  21:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:46[m  
+[1;35m  22:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:49[m  
 [1;35m  23:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:52[m  
 [1;35m  24:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ❌  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:54[m  
 [1;35m  25:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:56[m  
@@ -936,10 +936,10 @@
 [1;35m  28:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:62[m  
 [1;35m  29:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:64[m  
 [1;35m  30:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:66[m  
-[1;35m  31:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:68[m  
+[1;35m  31:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:68[m  
 [1;35m  32:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:74[m  
 [1;35m  33:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:76[m  
-[1;35m  34:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:78[m  
+[1;35m  34:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:78[m  
 [1;35m  35:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:80[m  
 [1;35m  36:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ❌  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:82[m  
 [1;35m  37:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/mand/8_syntax_errors.sh:84[m  
@@ -1028,9 +1028,9 @@
 [1;33m  # **************************************************************************** #[m
 [1;33m  #                                 SYNTAX ERRORS                                #[m
 [1;33m  # **************************************************************************** #[m
-[1;35m  1:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:5[m  
-[1;35m  2:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:7[m  
-[1;35m  3:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:9[m  
+[1;35m  1:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:5[m  
+[1;35m  2:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:7[m  
+[1;35m  3:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ❌[1;31m [ minishell(139)  bash(2) ][m  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:9[m  
 [1;35m  4:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:11[m  
 [1;35m  5:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:13[m  
 [1;35m  6:	[m[1;34mSTD_OUT:[m ❌  [1;33mSTD_ERR:[m ✅  [1;36mEXIT_CODE:[m ✅  [0;90m/home/v/42_minishell_tester/cmds/bonus/8_syntax_errors.sh:15[m  
@@ -1057,7 +1057,7 @@
 🏁                                    [1;31mRESULT[m                                    🏁
 🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁
 [1;35m             TOTAL TEST COUNT: 1001 [m[1;32m TESTS PASSED: 0[m [1;32m LEAKING: 0[m 
-[1;34m                     STD_OUT:[m [1;31m1001[m  [1;36mSTD_ERR:[m [1;31m166[m  [1;36mEXIT_CODE:[m [1;31m58[m  
+[1;34m                     STD_OUT:[m [1;31m1001[m  [1;36mSTD_ERR:[m [1;31m168[m  [1;36mEXIT_CODE:[m [1;31m68[m  
 [1;33m                         TOTAL FAILED AND PASSED CASES:
-[1;31m                                     ❌ 1225 [m  
-[1;32m                                     ✅ 1778 [m  
+[1;31m                                     ❌ 1237 [m  
+[1;32m                                     ✅ 1766 [m  

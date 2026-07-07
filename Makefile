@@ -6,7 +6,7 @@
 #    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/19 13:42:29 by lgervet           #+#    #+#              #
-#    Updated: 2026/07/07 02:34:24 by v                ###   ########.fr        #
+#    Updated: 2026/07/07 02:49:59 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ INC         := -I $(INCSDIR) -I $(LIBPATH)/includes
 SRC_FILES   := main/main.c \
                main/history.c \
                main/init.c \
-               main/syntax.h \
+               main/syntax.c \
                debug/debug_ast_print_utils.c \
                debug/debug_errors.c \
                debug/debug_print.c \
