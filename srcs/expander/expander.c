@@ -88,6 +88,7 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 {
 	t_token	*current;
 	char	*expanded;
+	bool	no_glob;
 
 	if (!head || !ms)
 		return ;
@@ -96,10 +97,12 @@ void	expand_token_list(t_minishell *ms, t_token *head)
 	{
 		if (current->type == TOK_WORD)
 		{
+			no_glob = is_quoted_star(current->value);
 			expanded = _expand_with_quotes(ms, current->value);
 			free(current->value);
 			current->value = expanded;
-			current = _expand_with_path(current);
+			if (!no_glob)
+				current = _expand_with_path(current);
 		}
 		current = current->next;
 	}

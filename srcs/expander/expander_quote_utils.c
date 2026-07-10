@@ -18,3 +18,8 @@ char	is_quote(char c)
 		return (c);
 	return ('\0');
 }
+
+bool	is_quoted_star(char *raw)
+{
+	return (!ft_strncmp(raw, "'*'", 4) || !ft_strncmp(raw, "\"*\"", 4));
+}

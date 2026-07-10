@@ -18,6 +18,7 @@ char		*check_for_var(char *str);
 int			get_key_len(char *dollar_ptr);
 void		get_env_var(t_minishell *ms, char *dollar, char **var);
 char		is_quote(char c);
+bool		is_quoted_star(char *raw);
 char		*expand_loop(t_minishell *ms, char *str, char *ret);
 t_token		*expand_path(t_token *current);
 bool		match_glob(char *pattern, char *str);

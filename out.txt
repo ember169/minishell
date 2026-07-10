@@ -1,0 +1,2 @@
+Minishell$ zzz_not_a_real_cmd
+Minishell$ 
