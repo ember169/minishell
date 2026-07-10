@@ -3,52 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:23:04 by v                 #+#    #+#             */
-/*   Updated: 2026/05/26 09:32:56 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/07/06 03:48:23 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-static void	_extract_word(char *input, t_lexer_state *ls, t_token **tok_ls)
+/*
+** _extract_word:
+**      Increments character pointer until it's space or operator, creates 
+**		new token with this content and appends it to tok_list
+**
+**      @param input  	input string
+**      @param ls  		lexer state machine
+**      @param tok_ls  	current token
+*/
+static void	_extract_full_word(char *input, t_lexer_state *ls, t_token **tok_ls)
 {
 	int		start;
 	char	*word;
-	t_token	*new_node;
+	char	quote_char;
 
 	start = ls->i;
-	while (input[ls->i]
-		&& ls->state == GENERAL
-		&& !is_space(input[ls->i])
-		&& !is_operator(input[ls->i]))
+	quote_char = '\0';
+	while (input[ls->i])
+	{
+		if (quote_char == '\0'
+			&& (input[ls->i] == '\'' || input[ls->i] == '\"'))
+			quote_char = input[ls->i];
+		else if (quote_char != '\0' && input[ls->i] == quote_char)
+			quote_char = '\0';
+		else if (quote_char == '\0'
+			&& (is_space(input[ls->i]) || is_operator(input[ls->i])))
+			break ;
 		ls->i++;
+	}
+	if (quote_char != '\0')
+		ls->state = IN_QUOTE;
 	word = ft_substr(input, start, ls->i - start);
-	new_node = token_new(word, TOK_WORD);
-	if (new_node)
-		token_add_back(tok_ls, new_node);
+	token_add_back(tok_ls, token_new(word, TOK_WORD));
 }
 
+/*
+** _process_character:
+**      Determines what the first character is (quote, operator, word)
+** 		and dispatch it accordingly
+**
+**      @param input  	input string
+**      @param ls  		lexer state machine
+**      @param tok_ls  	current token
+**      @return 		1 if everything works out / 0 if not
+*/
 static int	_process_character(char *input, t_lexer_state *ls, t_token **tok_ls)
 {
-	if (input[ls->i] == '\'' || input[ls->i] == '\"')
-		handle_quotes(input, ls, tok_ls);
-	else if (ls->state == GENERAL && is_space(input[ls->i]))
+	if (ls->state == GENERAL && is_space(input[ls->i]))
 		ls->i++;
-	else if (ls->state == GENERAL
-		&& ((input[ls->i] == '&' && input[ls->i + 1] == '&')
-			|| (input[ls->i] == '|' && input[ls->i + 1] == '|')
-			|| (input[ls->i] == '<' && input[ls->i + 1] == '<')
-			|| (input[ls->i] == '>' && input[ls->i + 1] == '>')))
-		handle_operator(input, ls, tok_ls);
-	else if (ls->state == GENERAL && !is_operator(input[ls->i]))
-		_extract_word(input, ls, tok_ls);
 	else if (ls->state == GENERAL && is_operator(input[ls->i]))
 	{
 		if (!handle_operator(input, ls, tok_ls))
 			return (0);
 	}
+	else
+		_extract_full_word(input, ls, tok_ls);
 	return (1);
 }
 

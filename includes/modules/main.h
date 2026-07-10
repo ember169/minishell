@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/18 10:51:53 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/06 06:07:57 by v                ###   ########.fr       */
+/*   Created: 2026/07/07 02:25:07 by v                 #+#    #+#             */
+/*   Updated: 2026/07/07 02:38:21 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef MAIN_H
+# define MAIN_H
 
-void		add_to_history(char *str);
-void		print_env_list(t_env *root);
+bool		check_syntax(t_token *tok);
+t_minishell	*init_ms(t_minishell *ms, char **av, char **envp);
 
 #endif

@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/18 10:51:53 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/06 06:07:57 by v                ###   ########.fr       */
+/*   Created: 2026/05/26 14:54:50 by lgervet           #+#    #+#             */
+/*   Updated: 2026/06/05 00:07:35 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-void		add_to_history(char *str);
-void		print_env_list(t_env *root);
+int	execute_echo(char **args);
+int	execute_cd(t_minishell *ms, char **args);
+int	execute_env(t_minishell *ms);
+int	execute_exit(t_minishell *ms, char **args);
+int	execute_export(t_minishell *ms, char **args);
+int	execute_pwd(void);
+int	execute_unset(t_minishell *ms, char **args);
 
 #endif

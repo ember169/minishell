@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 12:36:19 by v                 #+#    #+#             */
-/*   Updated: 2026/04/21 14:00:20 by v                ###   ########.fr       */
+/*   Updated: 2026/07/07 05:16:50 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ bool	is_redir(t_token_type type) // a proto
 	if (type == TOK_REDIR_IN
 		|| type == TOK_REDIR_OUT
 		|| type == TOK_REDIR_APPEND
-		|| type == TOK_HEREDOC)
+		|| type == TOK_HEREDOC
+		|| type == TOK_HEREDOC_QUOTED)
 		return (true);
 	return (false);
 }
@@ -26,6 +27,8 @@ t_redir	*red_new(t_token_type type, char *file)
 {
 	t_redir	*new_node;
 
+	if (!file)
+		return (NULL);
 	new_node = malloc(sizeof(t_redir));
 	if (!new_node)
 		return (NULL);

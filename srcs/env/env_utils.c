@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 17:49:50 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/20 18:06:11 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/07/07 01:39:12 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,32 @@ t_env	*get_env_addr_from_key(t_minishell *ms, char *to_find)
 	current = ms->env_list;
 	while (current)
 	{
-		if (ft_strncmp(current->key, to_find, len + 1) == 0 && \
-current->key[len] == '\0')
+		if (ft_strncmp(current->key, to_find, len + 1) == 0
+			&& current->key[len] == '\0')
 			return (current);
 		current = current->next;
 	}
 	return (NULL);
+}
+
+/*
+** get_env_value_from_key:
+**     Gets t_env address and returns a pointer to its value
+**
+**     @param *ms   Pointer to Minishell super structure.
+**     @param *key  Node to get value from
+**     @return      Pointer to t_env->value / NULL if not found
+*/
+char	*get_env_value_from_key(t_minishell *ms, char *key)
+{
+	t_env	*addr;
+
+	if (!ms || !ms->env_list || !key)
+		return (NULL);
+	addr = get_env_addr_from_key(ms, key);
+	if (!addr)
+		return (NULL);
+	return (addr->value);
 }
 
 /*

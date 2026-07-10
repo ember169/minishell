@@ -6,66 +6,72 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:11 by lgervet           #+#    #+#             */
-/*   Updated: 2026/05/23 16:01:04 by v                ###   ########.fr       */
+/*   Updated: 2026/07/07 02:40:16 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-static bool	_check_debug(char **av)
+static void	manage_heredoc_quotes(t_token *list)
 {
-	int		i;
-	bool	res;
+	t_token	*tmp;
 
-	res = false;
-	i = 0;
-	while (av && av[i])
+	tmp = list;
+	while (tmp && tmp->next)
 	{
-		if (ft_strncmp(av[i], "--debug", 8) == 0)
+		if (tmp->type == TOK_HEREDOC && tmp->next->type == TOK_WORD)
 		{
-			printf("Debug mode ON.\n\n");
-			res = true;
-			break ;
+			if (ft_strchr(tmp->next->value, '\'')
+				|| ft_strchr(tmp->next->value, '\"'))
+				tmp->type = TOK_HEREDOC_QUOTED;
 		}
-		i++;
+		tmp = tmp->next;
 	}
-	return (res);
 }
 
-static t_minishell	*_init_ms(t_minishell *ms, char **av, char **envp)
+static void	execute_pipeline(t_minishell *ms)
 {
-	ms = malloc(sizeof(t_minishell));
-	if (ms)
+	if (ms->debug)
+		print_ast(ms->ast_root, 0);
+	if (ms->ast_root)
 	{
-		ms->env_list = init_env(ms, av[0], envp);
+		ms->envp = generate_envp_array(ms->env_list);
+		init_exec_parent_signals();
+		ms->last_status = exec_ast(ms, ms->ast_root);
+		init_interactive_signals();
+		free_str_array(ms->envp);
 		ms->envp = NULL;
-		ms->last_status = 0;
+		free_ast(ms->ast_root);
 		ms->ast_root = NULL;
-		ms->debug = _check_debug(av);
 	}
-	return (ms);
 }
 
 static int	_process_input(t_minishell *ms, char *uinput)
 {
 	t_token	*list;
 
-	if (ft_strncmp(uinput, "exit", 5) == 0)
-		return (0);
 	list = lexer(uinput);
 	if (!list)
 		return (1);
+	if (!check_syntax(list))
+	{
+		ms->last_status = 2;
+		free_tok_ls(&list);
+		return (1);
+	}
+	manage_heredoc_quotes(list);
 	expand_token_list(ms, list);
 	if (ms->debug)
 		print_tok_list(list);
 	ms->ast_root = build_ast(list);
-	if (ms->debug)
-		print_ast(ms->ast_root, 0);
-	if (ms->ast_root)
+	if (process_all_heredocs(ms, ms->ast_root) == 130)
 	{
+		ms->last_status = 130;
 		free_ast(ms->ast_root);
 		ms->ast_root = NULL;
+		return (1);
 	}
+	execute_pipeline(ms);
 	return (1);
 }
 
@@ -73,17 +79,20 @@ static void	_main_loop(t_minishell *ms)
 {
 	char	*uinput;
 
+	init_interactive_signals();
 	while (1)
 	{
 		uinput = readline(PROMPT);
 		if (!uinput)
-			break ;
+			return ;
 		if (uinput[0] != '\0')
-			add_to_history(uinput);
-		if (!_process_input(ms, uinput))
 		{
-			free(uinput);
-			break ;
+			add_to_history(uinput);
+			if (_process_input(ms, uinput) == 0)
+			{
+				free(uinput);
+				break ;
+			}
 		}
 		free(uinput);
 	}
@@ -92,16 +101,18 @@ static void	_main_loop(t_minishell *ms)
 int	main(int ac, char **av, char **envp)
 {
 	t_minishell	*ms;
+	int			final_status;
 
 	(void)ac;
 	ms = NULL;
-	ms = _init_ms(ms, av, envp);
+	ms = init_ms(ms, av, envp);
 	if (!ms)
 		return (1);
 	if (ms->debug)
 		print_env_list(ms->env_list);
 	_main_loop(ms);
+	final_status = ms->last_status;
 	clean_ms(ms);
 	free(ms);
-	return (0);
+	return (final_status);
 }

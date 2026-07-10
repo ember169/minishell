@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heap_cleanup.c                                     :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 14:17:36 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/10 16:12:03 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/05/28 17:01:21 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	clean_ms(t_minishell *ms)
 	}
 	clear_history();
 	if (debug)
-		printf("Cleanup done ! Terminating.\n");
+		ft_printf("Cleanup done ! Terminating.\n");
 	return ;
 }

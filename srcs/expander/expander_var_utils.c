@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander_utils.c                                   :+:      :+:    :+:   */
+/*   expander_var_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:04:24 by lgervet           #+#    #+#             */
-/*   Updated: 2026/04/23 10:33:31 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/06/12 13:57:43 by mskn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	get_key_len(char *dollar_ptr)
 	key_len = 1;
 	if (dollar_ptr[1] == '?')
 		return (key_len);
-	while ((dollar_ptr[key_len] && ft_isalnum(dollar_ptr[key_len])) || \
-dollar_ptr[key_len] == '_')
+	while ((dollar_ptr[key_len] && ft_isalnum(dollar_ptr[key_len]))
+		|| dollar_ptr[key_len] == '_')
 		key_len++;
 	return (key_len - 1);
 }
@@ -56,7 +56,7 @@ dollar_ptr[key_len] == '_')
 /*
 ** get_env_var:
 **     Finds according variable value in ms->env_list:
-**	   fills *`var with it or with empty string if not found.
+**	   fills var with it or with empty string if not found.
 **
 **     @param *ms		Pointer to minishell super structure
 **     @param *dollar	Pointer to string at dollar char
