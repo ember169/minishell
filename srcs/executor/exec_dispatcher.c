@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:35:38 by mskn              #+#    #+#             */
-/*   Updated: 2026/07/10 19:36:43 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 19:47:02 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	execute_child(t_minishell *ms, t_ast_node *node)
 	cmd_path = get_cmd_path(ms, node->args[0]);
 	if (!cmd_path)
 	{
-		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(node->args[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 		clean_child_and_exit(ms, 127);

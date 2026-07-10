@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 02:15:46 by v                 #+#    #+#             */
-/*   Updated: 2026/06/05 01:00:53 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 19:47:14 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	_apply_single_redir(t_redir *redir)
 	}
 	if (fd < 0)
 	{
+		ft_putstr_fd("minishell: ", 2);
 		perror(redir->file);
 		return (1);
 	}
