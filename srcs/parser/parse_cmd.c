@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 01:02:51 by v                 #+#    #+#             */
-/*   Updated: 2026/07/07 04:54:20 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 18:25:38 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,7 @@ static void	_fill_cmd_args(t_ast_node *cmd, t_token *tok)
 t_ast_node	*parse_cmd(t_token *tok)
 {
 	t_ast_node	*cmd;
-	t_token		*tmp;
 
-	tmp = tok;
-	while (tmp)
-	{
-		if (is_redir(tmp->type) && (!tmp->next || tmp->next->type != TOK_WORD))
-			return (print_syntax_error(tmp->next), free_tok_ls(&tok), NULL);
-		if (!is_redir(tmp->type) && tmp->type != TOK_WORD)
-			return (print_syntax_error(tmp), free_tok_ls(&tok), NULL);
-		tmp = tmp->next;
-	}
 	cmd = ast_new_cmd_node();
 	if (!cmd)
 		return (NULL);

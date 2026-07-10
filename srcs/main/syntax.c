@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 02:23:32 by v                 #+#    #+#             */
-/*   Updated: 2026/07/10 18:13:46 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 18:30:40 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	_check_paren(t_token *curr, int *par_lvl)
 	{
 		(*par_lvl)++;
 		if (!curr->next)
-			return (print_syntax_error(NULL), false);
+			return (print_syntax_error(curr), false);
 		if (curr->next->type == TOK_PIPE || curr->next->type == TOK_AND
 			|| curr->next->type == TOK_OR
 			|| curr->next->type == TOK_PAREN_RIGHT)
@@ -30,8 +30,7 @@ static bool	_check_paren(t_token *curr, int *par_lvl)
 		if (*par_lvl < 0)
 			return (print_syntax_error(curr), false);
 		if (curr->next && (curr->next->type == TOK_WORD
-				|| curr->next->type == TOK_PAREN_LEFT
-				|| is_redir(curr->next->type)))
+				|| curr->next->type == TOK_PAREN_LEFT))
 			return (print_syntax_error(curr->next), false);
 	}
 	return (true);
@@ -51,7 +50,7 @@ static bool	_check_operator(t_token *curr)
 static bool	_check_redir_syntax(t_token *curr)
 {
 	if (!curr->next)
-		return (print_syntax_error(NULL), false);
+		return (print_syntax_error(curr), false);
 	if (curr->next->type != TOK_WORD
 		&& curr->next->type != TOK_HEREDOC_QUOTED)
 		return (print_syntax_error(curr->next), false);

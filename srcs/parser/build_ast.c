@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:30:24 by v                 #+#    #+#             */
-/*   Updated: 2026/07/10 18:03:16 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 18:24:58 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ static t_ast_node	*_split_ast_op(t_token *tok, t_token *split_pts)
 	t_ast_node	*left;
 	t_ast_node	*right;
 
-	if (tok == split_pts)
-		return (print_syntax_error(split_pts), free_tok_ls(&tok), NULL);
-	if (!split_pts->next)
-		return (print_syntax_error(split_pts), free_tok_ls(&tok), NULL);
 	type = _get_node_type(split_pts->type);
 	current = tok;
 	while (current && current->next != split_pts)
