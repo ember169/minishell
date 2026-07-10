@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 17:20:45 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/10 21:07:59 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 21:17:47 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	execute_cd(t_minishell *ms, char **args)
 		buf = get_env_value_from_key(ms, "OLDPWD");
 		if (_change_dir(ms, buf) > 0)
 			return (_throw_error(buf));
-		write(STDOUT_FILENO, buf, ft_strlen(buf));
+		ft_putstr_fd(get_env_value_from_key(ms, "PWD"), 1);
+		ft_putstr_fd("\n", 1);	
 	}
 	else if (_change_dir(ms, args[1]) > 0)
 		return (_throw_error(args[1]));
