@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 02:23:32 by v                 #+#    #+#             */
-/*   Updated: 2026/07/07 02:44:40 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 18:13:46 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static bool	_check_paren(t_token *curr, int *par_lvl)
 static bool	_check_operator(t_token *curr)
 {
 	if (!curr->next)
-		return (print_syntax_error(NULL), false);
+		return (print_syntax_error(curr), false);
 	if (curr->next->type == TOK_PIPE || curr->next->type == TOK_AND
 		|| curr->next->type == TOK_OR
 		|| curr->next->type == TOK_PAREN_RIGHT)
