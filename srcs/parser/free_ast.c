@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 13:46:07 by v                 #+#    #+#             */
-/*   Updated: 2026/07/07 01:49:48 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 16:38:15 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	_free_redir_list(t_redir *redir)
 		redir = redir->next;
 		if (tmp->file)
 		{
-			if (strncmp(tmp->file, "/tmp/.ms_heredoc_", 17) == 0)
+			if (ft_strncmp(tmp->file, "/tmp/.ms_heredoc_", 17) == 0)
 				unlink(tmp->file);
 			free(tmp->file);
 		}
