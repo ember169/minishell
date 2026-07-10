@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 02:19:03 by v                 #+#    #+#             */
-/*   Updated: 2026/07/07 02:23:47 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 21:37:20 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_minishell	*init_ms(t_minishell *ms, char **av, char **envp)
 		ms->last_status = 0;
 		ms->ast_root = NULL;
 		ms->debug = _check_debug(av);
+		ms->is_child = false;
 	}
 	return (ms);
 }

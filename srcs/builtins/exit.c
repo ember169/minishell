@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 12:10:54 by mskn              #+#    #+#             */
-/*   Updated: 2026/07/06 06:07:56 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 22:03:47 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	execute_exit(t_minishell *ms, char **args)
 	int			status;
 
 	status = ms->last_status;
-	ft_putstr_fd("exit\n", STDERR_FILENO);
+	if (!ms->is_child)
+		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (args[1])
 	{
 		if (!_is_valid_exit(args[1], &code))

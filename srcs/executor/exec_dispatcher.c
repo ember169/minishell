@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:35:38 by mskn              #+#    #+#             */
-/*   Updated: 2026/07/10 20:46:37 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 21:40:36 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	execute_child(t_minishell *ms, t_ast_node *node)
 {
 	char	*cmd_path;
 
+	ms->is_child = true;
 	init_exec_child_signals();
 	if (setup_redirections(node) != 0)
 		clean_child_and_exit(ms, 1);

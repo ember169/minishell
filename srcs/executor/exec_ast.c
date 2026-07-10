@@ -22,6 +22,7 @@ static int	exec_subshell(t_minishell *ms, t_ast_node *node)
 		return (1);
 	if (pid == 0)
 	{
+		ms->is_child = true;
 		init_exec_child_signals();
 		if (setup_redirections(node) != 0)
 			clean_child_and_exit(ms, 1);

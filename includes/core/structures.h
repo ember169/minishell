@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:30 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/10 20:02:00 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 21:33:24 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_minishell
 	int			last_status;
 	t_ast_node	*ast_root;
 	bool		debug;
+	bool		is_child;
 }	t_minishell;
 
 #endif

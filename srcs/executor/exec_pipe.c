@@ -14,6 +14,7 @@
 
 static void	_exec_left_child(t_minishell *ms, t_ast_node *node, int *pfd)
 {
+	ms->is_child = true;
 	init_exec_child_signals();
 	close(pfd[0]);
 	dup2(pfd[1], STDOUT_FILENO);
@@ -23,6 +24,7 @@ static void	_exec_left_child(t_minishell *ms, t_ast_node *node, int *pfd)
 
 static void	_exec_right_child(t_minishell *ms, t_ast_node *node, int *pfd)
 {
+	ms->is_child = true;
 	init_exec_child_signals();
 	close(pfd[1]);
 	dup2(pfd[0], STDIN_FILENO);
