@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 17:20:45 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/05 02:16:47 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 20:57:34 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ int	execute_cd(t_minishell *ms, char **args)
 {
 	char	*buf;
 
+	if (args[1] != NULL && args[2] != NULL)
+	{
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		return (1);
+	}
 	if (!args[1])
 	{
 		buf = get_env_value_from_key(ms, "HOME");
@@ -84,10 +89,7 @@ int	execute_cd(t_minishell *ms, char **args)
 			return (_throw_error());
 		write(STDOUT_FILENO, buf, ft_strlen(buf));
 	}
-	else
-	{
-		if (_change_dir(ms, args[1]) > 0)
-			return (_throw_error());
-	}
+	else if (_change_dir(ms, args[1]) > 0)
+		return (_throw_error());
 	return (0);
 }
