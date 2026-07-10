@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 16:37:30 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/07 02:33:45 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 20:02:00 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_redir
 {
 	t_token_type	type;
 	char			*file;
+	char			*original_file;
 	struct s_redir	*next;
 }	t_redir;
 

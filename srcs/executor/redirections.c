@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 02:15:46 by v                 #+#    #+#             */
-/*   Updated: 2026/07/10 19:47:14 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 20:04:25 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ int	setup_redirections(t_ast_node *node)
 	{
 		if (current->type != TOK_HEREDOC)
 		{
+			if (!current->file || current->file[0] == '\0')
+			{
+				ft_putstr_fd("minishell: ", 2);
+				ft_putstr_fd(current->original_file, 2);
+				ft_putstr_fd(": ambiguous redirect\n", 2);
+				return (1);
+			}
 			if (_apply_single_redir(current) != 0)
 				return (1);
 		}

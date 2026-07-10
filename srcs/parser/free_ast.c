@@ -3,30 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   free_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 13:46:07 by v                 #+#    #+#             */
-/*   Updated: 2026/07/10 16:38:15 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/07/10 20:32:59 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
 
-static void	_free_redir_list(t_redir *redir)
+static void	_free_redir_list(t_redir *redirs)
 {
 	t_redir	*tmp;
 
-	while (redir)
+	while (redirs)
 	{
-		tmp = redir;
-		redir = redir->next;
-		if (tmp->file)
-		{
-			if (ft_strncmp(tmp->file, "/tmp/.ms_heredoc_", 17) == 0)
-				unlink(tmp->file);
-			free(tmp->file);
-		}
-		free(tmp);
+		tmp = redirs->next;
+		if (redirs->file)
+			free(redirs->file);
+		if (redirs->original_file)
+			free(redirs->original_file);
+		free(redirs);
+		redirs = tmp;
 	}
 }
 
