@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 17:20:45 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/10 21:01:28 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 21:07:59 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ static int	_change_dir(t_minishell *ms, char *dir)
 	return (1);
 }
 
-static int	_throw_error(void)
+static int	_throw_error(char *dir)
 {
-	perror("minishell: cd");
+	ft_putstr_fd("minishell: cd: ", 2);
+	if (!dir)
+		perror("");
+	else
+		perror(dir);
 	return (1);
 }
 
@@ -80,16 +84,16 @@ int	execute_cd(t_minishell *ms, char **args)
 	{
 		buf = get_env_value_from_key(ms, "HOME");
 		if (!buf || _change_dir(ms, buf) > 0)
-			return (_throw_error());
+			return (_throw_error(buf));
 	}
 	else if (ft_strncmp(args[1], "-", 2) == 0)
 	{
 		buf = get_env_value_from_key(ms, "OLDPWD");
 		if (_change_dir(ms, buf) > 0)
-			return (_throw_error());
+			return (_throw_error(buf));
 		write(STDOUT_FILENO, buf, ft_strlen(buf));
 	}
 	else if (_change_dir(ms, args[1]) > 0)
-		return (_throw_error());
+		return (_throw_error(args[1]));
 	return (0);
 }
