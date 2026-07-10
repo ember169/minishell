@@ -6,7 +6,7 @@
 /*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 02:23:32 by v                 #+#    #+#             */
-/*   Updated: 2026/07/10 18:30:40 by v                ###   ########.fr       */
+/*   Updated: 2026/07/10 19:21:13 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static bool	_check_operator(t_token *curr)
 static bool	_check_redir_syntax(t_token *curr)
 {
 	if (!curr->next)
-		return (print_syntax_error(curr), false);
+		return (print_syntax_error(NULL), false);
 	if (curr->next->type != TOK_WORD
 		&& curr->next->type != TOK_HEREDOC_QUOTED)
 		return (print_syntax_error(curr->next), false);
