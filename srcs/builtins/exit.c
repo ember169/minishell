@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 12:10:54 by mskn              #+#    #+#             */
-/*   Updated: 2026/07/10 22:03:47 by v                ###   ########.fr       */
+/*   Updated: 2026/07/11 04:52:52 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	execute_exit(t_minishell *ms, char **args)
 	int			status;
 
 	status = ms->last_status;
-	if (!ms->is_child)
+	if (!ms->is_child && isatty(STDIN_FILENO))
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (args[1])
 	{
