@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-static t_token	*_expand_with_path(t_token *current)
+t_token	*expand_with_path(t_token *current)
 {
 	if (!ft_strchr(current->value, '*'))
 		return (current);
@@ -63,7 +63,7 @@ static int	_calc_len(t_minishell *ms, char *str)
 **     @param *str  String to expand
 **     @return expanded string once the expand_loop is done
 */
-static char	*_expand_with_quotes(t_minishell *ms, char *str)
+char	*expand_with_quotes(t_minishell *ms, char *str)
 {
 	char	*ret;
 
@@ -84,26 +84,23 @@ static char	*_expand_with_quotes(t_minishell *ms, char *str)
 **     @param *ms    Pointer to superstructure.
 **     @param *head  Head of token chained list.
 */
-void	expand_token_list(t_minishell *ms, t_token *head)
+void	expand_token_list(t_minishell *ms, t_token **head)
 {
 	t_token	*current;
-	char	*expanded;
-	bool	no_glob;
+	t_token	*prev;
 
-	if (!head || !ms)
+	if (!head || !*head || !ms)
 		return ;
-	current = head;
+	current = *head;
+	prev = NULL;
 	while (current)
 	{
 		if (current->type == TOK_WORD)
+			current = expand_one_word(ms, head, &prev, current);
+		else
 		{
-			no_glob = is_quoted_star(current->value);
-			expanded = _expand_with_quotes(ms, current->value);
-			free(current->value);
-			current->value = expanded;
-			if (!no_glob)
-				current = _expand_with_path(current);
+			prev = current;
+			current = current->next;
 		}
-		current = current->next;
 	}
 }

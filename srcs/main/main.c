@@ -60,7 +60,7 @@ static int	_process_input(t_minishell *ms, char *uinput)
 		return (1);
 	}
 	manage_heredoc_quotes(list);
-	expand_token_list(ms, list);
+	expand_token_list(ms, &list);
 	if (ms->debug)
 		print_tok_list(list);
 	ms->ast_root = build_ast(list);
