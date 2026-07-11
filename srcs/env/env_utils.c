@@ -61,11 +61,25 @@ char	*get_env_value_from_key(t_minishell *ms, char *key)
 }
 
 /*
+** _key_less:
+**     Compares two env keys alphabetically (ft_strncmp with a large
+**     enough n to behave like a full string comparison).
+*/
+static bool	_key_less(char *a, char *b)
+{
+	size_t	n;
+
+	n = ft_strlen(a) + ft_strlen(b) + 1;
+	return (ft_strncmp(a, b, n) < 0);
+}
+
+/*
 ** env_add_back:
-**     Appends a node at the end of the env_list
+**     Inserts a node into env_list in alphabetical (by key) order, so
+**     the list is always sorted regardless of insertion order.
 **
 **     @param **root  Adress of the list's *root
-**     @param *new    Pointer to the node to append
+**     @param *new    Pointer to the node to insert
 */
 void	env_add_back(t_env **root, t_env *new)
 {
@@ -73,14 +87,16 @@ void	env_add_back(t_env **root, t_env *new)
 
 	if (!root || !new)
 		return ;
-	if (!*root)
+	if (!*root || _key_less(new->key, (*root)->key))
 	{
+		new->next = *root;
 		*root = new;
 		return ;
 	}
 	tmp = *root;
-	while (tmp->next)
+	while (tmp->next && !_key_less(new->key, tmp->next->key))
 		tmp = tmp->next;
+	new->next = tmp->next;
 	tmp->next = new;
 }
 
