@@ -25,10 +25,27 @@
 **     @param *ms  t_minishell superstructure
 **     @return 0 if success, 1 if error
 */
+static void	_set_env(t_minishell *ms, char *key, char *value)
+{
+	t_env	*node;
+	char	*tmp;
+	char	*entry;
+
+	node = get_env_addr_from_key(ms, key);
+	if (node)
+	{
+		put_env_value(node, value);
+		return ;
+	}
+	tmp = ft_strjoin(key, "=");
+	entry = ft_strjoin(tmp, value);
+	free(tmp);
+	env_add_back(&ms->env_list, create_node(entry));
+	free(entry);
+}
+
 static int	_change_dir(t_minishell *ms, char *dir)
 {
-	t_env	*old;
-	t_env	*new;	
 	char	*cwd;
 	char	*new_cwd;
 
@@ -39,14 +56,12 @@ static int	_change_dir(t_minishell *ms, char *dir)
 			free(cwd);
 		else
 		{
-			old = get_env_addr_from_key(ms, "OLDPWD");
-			put_env_value(old, cwd);
+			_set_env(ms, "OLDPWD", cwd);
 			free(cwd);
-			new = get_env_addr_from_key(ms, "PWD");
 			new_cwd = getcwd(NULL, 0);
 			if (!new_cwd)
 				return (1);
-			put_env_value(new, new_cwd);
+			_set_env(ms, "PWD", new_cwd);
 			free(new_cwd);
 			return (0);
 		}
