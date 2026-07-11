@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 02:19:03 by v                 #+#    #+#             */
-/*   Updated: 2026/07/11 06:23:09 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/07/11 06:30:48 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static bool	_check_debug(char **av)
 	}
 	return (res);
 }
-//rl_outstream = stderr;
 
 t_minishell	*init_ms(t_minishell *ms, char **av, char **envp)
 {
