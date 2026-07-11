@@ -41,9 +41,9 @@ static bool	_is_valid_exit(char *str, long long *code)
 	while (ft_isdigit(str[i]))
 	{
 		res = (res * 10) + (str[i] - '0');
-		if (sign == 1 && res > LLONG_MAX)
+		if (sign == 1 && res > (unsigned long long)LLONG_MAX)
 			return (false);
-		if (sign == -1 && res > LLONG_MAX)
+		if (sign == -1 && res > (unsigned long long)LLONG_MAX + 1)
 			return (false);
 		i++;
 	}
