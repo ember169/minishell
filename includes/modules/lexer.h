@@ -13,7 +13,7 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-t_token		*lexer(char *input);
+t_token		*lexer(t_minishell *ms, char *input);
 bool		handle_operator(char *input, t_lexer_state *ls, t_token **tok_ls);
 void		handle_quotes(char *input, t_lexer_state *ls, t_token **tok_ls);
 int			is_space(char c);

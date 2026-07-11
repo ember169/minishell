@@ -71,7 +71,7 @@ static int	_process_character(char *input, t_lexer_state *ls, t_token **tok_ls)
 	return (1);
 }
 
-t_token	*lexer(char *input)
+t_token	*lexer(t_minishell *ms, char *input)
 {
 	t_lexer_state	ls;
 	t_token			*tok_ls;
@@ -84,6 +84,7 @@ t_token	*lexer(char *input)
 		if (!_process_character(input, &ls, &tok_ls))
 		{
 			free_tok_ls(&tok_ls);
+			ms->last_status = 2;
 			return (NULL);
 		}
 	}
@@ -91,6 +92,7 @@ t_token	*lexer(char *input)
 	{
 		write(2, "error: unclosed quotes\n", 23);
 		free_tok_ls(&tok_ls);
+		ms->last_status = 2;
 		return (NULL);
 	}
 	return (tok_ls);

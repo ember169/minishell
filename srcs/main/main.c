@@ -50,7 +50,7 @@ static int	_process_input(t_minishell *ms, char *uinput)
 {
 	t_token	*list;
 
-	list = lexer(uinput);
+	list = lexer(ms, uinput);
 	if (!list)
 		return (1);
 	if (!check_syntax(list))
@@ -64,13 +64,8 @@ static int	_process_input(t_minishell *ms, char *uinput)
 	if (ms->debug)
 		print_tok_list(list);
 	ms->ast_root = build_ast(list);
-	if (process_all_heredocs(ms, ms->ast_root) == 130)
-	{
-		ms->last_status = 130;
-		free_ast(ms->ast_root);
-		ms->ast_root = NULL;
+	if (ast_failed(ms, list))
 		return (1);
-	}
 	execute_pipeline(ms);
 	return (1);
 }

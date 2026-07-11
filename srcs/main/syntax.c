@@ -57,6 +57,24 @@ static bool	_check_redir_syntax(t_token *curr)
 	return (true);
 }
 
+bool	ast_failed(t_minishell *ms, t_token *list)
+{
+	if (!ms->ast_root)
+	{
+		if (list)
+			ms->last_status = 2;
+		return (true);
+	}
+	if (process_all_heredocs(ms, ms->ast_root) == 130)
+	{
+		ms->last_status = 130;
+		free_ast(ms->ast_root);
+		ms->ast_root = NULL;
+		return (true);
+	}
+	return (false);
+}
+
 bool	check_syntax(t_token *tok)
 {
 	int	par_lvl;
