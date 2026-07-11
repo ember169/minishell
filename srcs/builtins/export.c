@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:00:46 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/06 03:48:16 by v                ###   ########.fr       */
+/*   Updated: 2026/07/11 02:47:51 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ static int	_export_one_var(t_minishell *ms, char *arg)
 	key = extract_key(arg);
 	if (!_check_key(key))
 		return (free(key), 1);
-	value = extract_value(arg);
+	if (ft_strchr(arg, '='))
+		value = extract_value(arg);
+	else
+		value = NULL;
 	var = get_env_addr_from_key(ms, key);
 	if (var)
 	{
-		put_env_value(var, value);
+		if (value)
+			put_env_value(var, value);
 		return (free(key), free(value), 0);
 	}
 	else
@@ -65,7 +69,10 @@ void	_export_list(t_env *root)
 	while (current)
 	{
 		write(STDOUT_FILENO, "declare -x ", ft_strlen("declare -x "));
-		ft_printf("%s=\"%s\"\n", current->key, current->value);
+		if (current->value)
+			ft_printf("%s=\"%s\"\n", current->key, current->value);
+		else
+			ft_printf("%s\n", current->key);
 		current = current->next;
 	}
 }

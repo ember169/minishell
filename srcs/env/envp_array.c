@@ -21,7 +21,8 @@ static int	_env_list_size(t_env *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		size++;
+		if (tmp->value)
+			size++;
 		tmp = tmp->next;
 	}
 	return (size);
@@ -41,10 +42,13 @@ char	**generate_envp_array(t_env *env_list)
 	i = 0;
 	while (tmp)
 	{
-		tmp_str = ft_strjoin(tmp->key, "=");
-		envp[i] = ft_strjoin(tmp_str, tmp->value);
-		free(tmp_str);
-		i++;
+		if (tmp->value)
+		{
+			tmp_str = ft_strjoin(tmp->key, "=");
+			envp[i] = ft_strjoin(tmp_str, tmp->value);
+			free(tmp_str);
+			i++;
+		}
 		tmp = tmp->next;
 	}
 	envp[i] = NULL;

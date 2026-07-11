@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/01 09:36:19 by mskn             ###   ########.fr       */
+/*   Updated: 2026/07/11 02:43:32 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*extract_value(char *env)
 	char	*value;
 	int		i;
 
-	if (!env)
+	if (!env || !ft_strchr(env, '='))
 		return (NULL);
 	i = 0;
 	while (env[i] && env[i] != '=')
