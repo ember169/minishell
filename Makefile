@@ -59,6 +59,7 @@ SRC_FILES   := main/main.c \
                env/envp_array.c \
                exit/exit.c \
                expander/expander.c \
+               expander/expander_helpers.c \
                expander/expander_path_expand.c \
                expander/expander_path_utils.c \
                expander/expander_quote_expand.c \
