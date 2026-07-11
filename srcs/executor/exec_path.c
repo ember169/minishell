@@ -22,15 +22,27 @@ static char	**_get_env_path(t_minishell *ms)
 	return (ft_split(path_node->value, ':'));
 }
 
-char	*get_cmd_path(t_minishell *ms, char *cmd)
+static bool	_exists_not_exec(char *path)
+{
+	return (access(path, F_OK) == 0 && access(path, X_OK) != 0);
+}
+
+static char	*_direct_path(char *cmd, bool *denied)
+{
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
+	if (_exists_not_exec(cmd))
+		*denied = true;
+	return (NULL);
+}
+
+static char	*_search_path(t_minishell *ms, char *cmd, bool *denied)
 {
 	char	**paths;
 	char	*tmp;
 	char	*full_path;
 	int		i;
 
-	if (cmd && access(cmd, X_OK) == 0)
-		return (ft_strdup(cmd));
 	paths = _get_env_path(ms);
 	i = 0;
 	while (paths && paths[i])
@@ -39,13 +51,22 @@ char	*get_cmd_path(t_minishell *ms, char *cmd)
 		full_path = ft_strjoin(tmp, cmd);
 		free(tmp);
 		if (access(full_path, X_OK) == 0)
-		{
-			free_str_array(paths);
-			return (full_path);
-		}
+			return (free_str_array(paths), full_path);
+		if (_exists_not_exec(full_path))
+			*denied = true;
 		free(full_path);
 		i++;
 	}
 	free_str_array(paths);
 	return (NULL);
+}
+
+char	*get_cmd_path(t_minishell *ms, char *cmd, bool *denied)
+{
+	*denied = false;
+	if (!cmd || !*cmd)
+		return (NULL);
+	if (ft_strchr(cmd, '/'))
+		return (_direct_path(cmd, denied));
+	return (_search_path(ms, cmd, denied));
 }

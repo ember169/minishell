@@ -34,6 +34,19 @@ void	clean_child_and_exit(t_minishell *ms, int exit_code)
 	exit(exit_code);
 }
 
+void	report_exec_error(t_minishell *ms, char *cmd, bool denied)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	if (denied)
+	{
+		ft_putstr_fd(": Permission denied\n", 2);
+		clean_child_and_exit(ms, 126);
+	}
+	ft_putstr_fd(": command not found\n", 2);
+	clean_child_and_exit(ms, 127);
+}
+
 int	handle_child_status(int status)
 {
 	if (WIFEXITED(status))

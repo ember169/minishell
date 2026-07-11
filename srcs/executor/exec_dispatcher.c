@@ -63,6 +63,7 @@ static bool	_is_env_unsafe(char *command)
 static void	execute_child(t_minishell *ms, t_ast_node *node)
 {
 	char	*cmd_path;
+	bool	denied;
 
 	ms->is_child = true;
 	init_exec_child_signals();
@@ -72,14 +73,9 @@ static void	execute_child(t_minishell *ms, t_ast_node *node)
 		clean_child_and_exit(ms, 0);
 	if (_is_builtin(node->args[0]))
 		clean_child_and_exit(ms, exec_builtin(ms, node));
-	cmd_path = get_cmd_path(ms, node->args[0]);
+	cmd_path = get_cmd_path(ms, node->args[0], &denied);
 	if (!cmd_path)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(node->args[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
-		clean_child_and_exit(ms, 127);
-	}
+		report_exec_error(ms, node->args[0], denied);
 	execve(cmd_path, node->args, ms->envp);
 	perror("execve");
 	clean_child_and_exit(ms, 126);

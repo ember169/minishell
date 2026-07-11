@@ -16,10 +16,11 @@
 int		exec_ast(t_minishell *ms, t_ast_node *node);
 int		dispatch_cmd(t_minishell *ms, t_ast_node *node);
 int		setup_redirections(t_ast_node *node);
-char	*get_cmd_path(t_minishell *ms, char *cmd);
+char	*get_cmd_path(t_minishell *ms, char *cmd, bool *denied);
 int		exec_builtin(t_minishell *ms, t_ast_node *node);
 int		exec_pipe(t_minishell *ms, t_ast_node *node);
 void	clean_child_and_exit(t_minishell *ms, int exit_code);\
 int		handle_child_status(int status);
+void	report_exec_error(t_minishell *ms, char *cmd, bool denied);
 
 #endif
