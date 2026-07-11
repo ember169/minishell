@@ -20,6 +20,7 @@ void		get_env_var(t_minishell *ms, char *dollar, char **var);
 char		is_quote(char c);
 bool		is_quoted_star(char *raw);
 char		*expand_loop(t_minishell *ms, char *str, char *ret);
+void		strip_delim_quotes(char *str);
 t_token		*expand_path(t_token *current);
 bool		match_glob(char *pattern, char *str);
 void		sort_matches(char **arr, int n);

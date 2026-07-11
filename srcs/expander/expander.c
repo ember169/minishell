@@ -88,19 +88,27 @@ void	expand_token_list(t_minishell *ms, t_token **head)
 {
 	t_token	*current;
 	t_token	*prev;
+	bool	is_delim;
+	bool	was_heredoc;
 
 	if (!head || !*head || !ms)
 		return ;
 	current = *head;
 	prev = NULL;
+	is_delim = false;
 	while (current)
 	{
-		if (current->type == TOK_WORD)
+		was_heredoc = (current->type == TOK_HEREDOC
+				|| current->type == TOK_HEREDOC_QUOTED);
+		if (current->type == TOK_WORD && is_delim)
+			strip_delim_quotes(current->value);
+		if (current->type == TOK_WORD && !is_delim)
 			current = expand_one_word(ms, head, &prev, current);
 		else
 		{
 			prev = current;
 			current = current->next;
 		}
+		is_delim = was_heredoc;
 	}
 }

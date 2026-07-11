@@ -80,6 +80,37 @@ static void	_expand_one_var(t_minishell *ms, char **src, char **dst)
 }
 
 /*
+** strip_delim_quotes:
+**     Removes quote characters from a heredoc delimiter in place, without
+**     touching $ characters: delimiters are never expanded, only the
+**     surrounding quotes (if any) are stripped for the final match text.
+**
+**     @param *str  Delimiter to strip quotes from
+*/
+void	strip_delim_quotes(char *str)
+{
+	char	in_quote;
+	char	*src;
+	char	*dst;
+
+	src = str;
+	dst = str;
+	in_quote = '\0';
+	while (*src)
+	{
+		if (is_quote(*src))
+			_in_quote_switcher(&in_quote, &src, &dst);
+		else
+		{
+			*dst = *src;
+			dst++;
+			src++;
+		}
+	}
+	*dst = '\0';
+}
+
+/*
 ** expand_loop:
 **     Main expansion loop. Processes input character by character while
 **     tracking quote state. Expands variables, removes quotes, copies chars.
