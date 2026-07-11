@@ -38,10 +38,11 @@ static char	*_direct_path(char *cmd, bool *denied)
 
 static char	*_search_path(t_minishell *ms, char *cmd, bool *denied)
 {
-	char	**paths;
-	char	*tmp;
-	char	*full_path;
-	int		i;
+	char		**paths;
+	char		*tmp;
+	char		*full_path;
+	int			i;
+	struct stat	st;
 
 	paths = _get_env_path(ms);
 	i = 0;
@@ -50,10 +51,13 @@ static char	*_search_path(t_minishell *ms, char *cmd, bool *denied)
 		tmp = ft_strjoin(paths[i], "/");
 		full_path = ft_strjoin(tmp, cmd);
 		free(tmp);
-		if (access(full_path, X_OK) == 0)
-			return (free_str_array(paths), full_path);
-		if (_exists_not_exec(full_path))
-			*denied = true;
+		if (!(stat(full_path, &st) == 0 && S_ISDIR(st.st_mode)))
+		{
+			if (access(full_path, X_OK) == 0)
+				return (free_str_array(paths), full_path);
+			if (_exists_not_exec(full_path))
+				*denied = true;
+		}
 		free(full_path);
 		i++;
 	}

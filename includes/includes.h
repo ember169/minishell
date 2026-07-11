@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <termios.h>
+# include <sys/stat.h>
 
 # include "../libs/libft/includes/libft.h"
 # include "core/structures.h"
