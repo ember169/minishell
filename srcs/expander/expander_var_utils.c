@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_var_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mskn <mskn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:04:24 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/12 13:57:43 by mskn             ###   ########.fr       */
+/*   Updated: 2026/07/11 03:30:10 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	get_key_len(char *dollar_ptr)
 
 	key_len = 1;
 	if (dollar_ptr[1] == '?')
+		return (key_len);
+	if (ft_isdigit(dollar_ptr[1]))
 		return (key_len);
 	while ((dollar_ptr[key_len] && ft_isalnum(dollar_ptr[key_len]))
 		|| dollar_ptr[key_len] == '_')
