@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 14:13:34 by lgervet           #+#    #+#             */
-/*   Updated: 2026/06/26 15:29:22 by v                ###   ########.fr       */
+/*   Updated: 2026/07/11 02:37:21 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	execute_echo(char **args)
 	{
 		if (!in_flags)
 			write(STDOUT_FILENO, " ", 1);
-		if (!_is_flag(args[i]))
+		if (!(_is_flag(args[i]) && in_flags))
 		{
 			write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
 			in_flags = false;
