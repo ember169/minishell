@@ -82,13 +82,15 @@ static int	_process_single_heredoc(t_minishell *ms, t_redir *redir)
 	struct termios	term;
 
 	tmp_file = _generate_tmp_filename();
-	tcgetattr(STDIN_FILENO, &term);
+	if (isatty(STDIN_FILENO))
+		tcgetattr(STDIN_FILENO, &term);
 	init_exec_parent_signals();
 	pid = fork();
 	if (pid == 0)
 		_heredoc_child(ms, redir, tmp_file);
 	waitpid(pid, &status, 0);
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	if (isatty(STDIN_FILENO))
+		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	init_interactive_signals();
 	free(redir->file);
 	redir->file = tmp_file;
