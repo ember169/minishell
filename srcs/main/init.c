@@ -34,6 +34,7 @@ static bool	_check_debug(char **av)
 
 t_minishell	*init_ms(t_minishell *ms, char **av, char **envp)
 {
+	rl_outstream = stderr;
 	ms = malloc(sizeof(t_minishell));
 	if (ms)
 	{
