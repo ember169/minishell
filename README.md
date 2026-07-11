@@ -67,10 +67,11 @@ Each file should have a clear, single responsibility matching its suffix
 
 ## Instructions
 ### Compiling
-*Building...*
+Run `make` in root repertory to compile the binary.
+Run `make re` to delete and recompile the binary.
 
 ### Executing
-*Building...*
+Run `./minishell` to execute the binary
 
 ## Resources
 
@@ -89,3 +90,5 @@ Each file should have a clear, single responsibility matching its suffix
 - To make sense of some intricates concepts (i.e: Lexer, Tokenizer, Expander, Executor...)
 - To conceive a robust nested structure architecture
 - To make flowcharts documenting the entire pipeline, making it easier to explain and debug
+- Structure our debug process
+- Run tests

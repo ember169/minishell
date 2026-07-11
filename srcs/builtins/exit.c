@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 12:10:54 by mskn              #+#    #+#             */
-/*   Updated: 2026/07/11 04:52:52 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/07/11 06:42:46 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	execute_exit(t_minishell *ms, char **args)
 		if (args[2])
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			return (2);
+			return (1);
 		}
 		status = (int)(code % 256);
 	}
