@@ -55,12 +55,11 @@ static bool	_is_valid_exit(char *str, long long *code)
 	return (true);
 }
 
-static void	_exit_numeric_error(t_minishell *ms, char *arg)
+static void	_exit_numeric_error(char *arg)
 {
 	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
 	ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-	clean_child_and_exit(ms, 2);
 }
 
 int	execute_exit(t_minishell *ms, char **args)
@@ -74,11 +73,14 @@ int	execute_exit(t_minishell *ms, char **args)
 	if (args[1])
 	{
 		if (!_is_valid_exit(args[1], &code))
-			_exit_numeric_error(ms, args[1]);
+		{
+			_exit_numeric_error(args[1]);
+			return (2);
+		}
 		if (args[2])
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			return (1);
+			return (2);
 		}
 		status = (int)(code % 256);
 	}
