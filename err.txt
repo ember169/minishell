@@ -1,1 +1,0 @@
-minishell: zzz_not_a_real_cmd: command not found
