@@ -24,6 +24,19 @@ LIBFT       := $(LIBPATH)/$(LIBNAME)
 
 INC         := -I $(INCSDIR) -I $(LIBPATH)/includes
 
+# Sur macOS, readline installe par Homebrew est keg-only : ses headers/libs
+# ne sont pas dans les chemins par defaut, donc cc trouve le readline.h
+# (libedit) fourni par Apple, qui n'a pas rl_replace_line. On ajoute donc
+# explicitement le prefixe Homebrew sur macOS uniquement (sans effet sur
+# Linux / les machines de l'ecole).
+ifeq ($(shell uname -s),Darwin)
+	READLINE_PREFIX := $(shell brew --prefix readline 2>/dev/null)
+	ifneq ($(READLINE_PREFIX),)
+		INC          += -I $(READLINE_PREFIX)/include
+		READLINE_LIB := -L $(READLINE_PREFIX)/lib
+	endif
+endif
+
 # Sources :
 SRC_FILES   := main/main.c \
                main/history.c \
@@ -83,7 +96,7 @@ $(LIBFT):
 
 # Linkage du binaire final
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBPATH) -lft -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBPATH) -lft $(READLINE_LIB) -lreadline -o $(NAME)
 
 # Compilation des objets (.c -> .o)
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.c
