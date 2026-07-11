@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 17:20:45 by lgervet           #+#    #+#             */
-/*   Updated: 2026/07/10 21:29:53 by v                ###   ########.fr       */
+/*   Updated: 2026/07/11 03:03:17 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,20 @@ static int	_throw_error(char *dir)
 	return (1);
 }
 
+static int	_cd_home(t_minishell *ms)
+{
+	char	*buf;
+
+	buf = get_env_value_from_key(ms, "HOME");
+	if (!buf)
+		return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), 1);
+	if (buf[0] == '\0')
+		return (0);
+	if (_change_dir(ms, buf) > 0)
+		return (_throw_error(buf));
+	return (0);
+}
+
 // First condition:
 // 		cd			   → chdir to HOME
 // 		cd /nonexistent → print error, return 1
@@ -81,11 +95,7 @@ int	execute_cd(t_minishell *ms, char **args)
 		return (1);
 	}
 	if (!args[1])
-	{
-		buf = get_env_value_from_key(ms, "HOME");
-		if (!buf || _change_dir(ms, buf) > 0)
-			return (_throw_error(buf));
-	}
+		return (_cd_home(ms));
 	else if (ft_strncmp(args[1], "-", 2) == 0)
 	{
 		buf = get_env_value_from_key(ms, "OLDPWD");
